@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">OffiCient</string>
+    <string name="andrew_id_prompt">Andrew ID</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="action_register">Register now</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_password_confirmation">Confirm Password</string>
+    <string name="integrity_notice">By clicking on the <b>Register</b> button, you confirm that the information that you provided is accurate and true.</string>
+    <string name="prompt_registration">Register now</string>
+    <string name="action_sign_in">Log in </string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="or">OR</string>
+    <string name="title_activity_registration">Registration</string>
 </resources>
