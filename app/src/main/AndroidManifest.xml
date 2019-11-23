@@ -12,17 +12,21 @@
         <activity android:name=".ui.Timer_Activity" />
         <activity android:name=".ui.ProfileEditActivity" />
         <activity
-            android:name=".ui.RegistrationActivity"
+            android:name=".ui.courses.CoursesList"
+            android:label="@string/title_activity_courses_list"></activity>
+        <activity android:name=".ui.users.SuccessfulRegistration" />
+        <activity
+            android:name=".ui.users.RegistrationActivity"
             android:label="@string/title_activity_registration"
-            android:parentActivityName=".ui.LoginActivity"
+            android:parentActivityName=".ui.users.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="edu.cmu.officient.ui.LoginActivity" />
+                android:value="edu.cmu.officient.ui.users.LoginActivity" />
         </activity>
         <activity
-            android:name=".ui.LoginActivity"
+            android:name=".ui.users.LoginActivity"
             android:label="@string/title_activity_login"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />

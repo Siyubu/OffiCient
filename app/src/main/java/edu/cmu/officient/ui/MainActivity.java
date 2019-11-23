@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import edu.cmu.officient.R;
+import edu.cmu.officient.ui.users.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 

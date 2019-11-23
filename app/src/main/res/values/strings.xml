@@ -8,6 +8,7 @@
     <string name="prompt_password_confirmation">Confirm Password</string>
     <string name="integrity_notice">By clicking on the <b>Register</b> button, you confirm that the information that you provided is accurate and true.</string>
     <string name="prompt_registration">Register now</string>
+    <string name="confirm_faculty">Please input the confirmation code that we sent to %s@andrew.cmu.edu to proceed. </string>
     <string name="action_sign_in">Log in </string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>
@@ -16,4 +17,14 @@
     <string name="login_failed">"Login failed"</string>
     <string name="or">OR</string>
     <string name="title_activity_registration">Registration</string>
+    <string name="submit">Submit</string>
+    <string name="thanks_for_registrating">Thanks you for registering in OffiCient. You can start using the application :).</string>
+    <string name="open_now">Open Now</string>
+    <string name="congratulations">Congratulations</string>
+    <string name="title_activity_courses_list">CoursesList</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="statistics">Statistics</string>
+    <string name="profile">Profile</string>
 </resources>
