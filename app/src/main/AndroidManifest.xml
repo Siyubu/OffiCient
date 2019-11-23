@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ui.users.Profile"
+            android:label="@string/title_activity_profile"
+            android:parentActivityName=".ui.courses.CoursesList"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.cmu.officient.ui.courses.CoursesList" />
+        </activity>
+        <activity
             android:name=".ui.courses.CoursesList"
             android:label="@string/title_activity_courses_list"></activity>
         <activity android:name=".ui.users.SuccessfulRegistration" />
@@ -26,8 +35,7 @@
         <activity
             android:name=".ui.users.LoginActivity"
             android:label="@string/title_activity_login"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.MainActivity"
             android:screenOrientation="portrait">
@@ -35,6 +43,11 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
     </application>
