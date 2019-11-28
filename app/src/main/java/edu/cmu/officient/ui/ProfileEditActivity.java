@@ -38,7 +38,5 @@ public class ProfileEditActivity extends AppCompatActivity {
         entPswd=(EditText) findViewById(R.id.changePswd);
         submit=(Button) findViewById(R.id.sub);
         cancel=(Button) findViewById(R.id.canc);
-
-
     }
 }
