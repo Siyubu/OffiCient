@@ -16,6 +16,7 @@ import edu.cmu.officient.wservices.*;
 public class ScannedCodeFactory {
     public static ScannedQRCode getCodeObject(ObjectType type, int id, int userId) {
         OfficientStorage storage = new PermanentStorage();
+        User user = storage.getUser(userId);
         Scannable data = null;
         switch (type) {
             case ASSIGNMENT:
@@ -24,6 +25,6 @@ public class ScannedCodeFactory {
             case OFFICE_HOURS:
                 data = storage.getOfficeHours(id);
         }
-        return new ScannedQRCode(data);
+        return new ScannedQRCode(data, user);
     }
 }

@@ -11,7 +11,4 @@
 package edu.cmu.officient.model;
 
 public class Assignment implements Scannable {
-    public Assignment() { // Build the object from the
-
-    }
 }

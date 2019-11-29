@@ -14,7 +14,6 @@ import edu.cmu.officient.model.*;
 
 public abstract class OfficientStorage{
     public Assignment getAssignment(int id) { // Builds an object using the ID
-
         return new Assignment();
     }
 
