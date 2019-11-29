@@ -38,4 +38,28 @@ public class ScannedQRCode {
     public void run(){
         state.execute();
     }
+
+    public TimerState getState() {
+        return state;
+    }
+
+    public void setState(TimerState state) {
+        this.state = state;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public Scannable getData() {
+        return data;
+    }
+
+    public void setData(Scannable data) {
+        this.data = data;
+    }
 }
