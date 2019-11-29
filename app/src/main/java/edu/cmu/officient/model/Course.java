@@ -12,7 +12,7 @@ package edu.cmu.officient.model;
 
 import androidx.annotation.NonNull;
 
-public class Course {
+public class Course implements Scannable {
     private int id;
     private String title, code;
     private Term term;
