@@ -8,10 +8,15 @@
  *
  */
 
-package edu.cmu.officient.model;
+package edu.cmu.officient.api.qrcode;
 
-public class Assignment implements Scannable {
-    public Assignment() { // Build the object from the
+public class TimerInvalid extends TimerState {
+    public TimerInvalid(ScannedQRCode code) {
+        super(code);
+    }
+
+    @Override
+    public void execute() {
 
     }
 }

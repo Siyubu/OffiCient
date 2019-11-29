@@ -8,10 +8,13 @@
  *
  */
 
-package edu.cmu.officient.model;
+package edu.cmu.officient.api.qrcode;
 
-public class Assignment implements Scannable {
-    public Assignment() { // Build the object from the
+import edu.cmu.officient.model.OfficeHours;
 
+public class ScannedOfficeHoursQRCode extends ScannedQRCode{
+    public ScannedOfficeHoursQRCode(OfficeHours officeHours) {
+        super(officeHours);
     }
+
 }

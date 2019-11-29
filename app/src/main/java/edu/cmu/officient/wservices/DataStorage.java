@@ -8,10 +8,11 @@
  *
  */
 
-package edu.cmu.officient.model;
+package edu.cmu.officient.wservices;
 
-public class Assignment implements Scannable {
-    public Assignment() { // Build the object from the
+import edu.cmu.officient.model.*;
 
-    }
+public interface DataStorage {
+    Assignment getAssignment(int id);
+    OfficeHours getOfficeHours(int id);
 }

@@ -8,10 +8,14 @@
  *
  */
 
-package edu.cmu.officient.model;
+package edu.cmu.officient.api.qrcode;
 
-public class Assignment implements Scannable {
-    public Assignment() { // Build the object from the
+import edu.cmu.officient.model.Assignment;
 
+public class ScannedAssignmentQRCode extends ScannedQRCode {
+    public ScannedAssignmentQRCode(Assignment assignment) {
+        super(assignment);
     }
+
+
 }
