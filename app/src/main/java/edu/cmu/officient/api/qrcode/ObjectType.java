@@ -11,7 +11,30 @@
 package edu.cmu.officient.api.qrcode;
 
 public enum ObjectType {
-    ASSIGNMENT,
-    OFFICE_HOURS,
-    UNDEFINED;
+    ASSIGNMENT("Assignment"),
+    OFFICE_HOURS("Office Hours"),
+    COURSE("Course"),
+    UNDEFINED("Undefined");
+
+    private String description;
+
+    ObjectType(String name) {
+        description = name;
+    }
+
+    public ObjectType fromString(String description) {
+        if (description.equalsIgnoreCase("Assignment"))
+            return ASSIGNMENT;
+        else if (description.equalsIgnoreCase("Office Hours") ||
+                description.equalsIgnoreCase("Office_Hours"))
+            return OFFICE_HOURS;
+        else if (description.equalsIgnoreCase("Course"))
+            return COURSE;
+        else
+            return UNDEFINED;
+    }
+
+    public String toString(){
+        return description;
+    }
 }

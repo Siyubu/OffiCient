@@ -12,14 +12,8 @@ package edu.cmu.officient.wservices;
 
 import edu.cmu.officient.model.Assignment;
 import edu.cmu.officient.model.OfficeHours;
+import edu.cmu.officient.model.User;
 
-public class PermanentStorage implements DataStorage {
-    public Assignment getAssignment(int id) { // Builds an object using the ID
+public class PermanentStorage extends OfficientStorage implements ReadData, UpdateData, DeleteData, AddData{
 
-        return new Assignment();
-    }
-
-    public OfficeHours getOfficeHours(int id) {
-        return new OfficeHours();
-    }
 }

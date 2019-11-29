@@ -10,9 +10,12 @@
 
 package edu.cmu.officient.wservices;
 
-import edu.cmu.officient.model.*;
+import edu.cmu.officient.model.Assignment;
+import edu.cmu.officient.model.OfficeHours;
+import edu.cmu.officient.model.User;
 
-public interface DataStorage {
+public interface ReadData {
     Assignment getAssignment(int id);
     OfficeHours getOfficeHours(int id);
+    User getUser(int id);
 }

@@ -14,8 +14,8 @@ import edu.cmu.officient.model.*;
 import edu.cmu.officient.wservices.*;
 
 public class ScannedCodeFactory {
-    public static ScannedQRCode getCodeObject(ObjectType type, int id) {
-        DataStorage storage = new PermanentStorage();
+    public static ScannedQRCode getCodeObject(ObjectType type, int id, int userId) {
+        OfficientStorage storage = new PermanentStorage();
         Scannable data = null;
         switch (type) {
             case ASSIGNMENT:
