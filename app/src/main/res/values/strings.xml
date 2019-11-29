@@ -29,4 +29,6 @@
     <string name="profile">Profile</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_profile">Profile</string>
+    <string name="Send_QR_Image_to_Email">Send QR Image to Email</string>
+    <string name="scan_QR_Image">scan QR Image</string>
 </resources>
