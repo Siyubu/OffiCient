@@ -21,14 +21,15 @@ public abstract class QRBuilder {
     abstract QRGeneration setUser_id(int user_id);
 
     abstract QRGeneration setObjectType(String objT);
+    abstract String buildQR();
 
 
-    public String  buildQR()
-    {
-        String txt= "OWNED_BY= "+this.qrgen.user_id+"\n" + "OBJECT_ID= "+this.qrgen.b_id + "\n"
-                +"OBJECT_TYPE= "+this.qrgen.object_type;
-
-        return txt;
-    }
+//    public String  buildQR()
+//    {
+//        String txt= "OWNED_BY= "+this.qrgen.user_id+"\n" + "OBJECT_ID= "+this.qrgen.b_id + "\n"
+//                +"OBJECT_TYPE= "+this.qrgen.object_type;
+//
+//        return txt;
+//    }
 
 }

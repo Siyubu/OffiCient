@@ -12,17 +12,21 @@ package edu.cmu.officient.ui.qr;
 
 public class GetQRdata {
 String formatedData;
- private QRCode_Factory qrFact=new QRCode_Factory();
+ private QRCode_Factory qrFact;
+ private QRBuilder builder;
 
- public GetQRdata(){}
+ public GetQRdata(){
+     builder=new Assignment_QR_Builder();
 
-
-
+ }
 
     public String qrData()
  {
-     formatedData=qrFact.getQRCode("Assignment");
 
+     builder.setObjectType("Assignment");
+     builder.setUser_id(12);
+     builder.setId(987);
+     formatedData=builder.buildQR();
      return formatedData;
  }
 

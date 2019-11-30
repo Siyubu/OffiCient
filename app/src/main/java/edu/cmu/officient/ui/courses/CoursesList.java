@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import edu.cmu.officient.R;
 import edu.cmu.officient.api.qrcode.ScannedCodeFactory;
 import edu.cmu.officient.api.qrcode.ScannedQRCode;
+import edu.cmu.officient.ui.listener.QRCodeGeneratorListener;
 import edu.cmu.officient.ui.listener.QRCodeScannerListener;
 import edu.cmu.officient.ui.qr.QRCodeScanner;
 
@@ -28,7 +30,12 @@ public class CoursesList extends AppCompatActivity {
         setSupportActionBar(appBar);
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new QRCodeScannerListener(this));
+        fab.setOnClickListener(new QRCodeGeneratorListener(this));
+
+
+
+        //Button loginBtn=findViewById(R.id.login);
+        //loginBtn.setOnClickListener(new QRCodeGeneratorListener(this));
     }
 
     @Override

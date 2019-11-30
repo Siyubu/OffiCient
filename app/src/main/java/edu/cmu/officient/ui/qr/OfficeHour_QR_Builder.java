@@ -30,4 +30,13 @@ public class OfficeHour_QR_Builder extends QRBuilder {
         qrgen.object_type=objT;
         return this.qrgen;
     }
+
+    @Override
+    String  buildQR()
+    {
+        String txt= "OWNED_BY= "+this.qrgen.user_id+"\n" + "OBJECT_ID= "+this.qrgen.b_id + "\n"
+                +"OBJECT_TYPE= "+this.qrgen.object_type;
+
+        return txt;
+    }
 }
