@@ -42,7 +42,6 @@ public class CoursesList extends AppCompatActivity {
         if (requestCode == QRCodeScanner.QR_CODE_READER && data != null) {
             String output = data.getStringExtra("code");
             ScannedQRCode qrCode = ScannedCodeFactory.loadCode(output);
-            Toast.makeText(this, qrCode.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 }

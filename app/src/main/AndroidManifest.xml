@@ -29,6 +29,9 @@
         <activity
             android:name=".ui.courses.CoursesList"
             android:label="@string/title_activity_courses_list" />
+        <activity
+            android:name=".ui.courses.AddCourse"
+            android:label="@string/title_activity_courses_list" />
         <activity android:name=".ui.users.SuccessfulRegistration" />
         <activity
             android:name=".ui.users.RegistrationActivity"
