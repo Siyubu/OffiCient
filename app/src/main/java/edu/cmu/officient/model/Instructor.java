@@ -8,13 +8,7 @@
  *
  */
 
-package edu.cmu.officient.api.qrcode;
+package edu.cmu.officient.model;
 
-import edu.cmu.officient.model.OfficeHours;
-
-public class ScannedOfficeHoursQRCode extends ScannedQRCode{
-    public ScannedOfficeHoursQRCode(OfficeHours officeHours) {
-        super(officeHours);
-    }
-
+public abstract class Instructor extends User {
 }

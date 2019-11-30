@@ -14,8 +14,11 @@ import edu.cmu.officient.model.*;
 
 public abstract class OfficientStorage{
     public Assignment getAssignment(int id) { // Builds an object using the ID
-
         return new Assignment();
+    }
+
+    public Course getCourse(int id) {
+        return new Course();
     }
 
     public OfficeHours getOfficeHours(int id) {
@@ -23,6 +26,10 @@ public abstract class OfficientStorage{
     }
 
     public User getUser(int id) {
-        return new User();
+        return new Student();
+    }
+
+    public User getCurrentUser(){
+        return new Student();
     }
 }

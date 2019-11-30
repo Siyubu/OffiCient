@@ -10,14 +10,14 @@
 
 package edu.cmu.officient.api.qrcode;
 
-public class TimerStopped extends TimerState {
+public class TimerStarting extends TimerState {
 
-    public TimerStopped(ScannedQRCode code) {
+    public TimerStarting(ScannedQRCode code) {
         super(code);
     }
 
     @Override
     public void execute() {
-        getScannedCode().setState(getScannedCode().TIMER_STARTING);
+        getScannedCode().setState(getScannedCode().TIMER_STARTED);
     }
 }

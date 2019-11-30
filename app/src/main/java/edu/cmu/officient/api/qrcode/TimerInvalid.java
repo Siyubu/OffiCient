@@ -11,12 +11,15 @@
 package edu.cmu.officient.api.qrcode;
 
 public class TimerInvalid extends TimerState {
-    public TimerInvalid(ScannedQRCode code) {
+    private String errorMessage;
+
+    public TimerInvalid(ScannedQRCode code, String message) {
         super(code);
+        errorMessage = message;
     }
 
     @Override
     public void execute() {
-
+        getScannedCode().setState(getScannedCode().TIMER_STOPPED);
     }
 }

@@ -10,9 +10,6 @@
 
 package edu.cmu.officient.wservices;
 
-import edu.cmu.officient.model.Assignment;
-import edu.cmu.officient.model.OfficeHours;
-import edu.cmu.officient.model.User;
 
 public class PermanentStorage extends OfficientStorage implements ReadData, UpdateData, DeleteData, AddData{
 

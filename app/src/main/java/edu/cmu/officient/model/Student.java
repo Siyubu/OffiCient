@@ -10,7 +10,5 @@
 
 package edu.cmu.officient.model;
 
-public interface Scannable {
-    boolean isInRange();
-    boolean userCanAccess(int id);
+public class Student extends User {
 }

@@ -22,11 +22,11 @@ public abstract class TimerState {
     }
 
     public void complete(){
-
+        // Any db action should be done here
     }
 
-    public void status(){
-
+    public String status(){
+        return getClass().getSimpleName();
     }
 
     public double timeout(){

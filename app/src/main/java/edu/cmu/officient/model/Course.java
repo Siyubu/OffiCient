@@ -12,59 +12,36 @@ package edu.cmu.officient.model;
 
 import androidx.annotation.NonNull;
 
+import java.util.List;
+
 public class Course implements Scannable {
     private int id;
     private String title, code;
     private Term term;
+    private List<Instructor> instructors;
 
-    public Course(int id) {
+    public Course(){
+
+    }
+
+    public Course(int id, String title, String code, Term term, List<Instructor> instructors) {
         this.id = id;
-    }
-
-    public Course (int courseId, String courseTitle, String courseCode, Term courseTerm) {
-        id = courseId;
-        title = courseTitle;
-        code = courseCode;
-        term = courseTerm;
-    }
-
-    public Course (String courseTitle, String courseCode, Term courseTerm) { // Used to create a new instance to be added to the server
-        id = -1;
-        title = courseTitle;
-        code = courseCode;
-        term = courseTerm;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
         this.code = code;
-    }
-
-    public Term getTerm() {
-        return term;
-    }
-
-    public void setTerm(Term term) {
         this.term = term;
+        this.instructors = instructors;
+    }
+
+    @Override
+    public boolean isInRange() { // Get the list of all office hours and check whether it's okay
+        // Should check if there is a valid office hours being held at the moment
+        return true;
+    }
+
+    @Override
+    public boolean userCanAccess(int id) {
+        // Returns true if the user can access a certain office hour i.e there are registered in the class
+        return true;
     }
 
     @NonNull

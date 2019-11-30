@@ -8,16 +8,7 @@
  *
  */
 
-package edu.cmu.officient.api.qrcode;
+package edu.cmu.officient.model;
 
-public class TimerPaused extends TimerState {
-
-    public TimerPaused(ScannedQRCode code) {
-        super(code);
-    }
-
-    @Override
-    public void execute() {
-
-    }
+public class FacultyMember extends Instructor {
 }
