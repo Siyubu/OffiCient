@@ -30,7 +30,7 @@ public class CoursesList extends AppCompatActivity {
         setSupportActionBar(appBar);
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new QRCodeGeneratorListener(this));
+        fab.setOnClickListener(new QRCodeScannerListener(this));
 
 
 
