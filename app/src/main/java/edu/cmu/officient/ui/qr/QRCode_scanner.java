@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import edu.cmu.officient.R;
+import edu.cmu.officient.api.qrcode.ScannedCodeFactory;
 
 public class QRCode_scanner extends AppCompatActivity {
     private Button btnScan;
@@ -73,6 +74,8 @@ public class QRCode_scanner extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 format.setText(data.getStringExtra("SCAN_RESULT_FORMAT"));
                 content.setText(data.getStringExtra("SCAN_RESULT"));
+
+                ScannedCodeFactory.loadCode(data.getStringExtra("SCAN_RESULT"));
             } else if (resultCode == RESULT_CANCELED) {
                 format.setText("Press a button to start a scan.");
                 content.setText("Scan cancelled.");

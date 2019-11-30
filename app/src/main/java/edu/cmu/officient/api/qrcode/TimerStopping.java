@@ -10,12 +10,15 @@
 
 package edu.cmu.officient.api.qrcode;
 
-import edu.cmu.officient.model.Assignment;
+public class TimerStopping extends TimerState {
 
-public class ScannedAssignmentQRCode extends ScannedQRCode {
-    public ScannedAssignmentQRCode(Assignment assignment) {
-        super(assignment);
+    public TimerStopping(ScannedQRCode code) {
+        super(code);
     }
 
-
+    @Override
+    public void execute() {
+        // Every DB actions should be done here
+        getScannedCode().setState(getScannedCode().TIMER_STOPPED);
+    }
 }

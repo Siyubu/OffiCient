@@ -4,10 +4,12 @@ import android.os.Bundle;
 import android.view.Menu;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import edu.cmu.officient.R;
+import edu.cmu.officient.ui.listener.QRCodeScannerListener;
 
 public class CoursesList extends AppCompatActivity {
 
@@ -17,6 +19,9 @@ public class CoursesList extends AppCompatActivity {
         setContentView(R.layout.activity_courses_list);
         BottomAppBar appBar = findViewById(R.id.bottom_app_bar);
         setSupportActionBar(appBar);
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new QRCodeScannerListener(this));
     }
 
     @Override

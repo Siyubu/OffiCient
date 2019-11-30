@@ -18,6 +18,6 @@ public class TimerStopped extends TimerState {
 
     @Override
     public void execute() {
-
+        getScannedCode().setState(getScannedCode().TIMER_STARTING);
     }
 }

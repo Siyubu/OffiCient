@@ -12,9 +12,9 @@ package edu.cmu.officient.model;
 
 import java.time.LocalDateTime;
 
-public class OfficeHours implements Scannable {
+public class OfficeHours/* implements Scannable */{
     private int id;
-    private String venue, description;
+    private String venue, description, day;
     private LocalDateTime startAt, endAt;
     private Course course;
     private Instructor holder; // Instructor holding the office hours
@@ -23,11 +23,12 @@ public class OfficeHours implements Scannable {
 
     }
 
-    public OfficeHours(int id, String venue, String description, LocalDateTime startAt, LocalDateTime endAt,
+    public OfficeHours(int id, String venue, String description, String day, LocalDateTime startAt, LocalDateTime endAt,
                        Course course, Instructor holder) {
         this.id = id;
         this.venue = venue;
         this.description = description;
+        this.day = day;
         this.startAt = startAt;
         this.endAt = endAt;
         this.course = course;
@@ -88,6 +89,14 @@ public class OfficeHours implements Scannable {
 
     public void setHolder(Instructor holder) {
         this.holder = holder;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
     }
 
     @Override

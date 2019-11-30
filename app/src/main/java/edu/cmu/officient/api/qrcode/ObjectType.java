@@ -22,7 +22,7 @@ public enum ObjectType {
         description = name;
     }
 
-    public ObjectType fromString(String description) {
+    public static ObjectType fromString(String description) {
         if (description.equalsIgnoreCase("Assignment"))
             return ASSIGNMENT;
         else if (description.equalsIgnoreCase("Office Hours") ||
