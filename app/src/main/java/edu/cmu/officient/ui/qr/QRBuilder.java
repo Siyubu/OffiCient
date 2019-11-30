@@ -7,38 +7,26 @@
   ~  */
 package edu.cmu.officient.ui.qr;
 
-public class QRBuilder {
+public abstract class QRBuilder {
 
-    private QRGeneration qrgen;
+    public QRGeneration qrgen;
 
     public QRBuilder()
     {
         qrgen=new QRGeneration();
     }
 
-    public QRGeneration setId(int b_id)
-    {
-        qrgen.b_id=b_id;
+    abstract QRGeneration setId(int b_id);
 
-        return this.qrgen;
-    }
+    abstract QRGeneration setUser_id(int user_id);
 
-    public QRGeneration setUser_id(int user_id)
-    {
-        qrgen.user_id=user_id;
+    abstract QRGeneration setObjectType(String objT);
 
-        return  this.qrgen;
-    }
-    public QRGeneration setObjectType(String objT)
-    {
-        qrgen.object_type=objT;
-        return this.qrgen;
-    }
 
-    public String  build()
+    public String  buildQR()
     {
-        String txt= "OWNED_BY: "+this.qrgen.user_id+"\n" + "OBJECT_ID: "+this.qrgen.b_id + "\n"
-                +"OBJECT_TYPE: "+this.qrgen.object_type;
+        String txt= "OWNED_BY= "+this.qrgen.user_id+"\n" + "OBJECT_ID= "+this.qrgen.b_id + "\n"
+                +"OBJECT_TYPE= "+this.qrgen.object_type;
 
         return txt;
     }

@@ -9,6 +9,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AppCompatActivity;
 
 import edu.cmu.officient.R;
+import edu.cmu.officient.ui.listener.QRCodeGeneratorListener;
 import edu.cmu.officient.ui.listener.QRCodeScannerListener;
 
 public class CoursesList extends AppCompatActivity {
@@ -21,7 +22,7 @@ public class CoursesList extends AppCompatActivity {
         setSupportActionBar(appBar);
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new QRCodeScannerListener(this));
+        fab.setOnClickListener(new QRCodeGeneratorListener(this));
     }
 
     @Override
