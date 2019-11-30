@@ -10,20 +10,18 @@
 
 package edu.cmu.officient.api.qrcode;
 
-import edu.cmu.officient.model.Assignment;
-import edu.cmu.officient.model.Course;
-import edu.cmu.officient.model.Scannable;
+import edu.cmu.officient.model.*;
 
 public final class TimerStateFactory {
     public static TimerState getState(ScannedQRCode code) {
+        User user = code.getOwner();
         Scannable data = code.getData();
-        if (data instanceof Assignment) {
-            // First we check the published date and maximum submission time
-
+        if (data.isInRange()) {
+            if (data.userCanAccess(user.getId())) {
+                return new TimerStopped(code);
+            }
+            return new TimerInvalid(code, "You cannot access this object. Permission denied.");
         }
-        else if (data instanceof Course) {
-
-        }
-        return new TimerInvalid(code, "Class not supported for now");
+        return new TimerInvalid(code, "The data you're trying to access is no longer valid.");
     }
 }

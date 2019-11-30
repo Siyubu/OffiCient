@@ -18,9 +18,8 @@ public class TimerInvalid extends TimerState {
         errorMessage = message;
     }
 
-
     @Override
     public void execute() {
-
+        getScannedCode().setState(getScannedCode().TIMER_STOPPED);
     }
 }

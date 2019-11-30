@@ -10,11 +10,11 @@
 
 package edu.cmu.officient.model;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Assignment implements Scannable {
     private int id, expectedTime; // Expected time in hours
-    LocalDateTime publishedOn, deadline, availableTill;
+    Date publishedOn, deadline, availableTill;
     private String title;
     private Course course;
 
@@ -22,7 +22,7 @@ public class Assignment implements Scannable {
 
     }
 
-    public Assignment(int id, int expectedTime, LocalDateTime publishedOn, LocalDateTime deadline, LocalDateTime availableTill,
+    public Assignment(int id, int expectedTime, Date publishedOn, Date deadline, Date availableTill,
                       String title, Course course) {
         this.id = id;
         this.expectedTime = expectedTime;
@@ -31,6 +31,18 @@ public class Assignment implements Scannable {
         this.availableTill = availableTill;
         this.title = title;
         this.course = course;
+    }
+
+    @Override
+    public boolean isInRange() {
+        Date now = new Date();
+        return now.after(publishedOn) && now.before(availableTill);
+    }
+
+    @Override
+    public boolean userCanAccess(int id) {
+        // Based on if the student is in the class, returns true
+        return true;
     }
 
     public int getId() {
@@ -49,27 +61,27 @@ public class Assignment implements Scannable {
         this.expectedTime = expectedTime;
     }
 
-    public LocalDateTime getPublishedOn() {
+    public Date getPublishedOn() {
         return publishedOn;
     }
 
-    public void setPublishedOn(LocalDateTime publishedOn) {
+    public void setPublishedOn(Date publishedOn) {
         this.publishedOn = publishedOn;
     }
 
-    public LocalDateTime getDeadline() {
+    public Date getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(LocalDateTime deadline) {
+    public void setDeadline(Date deadline) {
         this.deadline = deadline;
     }
 
-    public LocalDateTime getAvailableTill() {
+    public Date getAvailableTill() {
         return availableTill;
     }
 
-    public void setAvailableTill(LocalDateTime availableTill) {
+    public void setAvailableTill(Date availableTill) {
         this.availableTill = availableTill;
     }
 

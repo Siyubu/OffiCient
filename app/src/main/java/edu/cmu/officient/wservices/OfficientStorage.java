@@ -17,11 +17,19 @@ public abstract class OfficientStorage{
         return new Assignment();
     }
 
+    public Course getCourse(int id) {
+        return new Course();
+    }
+
     public OfficeHours getOfficeHours(int id) {
         return new OfficeHours();
     }
 
     public User getUser(int id) {
-        return new User();
+        return new Student();
+    }
+
+    public User getCurrentUser(){
+        return new Student();
     }
 }

@@ -10,11 +10,14 @@
 
 package edu.cmu.officient.api.qrcode;
 
-import edu.cmu.officient.model.OfficeHours;
+public class TimerStarting extends TimerState {
 
-public class ScannedOfficeHoursQRCode extends ScannedQRCode{
-    public ScannedOfficeHoursQRCode(OfficeHours officeHours) {
-        super(officeHours);
+    public TimerStarting(ScannedQRCode code) {
+        super(code);
     }
 
+    @Override
+    public void execute() {
+        getScannedCode().setState(getScannedCode().TIMER_STARTED);
+    }
 }

@@ -32,6 +32,18 @@ public class Course implements Scannable {
         this.instructors = instructors;
     }
 
+    @Override
+    public boolean isInRange() { // Get the list of all office hours and check whether it's okay
+        // Should check if there is a valid office hours being held at the moment
+        return true;
+    }
+
+    @Override
+    public boolean userCanAccess(int id) {
+        // Returns true if the user can access a certain office hour i.e there are registered in the class
+        return true;
+    }
+
     @NonNull
     @Override
     public String toString() {
