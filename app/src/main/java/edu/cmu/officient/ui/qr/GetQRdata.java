@@ -55,10 +55,12 @@ public class GetQRdata {
  {
      id_from_database=123;
      user_id_from_database=12356;
+     object_type="DPSD_Course";
 
      qrBuilder=new QRBuilder();
      qrBuilder.setId(id_from_database);
      qrBuilder.setUser_id(user_id_from_database);
+     qrBuilder.setObjectType(object_type);
      fomatedData=qrBuilder.build();
 
      return fomatedData;
