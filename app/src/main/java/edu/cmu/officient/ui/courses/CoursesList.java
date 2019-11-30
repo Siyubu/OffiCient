@@ -3,6 +3,7 @@ package edu.cmu.officient.ui.courses;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
@@ -44,4 +45,5 @@ public class CoursesList extends AppCompatActivity {
             ScannedQRCode qrCode = ScannedCodeFactory.loadCode(output);
         }
     }
+
 }

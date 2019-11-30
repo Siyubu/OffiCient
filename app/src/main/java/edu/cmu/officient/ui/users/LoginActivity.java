@@ -124,4 +124,8 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    public void goStraight(View view) {
+        Intent intent = new Intent(this, CoursesList.class);
+        startActivity(intent);
+    }
 }
