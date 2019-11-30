@@ -44,6 +44,13 @@ public class Course implements Scannable {
         return true;
     }
 
+    public boolean equals(Object obj) {
+        if (obj instanceof Course) {
+
+        }
+        return false;
+    }
+
     @NonNull
     @Override
     public String toString() {

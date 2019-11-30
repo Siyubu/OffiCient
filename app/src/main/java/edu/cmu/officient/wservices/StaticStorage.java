@@ -1,0 +1,45 @@
+/*
+ *
+ *  * @author Segla Boladji Vinny Trinite Adjibi
+ *  * AndrewID : vadjibi
+ *  * Program : MSIT
+ *  *
+ *  * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized assistance on this work.
+ *
+ */
+
+package edu.cmu.officient.wservices;
+
+
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
+import edu.cmu.officient.model.*;
+
+public class StaticStorage extends OfficientStorage implements ReadData, UpdateData, DeleteData, AddData{
+    public Assignment getAssignment(int id) { // Builds an object using the ID
+        try {
+            return new Assignment(id, 3, DATE_FORMATTER.parse("08/01/2019 10:00:00"), DATE_FORMATTER.parse("08/09/2019 11:59:00"), DATE_FORMATTER.parse("08/10/2019 13:00:00"), "Location Aware", getCourse(1));
+        }
+        catch (ParseException e) {
+            Log.e("STATIC_GENERATOR", e.toString());
+        }
+        return null;
+    }
+
+    public Course getCourse(int id) {
+        Term term = new Term();
+        List<Instructor> instructors = new ArrayList<>();
+        return new Course(1, "Design Patterns for SD", "18785", term, instructors);
+    }
+}
