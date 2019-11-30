@@ -14,19 +14,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
-import edu.cmu.officient.ui.qr.QRCode_scanner;
+import androidx.appcompat.app.AppCompatActivity;
+
+import edu.cmu.officient.ui.qr.QRCodeScanner;
 
 public class QRCodeScannerListener implements View.OnClickListener {
-    private Context context;
+    private AppCompatActivity parentActivity;
 
-    public QRCodeScannerListener(Context context) {
-        this.context = context;
+    public QRCodeScannerListener(AppCompatActivity activity) {
+        parentActivity = activity;
     }
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(context, QRCode_scanner.class);
-        context.startActivity(intent);
-
+        Intent intent = new Intent(parentActivity, QRCodeScanner.class);
+        parentActivity.startActivityForResult (intent, QRCodeScanner.QR_CODE_READER);
     }
 }
