@@ -21,6 +21,7 @@ import java.util.Map;
 
 import edu.cmu.officient.DBCommunication.JSONProtocol;
 import edu.cmu.officient.R;
+import edu.cmu.officient.ui.courses.AddCourse;
 import edu.cmu.officient.ui.courses.CoursesList;
 
 public class LoginActivity extends AppCompatActivity {
@@ -55,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         registrationOpener.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
+                Intent intent = new Intent(LoginActivity.this, AddCourse.class);
                 startActivity(intent);
             }
         });

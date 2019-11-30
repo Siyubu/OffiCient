@@ -29,4 +29,10 @@
     <string name="profile">Profile</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_profile">Profile</string>
+    <string name="title_add_course">Add Course</string>
+    <string name="course_code_prompt">Course Code</string>
+    <string name="course_title_prompt">Course Title</string>
+    <string name="term_prompt">Term Prompt</string>
+    <string name="action_add_course">Add Course</string>
+
 </resources>
