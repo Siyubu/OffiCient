@@ -50,9 +50,12 @@ public class Assignment implements Scannable {
     @Override
     public boolean equals(@Nullable Object obj) {
         if (obj instanceof Assignment) {
-
+            Assignment o = (Assignment) obj;
+            return id==o.id && expectedTime==o.expectedTime && publishedOn.equals(o.publishedOn) &&
+                    deadline.equals(o.deadline) && availableTill.equals(o.availableTill) && title.equals(o.title)
+                    && course.equals(o.course);
         }
-        return super.equals(obj);
+        return false;
     }
 
     public int getId() {

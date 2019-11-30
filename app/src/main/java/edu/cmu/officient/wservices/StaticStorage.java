@@ -29,7 +29,7 @@ import edu.cmu.officient.model.*;
 public class StaticStorage extends OfficientStorage implements ReadData, UpdateData, DeleteData, AddData{
     public Assignment getAssignment(int id) { // Builds an object using the ID
         try {
-            return new Assignment(id, 3, DATE_FORMATTER.parse("08/01/2019 10:00:00"), DATE_FORMATTER.parse("08/09/2019 11:59:00"), DATE_FORMATTER.parse("08/10/2019 13:00:00"), "Location Aware", getCourse(1));
+            return new Assignment(id, 3, DATE_FORMATTER.parse("08/11/2019 10:00:00"), DATE_FORMATTER.parse("01/12/2019 11:59:00"), DATE_FORMATTER.parse("08/12/2019 13:00:00"), "Location Aware", getCourse(1));
         }
         catch (ParseException e) {
             Log.e("STATIC_GENERATOR", e.toString());
@@ -38,8 +38,14 @@ public class StaticStorage extends OfficientStorage implements ReadData, UpdateD
     }
 
     public Course getCourse(int id) {
-        Term term = new Term();
+        Term term;
+        try {
+            term = new Term("Fall 2019", DATE_FORMATTER.parse("08/01/2019 10:00:00"), DATE_FORMATTER.parse("08/09/2019 11:59:00"));
+        }
+        catch (ParseException e) {
+            term = new Term();
+        }
         List<Instructor> instructors = new ArrayList<>();
-        return new Course(1, "Design Patterns for SD", "18785", term, instructors);
+        return new Course(1, "Design Patterns for SD", "18785", term, instructors, new ArrayList<Student>(), new ArrayList<OfficeHours>());
     }
 }

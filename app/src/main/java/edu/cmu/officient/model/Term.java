@@ -18,13 +18,22 @@ public class Term {
     private String name;
     private Date startDate, endDate;
 
+    public Term(){
+        this("", new Date(), new Date());
+    }
+    public Term(String name, Date startDate, Date endDate) {
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
     @Override
     public boolean equals(@Nullable Object obj) {
         if (obj instanceof Term) {
             Term o = (Term) obj;
             return name.equals(o.getName()) && startDate.equals(o.getStartDate()) && endDate.equals(o.getEndDate());
         }
-        return super.equals(obj);
+        return false;
     }
 
     public String getName() {

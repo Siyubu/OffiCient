@@ -35,9 +35,16 @@ public class ScannedCodeFactory {
             case ASSIGNMENT: case UNDEFINED:
                 data = storage.getAssignment(id);
                 break;
-            case COURSE:
+            case COURSE: // Here we get the perfect office hour
+                Course course = storage.getCourse(id);
+                if (course != null) {
+                    data = course.getAppropriateOfficeHours(userId);
+                }
                 data = storage.getCourse(id);
+                break;
         }
-        return new ScannedQRCode(data, user);
+        if (data !=null)
+            return new ScannedQRCode(data, user);
+        return null;
     }
 }

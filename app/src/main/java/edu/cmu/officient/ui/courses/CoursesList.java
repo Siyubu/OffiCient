@@ -17,6 +17,8 @@ import edu.cmu.officient.api.qrcode.ScannedCodeFactory;
 import edu.cmu.officient.api.qrcode.ScannedQRCode;
 import edu.cmu.officient.ui.listener.QRCodeScannerListener;
 import edu.cmu.officient.ui.qr.QRCodeScanner;
+import edu.cmu.officient.wservices.OfficientStorage;
+import edu.cmu.officient.wservices.StaticStorage;
 
 public class CoursesList extends AppCompatActivity {
 
@@ -43,6 +45,22 @@ public class CoursesList extends AppCompatActivity {
         if (requestCode == QRCodeScanner.QR_CODE_READER && data != null) {
             String output = data.getStringExtra("code");
             ScannedQRCode qrCode = ScannedCodeFactory.loadCode(output);
+            if (qrCode != null) {
+                OfficientStorage storage = new StaticStorage();
+                switch (storage.processScannedCode(qrCode)) {
+                    case OfficientStorage.STATE_STARTED:
+                        Toast.makeText(this, "Monitoring has started for " + qrCode.getData(), Toast.LENGTH_SHORT).show();
+                        break;
+                    case OfficientStorage.STATE_STOPPED:
+                        Toast.makeText(this, "Monitoring has stopped for " + qrCode.getData(), Toast.LENGTH_SHORT).show();
+                        break;
+                    case OfficientStorage.STATE_EXPIRED:
+                        Toast.makeText(this, "Monitoring cannot be started for " + qrCode.getData(), Toast.LENGTH_SHORT).show();
+                        break;
+
+                }
+            }
+
         }
     }
 

@@ -11,20 +11,21 @@
 package edu.cmu.officient.model;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public abstract class User {
+    private final String EMAIL_PREFIX = "andrew.cmu.edu";
     private int id;
-    private String andrewId, fullname, email, altEmail, phoneNumber;
+    private String andrewId, fullname, altEmail, phoneNumber;
 
     public User(){
 
     }
 
-    public User(int id, String andrewId, String fullname, String email, String altEmail, String phoneNumber) {
+    public User(int id, String andrewId, String fullname, String altEmail, String phoneNumber) {
         this.id = id;
         this.andrewId = andrewId;
         this.fullname = fullname;
-        this.email = email;
         this.altEmail = altEmail;
         this.phoneNumber = phoneNumber;
     }
@@ -54,11 +55,7 @@ public abstract class User {
     }
 
     public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+        return andrewId + "@" + EMAIL_PREFIX;
     }
 
     public String getAltEmail() {
@@ -75,6 +72,14 @@ public abstract class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (obj instanceof User) {
+            return andrewId.equals(((User) obj).andrewId);
+        }
+        return false;
     }
 
     @NonNull
