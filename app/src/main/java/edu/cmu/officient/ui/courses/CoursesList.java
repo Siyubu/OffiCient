@@ -1,13 +1,13 @@
 package edu.cmu.officient.ui.courses;
 
-import android.os.Bundle;
-import android.view.Menu;
+        import android.os.Bundle;
+        import android.view.Menu;
 
-import com.google.android.material.bottomappbar.BottomAppBar;
+        import com.google.android.material.bottomappbar.BottomAppBar;
 
-import androidx.appcompat.app.AppCompatActivity;
+        import androidx.appcompat.app.AppCompatActivity;
 
-import edu.cmu.officient.R;
+        import edu.cmu.officient.R;
 
 public class CoursesList extends AppCompatActivity {
 

@@ -20,6 +20,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.cmu.officient.DBCommunication.CheckInternetConnection;
 import edu.cmu.officient.DBCommunication.JSONProtocol;
 import edu.cmu.officient.R;
 
@@ -49,13 +50,18 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                new SignUp().execute(username.getText().toString(),password.getText().toString());
+                if(new CheckInternetConnection(context).isInternetAvailable()){
+                    new Register().execute(username.getText().toString(),password.getText().toString());
+                }
+                else{
+                    Toast.makeText(context, "Unable to connect to the network", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }
 
-
-    private class SignUp extends AsyncTask <String, String, String> {
+    private class Register extends AsyncTask <String, String, String> {
 
         @Override
         protected void onPreExecute() {
@@ -67,17 +73,15 @@ public class RegistrationActivity extends AppCompatActivity {
         protected String doInBackground(String[] args) {
             JSONProtocol httpJsonParser = new JSONProtocol();
             Map<String, String> httpParams = new HashMap<>();
-            //Populating request parameters
-            System.out.println(args[1]);
             httpParams.put("andrewId",args[0]);
             httpParams.put("password", args[1]);
-            httpParams.put("signup", "ok");
+            httpParams.put("signup", "signup");
             JSONObject jsonObject = httpJsonParser.makeHttpRequest(
                     "http://gamfruits.com/officient_api/functions.php", "POST", httpParams);
+
+            System.out.println(jsonObject);
             try {
                 message = jsonObject.getString("message");
-                System.out.println(message);
-
             } catch (JSONException e) {
                 message = "error";
             }
@@ -89,7 +93,7 @@ public class RegistrationActivity extends AppCompatActivity {
         protected void onPostExecute(String result){
 
             progressBar.setVisibility(View.GONE);
-
+            System.out.println(message);
             if (message.equalsIgnoreCase("success")){
                 Intent intent = new Intent(RegistrationActivity.this, SuccessfulRegistration.class);
                 startActivity(intent);
