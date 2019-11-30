@@ -1,16 +1,21 @@
 package edu.cmu.officient.ui.courses;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import edu.cmu.officient.R;
-import edu.cmu.officient.ui.listener.QRCodeGeneratorListener;
+import edu.cmu.officient.api.qrcode.ScannedCodeFactory;
+import edu.cmu.officient.api.qrcode.ScannedQRCode;
 import edu.cmu.officient.ui.listener.QRCodeScannerListener;
+import edu.cmu.officient.ui.qr.QRCodeScanner;
 
 public class CoursesList extends AppCompatActivity {
 
@@ -22,12 +27,21 @@ public class CoursesList extends AppCompatActivity {
         setSupportActionBar(appBar);
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new QRCodeGeneratorListener(this));
+        fab.setOnClickListener(new QRCodeScannerListener(this));
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.bottom_nav_menu, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == QRCodeScanner.QR_CODE_READER && data != null) {
+            String output = data.getStringExtra("code");
+            ScannedQRCode qrCode = ScannedCodeFactory.loadCode(output);
+        }
     }
 }

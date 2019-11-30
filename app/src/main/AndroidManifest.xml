@@ -12,10 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.qr.QRCode_scanner"></activity>
+        <activity android:name=".ui.qr.QRCode_scanner"/>
         <activity android:name=".ui.qr.QRGeneration" />
         <activity android:name=".ui.Timer_Activity" />
         <activity android:name=".ui.ProfileEditActivity" />
+        <activity android:name=".ui.qr.QRCodeScanner" />
         <activity
             android:name=".ui.users.Profile"
             android:label="@string/title_activity_profile"
@@ -27,6 +28,9 @@
         </activity>
         <activity
             android:name=".ui.courses.CoursesList"
+            android:label="@string/title_activity_courses_list" />
+        <activity
+            android:name=".ui.courses.AddCourse"
             android:label="@string/title_activity_courses_list" />
         <activity android:name=".ui.users.SuccessfulRegistration" />
         <activity

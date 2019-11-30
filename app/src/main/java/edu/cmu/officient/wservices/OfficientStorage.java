@@ -10,9 +10,13 @@
 
 package edu.cmu.officient.wservices;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 import edu.cmu.officient.model.*;
 
 public abstract class OfficientStorage{
+    static SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("yy/MM/dd HH:mm:ss", Locale.getDefault());
     public Assignment getAssignment(int id) { // Builds an object using the ID
         return new Assignment();
     }
