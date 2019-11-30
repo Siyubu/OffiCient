@@ -32,13 +32,20 @@ import androidmads.library.qrgenearator.QRGEncoder;
 import edu.cmu.officient.R;
 
 public class QRGeneration extends AppCompatActivity {
-    String TAG = "GenerateQRCode";
+   public  int b_id;
+   public  int user_id;
+   public String object_type;
+   private GetQRdata realdata;
+   private String txt;
+
+    private String TAG = "GenerateQRCode";
     EditText edtValue;
-    ImageView qrImage;
-    Button start;
-    String savePath = Environment.getExternalStorageDirectory().getPath() + "/QRCode/";
-    Bitmap bitmap;
-    QRGEncoder qrgEncoder;
+    private ImageView qrImage;
+    private  Button start;
+   // private String savePath = Environment.getExternalStorageDirectory().getPath() + "/QRCode/";
+    private Bitmap bitmap;
+    private QRGEncoder qrgEncoder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,11 +55,13 @@ public class QRGeneration extends AppCompatActivity {
         edtValue = (EditText) findViewById(R.id.txt);
         start = (Button) findViewById(R.id.btnstart);
         final Button save = (Button) findViewById(R.id.btnsave);
+        realdata=new GetQRdata();
+        txt=realdata.qrData();
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (edtValue.getText().toString().trim().length() > 0) {
+                if (txt.length() > 0) {
 
                     //calculating bitmap dimension
                     WindowManager manager = (WindowManager) getSystemService(WINDOW_SERVICE);
@@ -64,7 +73,7 @@ public class QRGeneration extends AppCompatActivity {
                     int smallerDimension = width < height ? width : height;
                     smallerDimension = smallerDimension * 3 / 4;
 
-                    qrgEncoder = new QRGEncoder(edtValue.getText().toString().trim(), null, QRGContents.Type.TEXT, smallerDimension);
+                    qrgEncoder = new QRGEncoder(txt, null, QRGContents.Type.TEXT, smallerDimension);
                     try {
                         bitmap = qrgEncoder.encodeAsBitmap();
                         qrImage.setImageBitmap(bitmap);
@@ -92,4 +101,7 @@ public class QRGeneration extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+
+
 }
