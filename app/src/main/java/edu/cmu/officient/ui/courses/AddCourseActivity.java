@@ -16,6 +16,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,9 +32,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
 import edu.cmu.officient.DBCommunication.RequestData;
 import edu.cmu.officient.R;
+import edu.cmu.officient.Util.DateConversion;
+import edu.cmu.officient.model.Term;
 
 public class AddCourseActivity extends AppCompatActivity {
 
@@ -44,7 +51,8 @@ public class AddCourseActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private Context context;
     private ArrayAdapter adapter;
-    ArrayList<String> items;
+    ArrayList<Term> items;
+    Term selectedTerm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +64,6 @@ public class AddCourseActivity extends AppCompatActivity {
         course_code = findViewById(R.id.code);
         course_title = findViewById(R.id.title);
         dropdown = findViewById(R.id.term);
-        //String[] items = new String[]{"Fall 2019", "Spring 2018", "Summer 2018"};
         items = new ArrayList<>();
         adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
@@ -66,16 +73,39 @@ public class AddCourseActivity extends AppCompatActivity {
         addCourseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AddCourse().execute("addCourse",course_code.getText().toString(), course_title.getText().toString(), "1");
+                if(selectedTerm !=null) {
+                    new AddCourse().execute("addCourse", course_code.getText().toString(), course_title.getText().toString(), selectedTerm.getId() + "");
+                }
+                else{
+                    Toast.makeText(context, "Please select a term for the office hours", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
+        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedTerm = (Term) parent.getSelectedItem();
+                Toast.makeText(context, selectedTerm.getId()+"", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                selectedTerm = null;
+            }
+        });
+
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.bottom_nav_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
+
 
     private class AddCourse extends AsyncTask<String, String, String> {
         private JSONObject jsonObject;
@@ -148,13 +178,17 @@ public class AddCourseActivity extends AppCompatActivity {
         protected void onPostExecute(String result){
             progressBar.setVisibility(View.GONE);
             System.out.println(result);
+            DateConversion dateConversion = new DateConversion();
             if (result.equalsIgnoreCase("success")){
                 try {
                     JSONArray jsonArray = jsonObject.getJSONArray("data");
                     JSONObject row;
                     for(int i=0;i<jsonArray.length();i++){
                         row = (JSONObject) jsonArray.get(i);
-                        items.add(row.getString("name") +" ( From " +row.getString("start_date")+" to "+row.getString("end_date")+")");
+                        items.add(new Term(row.getInt("id"), row.getString("name"),
+                                dateConversion.stringToDate(row.getString("start_date")),
+                                dateConversion.stringToDate(row.getString("end_date"))));
+                        //items.add(row.getString("name") +" ( From " +row.getString("start_date")+" to "+row.getString("end_date")+")");
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -165,7 +199,7 @@ public class AddCourseActivity extends AppCompatActivity {
                 Toast.makeText(context, "Unable to connect to the internet. The term list won't be updated", Toast.LENGTH_SHORT).show();
             }
             else if (result.equalsIgnoreCase("no_data")){
-                items.add("Term list empty");
+                //items.add("Term list empty");
                 Toast.makeText(context, "term list empty", Toast.LENGTH_SHORT).show();
             }
             adapter.notifyDataSetChanged();
