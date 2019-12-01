@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.annotation.Nullable;
@@ -18,7 +19,9 @@ import edu.cmu.officient.api.qrcode.ScannedCodeFactory;
 import edu.cmu.officient.api.qrcode.ScannedQRCode;
 import edu.cmu.officient.ui.listener.QRCodeGeneratorListener;
 import edu.cmu.officient.ui.listener.QRCodeScannerListener;
+import edu.cmu.officient.ui.listener.TrackedActivitiesViewerListener;
 import edu.cmu.officient.ui.qr.QRCodeScanner;
+import edu.cmu.officient.ui.util.NavigationInitializer;
 import edu.cmu.officient.wservices.OfficientStorage;
 import edu.cmu.officient.wservices.StaticStorage;
 
@@ -28,11 +31,15 @@ public class CoursesList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses_list);
-        BottomAppBar appBar = findViewById(R.id.bottom_app_bar);
-        setSupportActionBar(appBar);
+        /*BottomAppBar appBar = findViewById(R.id.bottom_app_bar);
+        setSupportActionBar(appBar);*/
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new QRCodeScannerListener(this));
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        NavigationInitializer.setUpBottomNavigationBar(this, navView);
+
+        FloatingActionButton scanCode = findViewById(R.id.scan_code), viewStatus = findViewById(R.id.see_activities);
+        scanCode.setOnClickListener(new QRCodeScannerListener(this));
+        viewStatus.setOnClickListener(new TrackedActivitiesViewerListener(this));
 
 
 

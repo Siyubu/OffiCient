@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.qr.QRCode_scanner"/>
+        <activity android:name=".ui.activities.OngoingActivitiesList"></activity>
+        <activity android:name=".ui.qr.QRCode_scanner" />
         <activity android:name=".ui.qr.QRGeneration" />
         <activity android:name=".ui.Timer_Activity" />
         <activity android:name=".ui.ProfileEditActivity" />

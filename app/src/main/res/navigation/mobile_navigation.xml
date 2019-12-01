@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="edu.cmu.officient.ui.courses.ui.home.HomeFragment"
+        android:name="edu.cmu.officient.ui.courses.CoursesFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="edu.cmu.officient.ui.courses.ui.dashboard.DashboardFragment"
+        android:name="edu.cmu.officient.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="edu.cmu.officient.ui.courses.ui.notifications.NotificationsFragment"
+        android:name="edu.cmu.officient.ui.users.ProfileFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_profile" />
 </navigation>
