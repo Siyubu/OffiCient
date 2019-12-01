@@ -11,64 +11,29 @@
 package edu.cmu.officient.ui.qr;
 
 public class GetQRdata {
- private int id_from_database;
- private int user_id_from_database;
- private String object_type;
- private String fomatedData;
- private QRBuilder qrBuilder;
+String formatedData;
+ private QRCode_Factory qrFact;
+ private QRBuilder builder;
 
- public GetQRdata(){}
+ public GetQRdata(){
+     builder=new Assignment_QR_Builder();
 
-    public GetQRdata(int id_from_database, int user_id_from_database,String object_type) {
-
-        this.id_from_database = id_from_database;
-        this.user_id_from_database = user_id_from_database;
-        this.object_type=object_type;
-
-    }
-
-    public int getId_from_database() {
-        return id_from_database;
-    }
-
-    public void setId_from_database(int id_from_database) {
-        this.id_from_database = id_from_database;
-    }
-
-    public int getUser_id_from_database() {
-        return user_id_from_database;
-    }
-
-    public void setUser_id_from_database(int user_id_from_database) {
-        this.user_id_from_database = user_id_from_database;
-    }
-
-    public String getObject_type() {
-        return object_type;
-    }
-
-    public void setObject_type(String object_type) {
-        this.object_type = object_type;
-    }
+ }
 
     public String qrData()
  {
-     id_from_database=123;
-     user_id_from_database=12356;
 
-     qrBuilder=new QRBuilder();
-     qrBuilder.setId(id_from_database);
-     qrBuilder.setUser_id(user_id_from_database);
-     fomatedData=qrBuilder.build();
-
-     return fomatedData;
+     builder.setObjectType("Assignment");
+     builder.setUser_id(12);
+     builder.setId(987);
+     formatedData=builder.buildQR();
+     return formatedData;
  }
 
     @Override
     public String toString() {
         return "GetQRdata{" +
-                "id_from_database=" + id_from_database +
-                ", user_id_from_database=" + user_id_from_database +
+                "formatedData='" + formatedData + '\'' +
                 '}';
     }
 }

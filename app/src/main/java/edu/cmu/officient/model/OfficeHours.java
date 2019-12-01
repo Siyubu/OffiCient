@@ -11,11 +11,13 @@
 package edu.cmu.officient.model;
 
 import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
 
-public class OfficeHours/* implements Scannable */{
-    private int id;
-    private String venue, description, day;
-    private LocalDateTime startAt, endAt;
+public class OfficeHours implements Scannable {
+    private int id, day; // Day is a 0 based value of the day in the week
+    private String venue, description;
+    private Date startAt, endAt;
     private Course course;
     private Instructor holder; // Instructor holding the office hours
 
@@ -23,7 +25,7 @@ public class OfficeHours/* implements Scannable */{
 
     }
 
-    public OfficeHours(int id, String venue, String description, String day, LocalDateTime startAt, LocalDateTime endAt,
+    public OfficeHours(int id, int day, String venue, String description,  Date startAt, Date endAt,
                        Course course, Instructor holder) {
         this.id = id;
         this.venue = venue;
@@ -33,6 +35,25 @@ public class OfficeHours/* implements Scannable */{
         this.endAt = endAt;
         this.course = course;
         this.holder = holder;
+    }
+
+    @Override
+    public boolean isInRange() {
+        Calendar calendar = Calendar.getInstance();
+        if (calendar.get(Calendar.DAY_OF_WEEK) == day ) { // We are the right day when the office hours is held
+            // Now we check the time
+            Date now = new Date();
+            if (startAt.before(now) && endAt.after(now) ) { // We are still in the range
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean userCanAccess(int id) {
+        // Check if it is a student in the class
+        return course.isAStudentOfCourse(id);
     }
 
     public int getId() {
@@ -59,19 +80,19 @@ public class OfficeHours/* implements Scannable */{
         this.description = description;
     }
 
-    public LocalDateTime getStartAt() {
+    public Date getStartAt() {
         return startAt;
     }
 
-    public void setStartAt(LocalDateTime startAt) {
+    public void setStartAt(Date startAt) {
         this.startAt = startAt;
     }
 
-    public LocalDateTime getEndAt() {
+    public Date getEndAt() {
         return endAt;
     }
 
-    public void setEndAt(LocalDateTime endAt) {
+    public void setEndAt(Date endAt) {
         this.endAt = endAt;
     }
 
@@ -91,13 +112,15 @@ public class OfficeHours/* implements Scannable */{
         this.holder = holder;
     }
 
-    public String getDay() {
+    public int getDay() {
         return day;
     }
 
-    public void setDay(String day) {
+    public void setDay(int day) {
         this.day = day;
     }
+
+
 
     @Override
     public String toString() {

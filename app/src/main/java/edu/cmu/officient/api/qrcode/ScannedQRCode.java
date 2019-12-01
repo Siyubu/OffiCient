@@ -10,6 +10,8 @@
 
 package edu.cmu.officient.api.qrcode;
 
+import androidx.annotation.Nullable;
+
 import edu.cmu.officient.model.Scannable;
 import edu.cmu.officient.model.User;
 
@@ -18,7 +20,7 @@ public class ScannedQRCode {
     private User owner; // Represents the owner of the QR Code (Generally an instructor)
     private Scannable data;
     // Make it accessible from the package
-    protected final TimerState TIMER_INVALID = new TimerInvalid(this, ""), TIMER_STOPPING = new TimerStopping(this),
+    public  final TimerState TIMER_INVALID = new TimerInvalid(this, ""), TIMER_STOPPING = new TimerStopping(this),
             TIMER_STARTING = new TimerStarting(this), TIMER_STARTED = new TimerStarted(this), TIMER_STOPPED = new TimerStopping(this);
 
     public ScannedQRCode(Scannable object){
@@ -52,6 +54,15 @@ public class ScannedQRCode {
 
     public double timeout(){
         return state.timeout();
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (obj instanceof ScannedQRCode) {
+            ScannedQRCode code = (ScannedQRCode) obj;
+            return owner.equals(code.owner) && data.equals(code.data);
+        }
+        return false;
     }
 
     public TimerState getState() {

@@ -12,16 +12,18 @@ package edu.cmu.officient.api.qrcode;
 
 import edu.cmu.officient.model.*;
 
-public final class TimerStateFactory {
+public final class TimerStateFactory { // Should be a polymorphic behavior
     public static TimerState getState(ScannedQRCode code) {
         User user = code.getOwner();
         Scannable data = code.getData();
         if (data.isInRange()) {
-            if (data.userCanAccess(user.getId())) {
-                return new TimerStopped(code);
+            int userId = -1;
+            if (user != null)
+                userId = user.getId();
+            if (data.userCanAccess(userId)) {
+                return code.TIMER_STARTING;
             }
-            return new TimerInvalid(code, "You cannot access this object. Permission denied.");
         }
-        return new TimerInvalid(code, "The data you're trying to access is no longer valid.");
+        return code.TIMER_INVALID;
     }
 }

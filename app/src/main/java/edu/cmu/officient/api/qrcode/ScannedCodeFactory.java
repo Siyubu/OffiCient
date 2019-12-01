@@ -18,20 +18,6 @@ import edu.cmu.officient.model.*;
 import edu.cmu.officient.wservices.*;
 
 public class ScannedCodeFactory {
-    public static ScannedQRCode getCodeObject(ObjectType type, int id, int userId) {
-        OfficientStorage storage = new PermanentStorage();
-        User user = storage.getUser(userId);
-        Scannable data = null;
-        switch (type) {
-            case ASSIGNMENT:
-                data = storage.getAssignment(id);
-                break;
-            case COURSE:
-                data = storage.getCourse(id);
-        }
-        return new ScannedQRCode(data, user);
-    }
-
     public static ScannedQRCode loadCode(String output) {
         Properties properties = new Properties();
         try {
@@ -41,16 +27,24 @@ public class ScannedCodeFactory {
         int userId = Integer.parseInt(properties.getProperty("OWNED_BY"));
         int id = Integer.parseInt(properties.getProperty("OBJECT_ID"));
         ObjectType type = ObjectType.fromString(properties.getProperty("OBJECT_TYPE"));
-        OfficientStorage storage = new PermanentStorage();
+        //OfficientStorage storage = new PermanentStorage();
+        OfficientStorage storage = new StaticStorage();
         User user = storage.getUser(userId);
         Scannable data = null;
         switch (type) {
-            case ASSIGNMENT:
+            case ASSIGNMENT: case UNDEFINED:
                 data = storage.getAssignment(id);
                 break;
-            case COURSE:
+            case COURSE: // Here we get the perfect office hour
+                Course course = storage.getCourse(id);
+                if (course != null) {
+                    data = course.getAppropriateOfficeHours(userId);
+                }
                 data = storage.getCourse(id);
+                break;
         }
-        return new ScannedQRCode(data, user);
+        if (data !=null)
+            return new ScannedQRCode(data, user);
+        return null;
     }
 }

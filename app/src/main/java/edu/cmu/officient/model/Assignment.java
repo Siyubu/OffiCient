@@ -10,6 +10,8 @@
 
 package edu.cmu.officient.model;
 
+import androidx.annotation.Nullable;
+
 import java.util.Date;
 
 public class Assignment implements Scannable {
@@ -43,6 +45,17 @@ public class Assignment implements Scannable {
     public boolean userCanAccess(int id) {
         // Based on if the student is in the class, returns true
         return true;
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (obj instanceof Assignment) {
+            Assignment o = (Assignment) obj;
+            return id==o.id && expectedTime==o.expectedTime && publishedOn.equals(o.publishedOn) &&
+                    deadline.equals(o.deadline) && availableTill.equals(o.availableTill) && title.equals(o.title)
+                    && course.equals(o.course);
+        }
+        return false;
     }
 
     public int getId() {

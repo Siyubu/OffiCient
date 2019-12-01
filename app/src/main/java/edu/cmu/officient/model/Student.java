@@ -11,4 +11,7 @@
 package edu.cmu.officient.model;
 
 public class Student extends User {
+    public Student(int id, String andrewId, String fullname, String altEmail, String phoneNumber) {
+        super(id, andrewId, fullname, altEmail, phoneNumber);
+    }
 }
