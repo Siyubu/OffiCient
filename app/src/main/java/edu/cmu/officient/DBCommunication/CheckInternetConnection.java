@@ -22,7 +22,7 @@ public class CheckInternetConnection {
         this.context = context;
     }
 
-    public boolean isInternetAvailable() {
+    public boolean isAvailable() {
         ConnectivityManager cm =
                 (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
 

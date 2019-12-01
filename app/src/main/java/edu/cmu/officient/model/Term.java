@@ -1,7 +1,7 @@
 /*
  *
- *  * @author Segla Boladji Vinny Trinite Adjibi
- *  * AndrewID : vadjibi
+ *  * @author Segla Boladji Vinny Trinite Adjibi, Wuyeh Jobe
+ *  * AndrewID : vadjibi, jwuyeh
  *  * Program : MSIT
  *  *
  *  * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized assistance on this work.
@@ -14,7 +14,10 @@ import androidx.annotation.Nullable;
 
 import java.util.Date;
 
+import edu.cmu.officient.Util.DateConversion;
+
 public class Term {
+    private int id;
     private String name;
     private Date startDate, endDate;
 
@@ -22,6 +25,13 @@ public class Term {
         this("", new Date(), new Date());
     }
     public Term(String name, Date startDate, Date endDate) {
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+    public Term(int id, String name, Date startDate, Date endDate){
+        this.id = id;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -36,6 +46,9 @@ public class Term {
         return false;
     }
 
+    public int getId(){
+        return id;
+    }
     public String getName() {
         return name;
     }
@@ -45,7 +58,7 @@ public class Term {
     }
 
     public Date getStartDate() {
-        return startDate;
+       return startDate;
     }
 
     public void setStartDate(Date startDate) {
@@ -53,10 +66,15 @@ public class Term {
     }
 
     public Date getEndDate() {
-        return endDate;
+       return endDate;
     }
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public String toString(){
+        DateConversion dateConversion = new DateConversion();
+        return name+ " (From "+dateConversion.datePart(getStartDate())+ " to "+ dateConversion.datePart(getEndDate())+")";
     }
 }

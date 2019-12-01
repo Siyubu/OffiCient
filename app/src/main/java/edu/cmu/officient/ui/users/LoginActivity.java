@@ -20,8 +20,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import edu.cmu.officient.DBCommunication.JSONProtocol;
+import edu.cmu.officient.DBCommunication.RequestData;
 import edu.cmu.officient.R;
-import edu.cmu.officient.ui.courses.AddCourse;
+import edu.cmu.officient.ui.courses.AddCourseActivity;
 import edu.cmu.officient.ui.courses.CoursesList;
 
 public class LoginActivity extends AppCompatActivity {
@@ -31,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private EditText username;
     private EditText password;
-    private String message;
     private Context context;
 
     @Override
@@ -50,13 +50,13 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Login().execute(username.getText().toString(), password.getText().toString());
+                new Login().execute("login",username.getText().toString(), password.getText().toString());
             }
         });
         registrationOpener.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, AddCourse.class);
+                Intent intent = new Intent(LoginActivity.this, AddCourseActivity.class);
                 startActivity(intent);
             }
         });
@@ -73,45 +73,35 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String[] args) {
-            JSONProtocol httpJsonParser = new JSONProtocol();
-            Map<String, String> httpParams = new HashMap<>();
-            httpParams.put("andrewId",args[0]);
-            httpParams.put("password", args[1]);
-            httpParams.put("login", "login");
-            jsonObject = httpJsonParser.makeHttpRequest(
-                    "http://gamfruits.com/officient_api/functions.php", "POST", httpParams);
-
+            String message;
+            String[] attributes = new String[]{"login", "andrewId", "password"};
+            RequestData requestData = new RequestData( context,"http://gamfruits.com/officient_api/functions.php", attributes, args);
+            jsonObject = requestData.getResponse();
             System.out.println(jsonObject);
             try {
                 message = jsonObject.getString("message");
             } catch (JSONException e) {
                 message = "error";
             }
-            return null;
-
+            return message;
         }
 
         protected void onPostExecute(String result){
 
             progressBar.setVisibility(View.GONE);
-            System.out.println(message);
-            if (message.equalsIgnoreCase("success")){
-//                try {
-//                   // System.out.println(jsonObject.getJSONArray("data"));
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
+            System.out.println(result);
+            if (result.equalsIgnoreCase("success")){
                 Toast.makeText(context, "Login Successful", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, CoursesList.class);
                 startActivity(intent);
             }
-            else if(message.equalsIgnoreCase("error")){
+            else if(result.equalsIgnoreCase("error")){
                 Toast.makeText(context, "Unable to connect to the network", Toast.LENGTH_SHORT).show();
             }
-            else if (message.equalsIgnoreCase("no_account")){
+            else if (result.equalsIgnoreCase("no_account")){
                 Toast.makeText(context, "You have not registered", Toast.LENGTH_SHORT).show();
             }
-            else if (message.equalsIgnoreCase("wrong_password")){
+            else if (result.equalsIgnoreCase("wrong_password")){
                 try {
                     System.out.println(jsonObject.getString("data"));
                 } catch (JSONException e) {

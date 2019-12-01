@@ -30,7 +30,7 @@
             android:name=".ui.courses.CoursesList"
             android:label="@string/title_activity_courses_list" />
         <activity
-            android:name=".ui.courses.AddCourse"
+            android:name=".ui.courses.AddCourseActivity"
             android:label="@string/title_activity_courses_list" />
         <activity android:name=".ui.users.SuccessfulRegistration" />
         <activity
