@@ -16,12 +16,8 @@ import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import edu.cmu.officient.DBCommunication.CheckInternetConnection;
-import edu.cmu.officient.DBCommunication.JSONProtocol;
+import edu.cmu.officient.DBCommunication.RequestData;
 import edu.cmu.officient.R;
 
 public class RegistrationActivity extends AppCompatActivity {
@@ -32,7 +28,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText username;
     private  EditText password;
     private ProgressBar progressBar;
-    private String message;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,25 +40,23 @@ public class RegistrationActivity extends AppCompatActivity {
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         progressBar = findViewById(R.id.loading);
-
         completeRegistration = findViewById(R.id.register);
         completeRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(new CheckInternetConnection(context).isInternetAvailable()){
-                    new Register().execute(username.getText().toString(),password.getText().toString());
+                if(new CheckInternetConnection(context).isAvailable()){
+                    new Register().execute("signup",username.getText().toString(),password.getText().toString());
                 }
                 else{
                     Toast.makeText(context, "Unable to connect to the network", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
     }
 
     private class Register extends AsyncTask <String, String, String> {
-
+        private JSONObject jsonObject;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -71,40 +65,34 @@ public class RegistrationActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String[] args) {
-            JSONProtocol httpJsonParser = new JSONProtocol();
-            Map<String, String> httpParams = new HashMap<>();
-            httpParams.put("andrewId",args[0]);
-            httpParams.put("password", args[1]);
-            httpParams.put("signup", "signup");
-            JSONObject jsonObject = httpJsonParser.makeHttpRequest(
-                    "http://gamfruits.com/officient_api/functions.php", "POST", httpParams);
-
+            String message;
+            String[] attributes = new String[]{"signup", "andrewId", "password"};
+            RequestData requestData = new RequestData( context,"http://gamfruits.com/officient_api/functions.php", attributes, args);
+            jsonObject = requestData.getResponse();
             System.out.println(jsonObject);
             try {
                 message = jsonObject.getString("message");
             } catch (JSONException e) {
                 message = "error";
             }
-            return null;
-
+            return message;
         }
-
 
         protected void onPostExecute(String result){
 
             progressBar.setVisibility(View.GONE);
-            System.out.println(message);
-            if (message.equalsIgnoreCase("success")){
+            System.out.println(result);
+            if (result.equalsIgnoreCase("success")){
                 Intent intent = new Intent(RegistrationActivity.this, SuccessfulRegistration.class);
                 startActivity(intent);
             }
-            else if(message.equalsIgnoreCase("error")){
+            else if(result.equalsIgnoreCase("error")){
                 Toast.makeText(context, "Unable to connect to the network", Toast.LENGTH_SHORT).show();
             }
-            else if (message.equalsIgnoreCase("already_registered")){
+            else if (result.equalsIgnoreCase("already_registered")){
                 Toast.makeText(context, "User is already registered", Toast.LENGTH_SHORT).show();
             }
-            else if (message.equalsIgnoreCase("failed")){
+            else if (result.equalsIgnoreCase("failed")){
                 Toast.makeText(context, "Problem with sql query", Toast.LENGTH_SHORT).show();
             }
 
