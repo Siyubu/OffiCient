@@ -14,7 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
-import edu.cmu.officient.ui.activities.OngoingActivitiesList;
+import edu.cmu.officient.ui.tasks.OngoingTasksList;
 
 public class TrackedActivitiesViewerListener  implements View.OnClickListener  {
     private Context context;
@@ -26,7 +26,7 @@ public class TrackedActivitiesViewerListener  implements View.OnClickListener  {
     @Override
     public void onClick(View view) {
         // Do all the stuffs here. Basically opens the page with all the data
-        Intent intent = new Intent(context, OngoingActivitiesList.class);
+        Intent intent = new Intent(context, OngoingTasksList.class);
         context.startActivity(intent);
     }
 }

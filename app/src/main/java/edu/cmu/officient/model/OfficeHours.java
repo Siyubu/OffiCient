@@ -56,6 +56,10 @@ public class OfficeHours implements Scannable {
         return course.isAStudentOfCourse(id);
     }
 
+    public String getType(){
+        return "Office Hours";
+    }
+
     public int getId() {
         return id;
     }

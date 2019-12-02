@@ -13,9 +13,11 @@ package edu.cmu.officient.api.qrcode;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.Date;
+
 public abstract class TimerState {
     private ScannedQRCode scannedCode;
-    private double startedAt=0, endAt=0;
+    private Date enteredAt, leftAt;
 
     public TimerState(ScannedQRCode code) {
         scannedCode = code;
@@ -30,7 +32,9 @@ public abstract class TimerState {
     }
 
     public double timeout(){
-        return endAt - startedAt;
+        if (leftAt != null)
+            return leftAt.getTime() - enteredAt.getTime();
+        return new Date().getTime() - enteredAt.getTime();
     }
 
     public abstract void execute();
@@ -43,20 +47,20 @@ public abstract class TimerState {
         this.scannedCode = scannedCode;
     }
 
-    public double getStartedAt() {
-        return startedAt;
+    public Date getEnteredAt() {
+        return enteredAt;
     }
 
-    public void setStartedAt(double startedAt) {
-        this.startedAt = startedAt;
+    public void setEnteredAt(Date startedAt) {
+        this.enteredAt = startedAt;
     }
 
-    public double getEndAt() {
-        return endAt;
+    public Date getLeftAt() {
+        return leftAt;
     }
 
-    public void setEndAt(double endAt) {
-        this.endAt = endAt;
+    public void setLeftAt(Date endAt) {
+        this.leftAt = endAt;
     }
 
     @NonNull
@@ -64,9 +68,9 @@ public abstract class TimerState {
         StringBuilder builder = new StringBuilder();
         builder.append(scannedCode);
         builder.append(" : (");
-        builder.append(startedAt);
+        builder.append(enteredAt);
         builder.append(", ");
-        builder.append(endAt);
+        builder.append(leftAt);
         builder.append(")");
         return builder.toString();
     }

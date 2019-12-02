@@ -58,8 +58,8 @@ public class Assignment implements Scannable {
         return false;
     }
 
-    public int getId() {
-        return id;
+    public String getType(){
+        return "Assignment";
     }
 
     public void setId(int id) {

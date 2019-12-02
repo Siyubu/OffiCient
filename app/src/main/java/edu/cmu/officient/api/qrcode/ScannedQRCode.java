@@ -12,6 +12,8 @@ package edu.cmu.officient.api.qrcode;
 
 import androidx.annotation.Nullable;
 
+import java.util.Date;
+
 import edu.cmu.officient.model.Scannable;
 import edu.cmu.officient.model.User;
 
@@ -70,7 +72,9 @@ public class ScannedQRCode {
     }
 
     public void setState(TimerState state) {
+        this.state.setLeftAt(new Date());
         this.state = state;
+        this.state.setEnteredAt(new Date());
     }
 
     public User getOwner() {

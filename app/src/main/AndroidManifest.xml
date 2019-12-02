@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activities.OngoingActivitiesList"></activity>
+        <activity android:name=".ui.tasks.OngoingTasksList"
+            android:label="@string/ongoing_tasks"/>
         <activity android:name=".ui.qr.QRCode_scanner" />
         <activity android:name=".ui.qr.QRGeneration" />
         <activity android:name=".ui.Timer_Activity" />
@@ -29,7 +30,18 @@
         </activity>
         <activity
             android:name=".ui.courses.CoursesList"
-            android:label="@string/title_activity_courses_list" />
+            android:label="@string/title_activity_courses_list">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.courses.AddCourseActivity"
             android:label="@string/title_activity_courses_list" />

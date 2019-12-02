@@ -8,10 +8,10 @@
  *
  */
 
-package edu.cmu.officient.model;
+package edu.cmu.officient.logic;
 
-public interface Scannable {
-    boolean isInRange();
-    boolean userCanAccess(int id);
-    String getType();
+public enum ScannedCodeStatus {
+    RUNNING,
+    STOPPED,
+    EXPIRED;
 }

@@ -23,7 +23,6 @@ public class Assignment_QR_Builder extends QRBuilder {
     {
 
         qrgen.b_id=assignment_id;
-
         return  this.qrgen;
     }
 

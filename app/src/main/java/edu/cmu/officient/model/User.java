@@ -13,7 +13,7 @@ package edu.cmu.officient.model;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public abstract class User {
+public class User {
     private final String EMAIL_PREFIX = "andrew.cmu.edu";
     private int id;
     private String andrewId, fullname, altEmail, phoneNumber;
