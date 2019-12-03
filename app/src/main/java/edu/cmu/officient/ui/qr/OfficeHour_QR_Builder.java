@@ -12,31 +12,33 @@ package edu.cmu.officient.ui.qr;
 
 public class OfficeHour_QR_Builder extends QRBuilder {
     @Override
-    QRGeneration setId(int officeHour_id) {
-        qrgen.b_id=officeHour_id;
+    QRGenerator setId(int officeHour_id) {
+        qrgen.b_id = officeHour_id;
 
         return this.qrgen;
     }
 
     @Override
-    QRGeneration setUser_id(int user_id) {
-        qrgen.user_id=user_id;
+    QRGenerator setUser_id(int user_id) {
+        qrgen.user_id = user_id;
 
-        return  this.qrgen;
-    }
-
-    @Override
-    QRGeneration setObjectType(String objT) {
-        qrgen.object_type=objT;
         return this.qrgen;
     }
 
     @Override
-    String  buildQR()
+    QRGenerator setObjectType(String objT) {
+        qrgen.object_type = objT;
+        return this.qrgen;
+    }
+
+
+    @Override
+    public QRGenerator buildQR()
     {
-        String txt= "OWNED_BY= "+this.qrgen.user_id+"\n" + "OBJECT_ID= "+this.qrgen.b_id + "\n"
+        qrgen.txt = "OWNED_BY= "+this.qrgen.user_id+"\n" + "OBJECT_ID= "+this.qrgen.b_id + "\n"
                 +"OBJECT_TYPE= "+this.qrgen.object_type;
 
-        return txt;
+        return this.qrgen;
     }
 }
+

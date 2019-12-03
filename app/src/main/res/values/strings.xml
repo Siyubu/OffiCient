@@ -34,8 +34,8 @@
     <string name="course_title_prompt">Course Title</string>
     <string name="term_prompt">Term Prompt</string>
     <string name="action_add_course">Add Course</string>
-    <string name="scan_QR_Image">Scan QR Image</string>
-    <string name="Send_QR_Image_to_Email">Send QR Image To Email</string>
+    <string name="scan_QR_Image">Share QR Image via email</string>
+    <string name="Send_QR_Image_to_Email">Generate QR Image </string>
     <string name="title_activity_test_activiy">TestActiviy</string>
     <string name="started_at">Started: %s</string>
     <string name="stop">Stop</string>
