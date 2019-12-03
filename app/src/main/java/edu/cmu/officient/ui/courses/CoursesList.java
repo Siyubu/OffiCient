@@ -62,7 +62,7 @@ public class CoursesList extends AppCompatActivity {
 
                 }
             }
+            Toast.makeText(this, R.string.invalid_qr_code, Toast.LENGTH_SHORT).show();
         }
     }
-
 }

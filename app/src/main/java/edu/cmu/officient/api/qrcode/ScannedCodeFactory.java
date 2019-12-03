@@ -32,7 +32,7 @@ public class ScannedCodeFactory {
         User user = storage.getUser(userId);
         Scannable data = null;
         switch (type) {
-            case ASSIGNMENT: case UNDEFINED:
+            case ASSIGNMENT:
                 data = storage.getAssignment(id);
                 break;
             case COURSE: // Here we get the perfect office hour
@@ -40,7 +40,9 @@ public class ScannedCodeFactory {
                 if (course != null) {
                     data = course.getAppropriateOfficeHours(userId);
                 }
-                data = storage.getCourse(id);
+                //data = storage.getCourse(id);
+                break;
+            case UNDEFINED:
                 break;
         }
         if (data !=null)
