@@ -22,6 +22,7 @@ import java.util.Map;
 import edu.cmu.officient.DBCommunication.JSONProtocol;
 import edu.cmu.officient.DBCommunication.RequestData;
 import edu.cmu.officient.R;
+import edu.cmu.officient.logic.ApplicationManager;
 import edu.cmu.officient.ui.courses.AddCourseActivity;
 import edu.cmu.officient.ui.courses.CoursesList;
 
@@ -80,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
             System.out.println(jsonObject);
             try {
                 message = jsonObject.getString("message");
-            } catch (JSONException e) {
+            } catch (JSONException|NullPointerException e) {
                 message = "error";
             }
             return message;
@@ -92,8 +93,17 @@ public class LoginActivity extends AppCompatActivity {
             System.out.println(result);
             if (result.equalsIgnoreCase("success")){
                 Toast.makeText(context, "Login Successful", Toast.LENGTH_SHORT).show();
+
+                // Log in to the app (i.e store data to local storage)
+                try {
+                    ApplicationManager.getInstance().logUserIn(jsonObject.getJSONObject("data"), LoginActivity.this);
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 Intent intent = new Intent(context, CoursesList.class);
                 startActivity(intent);
+                finish();
             }
             else if(result.equalsIgnoreCase("error")){
                 Toast.makeText(context, "Unable to connect to the network", Toast.LENGTH_SHORT).show();

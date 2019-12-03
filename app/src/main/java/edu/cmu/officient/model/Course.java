@@ -80,6 +80,11 @@ public class Course implements Scannable {
         return false;
     }
 
+    @Override
+    public String getType() {
+        return "Assignment";
+    }
+
     @NonNull
     @Override
     public String toString() {
