@@ -67,9 +67,6 @@ public class AddCourseActivity extends AppCompatActivity {
         items = new ArrayList<>();
         adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
-        BottomAppBar appBar = findViewById(R.id.bottom_app_bar);
-        setSupportActionBar(appBar);
-
         addCourseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
