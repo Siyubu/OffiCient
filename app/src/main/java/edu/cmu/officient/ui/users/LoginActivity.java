@@ -19,6 +19,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.cmu.officient.DBCommunication.CheckInternetConnection;
 import edu.cmu.officient.DBCommunication.JSONProtocol;
 import edu.cmu.officient.DBCommunication.RequestData;
 import edu.cmu.officient.R;
@@ -51,7 +52,12 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Login().execute("login",username.getText().toString(), password.getText().toString());
+                if(new CheckInternetConnection(context).isAvailable()){
+                    new Login().execute("login",username.getText().toString(), password.getText().toString());                }
+                else{
+                    Toast.makeText(context, "Unable to connect to the network", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         registrationOpener.setOnClickListener(new View.OnClickListener() {
