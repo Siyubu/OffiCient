@@ -10,16 +10,17 @@
 
 package edu.cmu.officient.ui.qr;
 
+import java.sql.Date;
+
 public class Assignment_QR_Builder extends QRBuilder {
 
 
-    public Assignment_QR_Builder() {
+    public Assignment_QR_Builder()
+    {
         super();
     }
 
-
-    @Override
-    QRGeneration setId(int assignment_id) // here I need a querry of Assignment ID
+    QRGenerator setId(int assignment_id)
     {
 
         qrgen.b_id=assignment_id;
@@ -27,22 +28,26 @@ public class Assignment_QR_Builder extends QRBuilder {
     }
 
     @Override
-    QRGeneration setUser_id(int user_id) {
+    QRGenerator setUser_id(int user_id)
+    {
         qrgen.user_id= user_id;
         return  this.qrgen;
     }
 
     @Override
-    QRGeneration setObjectType(String objectT) {
+    QRGenerator setObjectType(String objectT)
+    {
         qrgen.object_type=objectT;
         return this.qrgen;
     }
-    @Override
-    String  buildQR()
+
+
+        public String buildQR()
     {
-        String txt= "OWNED_BY= "+this.qrgen.user_id+"\n" + "OBJECT_ID= "+this.qrgen.b_id + "\n"
+        qrgen.txt = "OWNED_BY= "+this.qrgen.user_id+"\n" + "OBJECT_ID= "+this.qrgen.b_id + "\n"
                 +"OBJECT_TYPE= "+this.qrgen.object_type;
 
-        return txt;
+        return this.qrgen.txt;
     }
+
 }

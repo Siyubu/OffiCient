@@ -14,8 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
-import edu.cmu.officient.ui.qr.QRCode_scanner;
-import edu.cmu.officient.ui.qr.QRGeneration;
+import edu.cmu.officient.ui.qr.QRGenerator;
 
 public class QRCodeGeneratorListener implements View.OnClickListener {
     private Context ctx;
@@ -26,7 +25,7 @@ public class QRCodeGeneratorListener implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(ctx, QRGeneration.class);
+        Intent intent = new Intent(ctx, QRGenerator.class);
         ctx.startActivity(intent);
 
     }

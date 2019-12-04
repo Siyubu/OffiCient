@@ -24,6 +24,6 @@ public class QRCode_Factory {
             return new OfficeHour_QR_Builder().buildQR();
         }
         else
-            return "no QR code of such object";
+            return "no information of such object";
     }
 }

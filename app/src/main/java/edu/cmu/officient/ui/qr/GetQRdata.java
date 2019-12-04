@@ -11,8 +11,6 @@
 package edu.cmu.officient.ui.qr;
 
 public class GetQRdata {
-String formatedData;
- private QRCode_Factory qrFact;
  private QRBuilder builder;
 
  public GetQRdata(){
@@ -20,20 +18,30 @@ String formatedData;
 
  }
 
-    public String qrData()
+    public String getAssignmantData()
  {
-
+     String assign;
      builder.setObjectType("Assignment");
      builder.setUser_id(12);
      builder.setId(987);
-     formatedData=builder.buildQR();
-     return formatedData;
+    assign= builder.buildQR();
+    return assign;
  }
+
+    public String getOfficeHourData()
+    {
+        String officeHourData=" ";
+//        builder.setObjectType("DPSD");
+//        builder.setUser_id(12);
+//        builder.setId(987);
+//        assignmentData=builder.buildQR();
+        return officeHourData;
+    }
 
     @Override
     public String toString() {
         return "GetQRdata{" +
-                "formatedData='" + formatedData + '\'' +
+                "builder=" + builder +
                 '}';
     }
 }
