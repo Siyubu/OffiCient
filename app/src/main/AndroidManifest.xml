@@ -17,7 +17,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ui.tasks.OngoingTasksList"
             android:label="@string/ongoing_tasks"/>
-        <activity android:name=".ui.qr.QRCode_scanner" />
         <activity android:name=".ui.qr.QRGenerator" />
         <activity android:name=".ui.Timer_Activity" />
         <activity android:name=".ui.ProfileEditActivity" />

@@ -27,6 +27,5 @@ public class QRCodeGeneratorListener implements View.OnClickListener {
     public void onClick(View view) {
         Intent intent = new Intent(ctx, QRGenerator.class);
         ctx.startActivity(intent);
-
     }
 }

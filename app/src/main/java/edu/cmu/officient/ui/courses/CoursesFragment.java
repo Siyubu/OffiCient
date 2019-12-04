@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -33,6 +34,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import edu.cmu.officient.R;
+import edu.cmu.officient.ui.listener.QRCodeGeneratorListener;
 
 public class CoursesFragment extends Fragment {
 
@@ -50,6 +52,9 @@ public class CoursesFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
+        Button test = root.findViewById(R.id.test);
+        test.setOnClickListener(new QRCodeGeneratorListener(getContext()));
         return root;
     }
 }

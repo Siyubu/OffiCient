@@ -17,8 +17,7 @@ import android.util.Log;
 
 import java.util.Date;
 
-import edu.cmu.officient.model.Assignment;
-import edu.cmu.officient.model.Scannable;
+import edu.cmu.officient.model.*;
 import edu.cmu.officient.storage.OfficientLocalDbContract.*;
 
 public class SQLiteStorage extends OfficientStorage implements AddData, ReadData, UpdateData, DeleteData {
