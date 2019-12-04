@@ -65,7 +65,7 @@ public abstract class QRBuilder {
     abstract String buildQR();
 
 
-    
+
 //    public String buildQR()
 //    {
 //        qrgen.txt = "OWNED_BY= "+this.qrgen.user_id+"\n" + "OBJECT_ID= "+this.qrgen.b_id + "\n"
