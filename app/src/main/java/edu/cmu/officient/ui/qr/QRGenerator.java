@@ -24,7 +24,6 @@ import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -43,6 +42,7 @@ public class QRGenerator extends AppCompatActivity {
    protected  int user_id;
    protected String object_type;
    protected String txt;
+
    protected String name;
    protected Date deadLine;
    protected Date available_till;
@@ -57,7 +57,8 @@ public class QRGenerator extends AppCompatActivity {
     private QRGEncoder qrgEncoder;
     private File file;
 
-    public QRGenerator(){}
+    public QRGenerator()
+    {}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +69,16 @@ public class QRGenerator extends AppCompatActivity {
         start = (Button) findViewById(R.id.btnstart);
         final Button save = (Button) findViewById(R.id.btnsave);
 
-        txt= "OWNED_BY= "+ user_id+"\n" + "OBJECT_ID= "+b_id + "\n"
-                +"OBJECT_TYPE= "+object_type;
+              GetQRdata getdata=new GetQRdata();
 
+              if(getdata.getAssignmantData().equals(" "))
+              {
+                  txt= getdata.getAssignmantData();
+              }
+              else
+              {
+                  txt=getdata.getOfficeHourData();
+              }
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,8 +96,6 @@ public class QRGenerator extends AppCompatActivity {
                     int height = point.y;
                     int smallerDimension = width < height ? width : height;
                     smallerDimension = smallerDimension * 3 / 4;
-                    GetQRdata getdata=new GetQRdata();
-                     getdata.getAssignmantData();
 
                     qrgEncoder = new QRGEncoder(txt, null, QRGContents.Type.TEXT, smallerDimension);
                     try {

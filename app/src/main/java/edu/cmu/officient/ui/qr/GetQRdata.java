@@ -18,12 +18,14 @@ public class GetQRdata {
 
  }
 
-    public void getAssignmantData()
+    public String getAssignmantData()
  {
+     String assign;
      builder.setObjectType("Assignment");
      builder.setUser_id(12);
      builder.setId(987);
-     builder.buildQR();
+    assign= builder.buildQR();
+    return assign;
  }
 
     public String getOfficeHourData()

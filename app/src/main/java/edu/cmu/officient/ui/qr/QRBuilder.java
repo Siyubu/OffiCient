@@ -20,7 +20,7 @@ public abstract class QRBuilder {
 
 
 
-    QRGenerator setId(int assignment_id) // here I need a querry of Assignment ID
+     QRGenerator setId(int assignment_id)
     {
 
         qrgen.b_id=assignment_id;
@@ -28,35 +28,51 @@ public abstract class QRBuilder {
     }
 
 
-    QRGenerator setUser_id(int user_id) {
+     QRGenerator setUser_id(int user_id)
+    {
         qrgen.user_id= user_id;
         return  this.qrgen;
     }
 
 
-    QRGenerator setObjectType(String objectT) {
+   QRGenerator setObjectType(String objectT)
+    {
         qrgen.object_type=objectT;
         return this.qrgen;
     }
 
-    QRGenerator setObjectName(String name) {
+     QRGenerator setObjectName(String name)
+    {
         qrgen.name=name;
         return this.qrgen;
     }
 
-    QRGenerator setObjectDeadLine(Date deadLine) {
+    QRGenerator setObjectDeadLine(Date deadLine)
+    {
         qrgen.deadLine=deadLine;
         return this.qrgen;
     }
-    QRGenerator setObjectAvailable_till(Date available_till) {
+    QRGenerator setObjectAvailable_till(Date available_till)
+    {
         qrgen.available_till=available_till;
         return this.qrgen;
     }
-    QRGenerator setObjectPublished_date(Date published_date) {
+    QRGenerator setObjectPublished_date(Date published_date)
+    {
         qrgen.published_date=published_date;
         return this.qrgen;
     }
-    abstract QRGenerator buildQR();
+    abstract String buildQR();
+
+
+    
+//    public String buildQR()
+//    {
+//        qrgen.txt = "OWNED_BY= "+this.qrgen.user_id+"\n" + "OBJECT_ID= "+this.qrgen.b_id + "\n"
+//                +"OBJECT_TYPE= "+this.qrgen.object_type;
+//
+//        return this.qrgen.txt;
+//    }
 
 
 
