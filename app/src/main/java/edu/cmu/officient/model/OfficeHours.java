@@ -13,13 +13,14 @@ package edu.cmu.officient.model;
 import android.content.ContentValues;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
 
 public class OfficeHours implements Scannable {
     private int id, day; // Day is a 0 based value of the day in the week
     private String venue, description;
-    private Date startAt, endAt;
+    private LocalTime startAt, endAt;
     private Course course;
     private Instructor holder; // Instructor holding the office hours
 
@@ -27,7 +28,7 @@ public class OfficeHours implements Scannable {
 
     }
 
-    public OfficeHours(int id, int day, String venue, String description,  Date startAt, Date endAt,
+    public OfficeHours(int id, int day, String venue, String description,  LocalTime startAt, LocalTime endAt,
                        Course course, Instructor holder) {
         this.id = id;
         this.venue = venue;
@@ -44,10 +45,12 @@ public class OfficeHours implements Scannable {
         Calendar calendar = Calendar.getInstance();
         if (calendar.get(Calendar.DAY_OF_WEEK) == day ) { // We are the right day when the office hours is held
             // Now we check the time
+            /*calendar.getTime().getTime();
+            startAt.
             Date now = new Date();
             if (startAt.before(now) && endAt.after(now) ) { // We are still in the range
                 return true;
-            }
+            }*/
         }
         return false;
     }
@@ -96,19 +99,19 @@ public class OfficeHours implements Scannable {
         this.description = description;
     }
 
-    public Date getStartAt() {
+    public LocalTime getStartAt() {
         return startAt;
     }
 
-    public void setStartAt(Date startAt) {
+    public void setStartAt(LocalTime startAt) {
         this.startAt = startAt;
     }
 
-    public Date getEndAt() {
+    public LocalTime getEndAt() {
         return endAt;
     }
 
-    public void setEndAt(Date endAt) {
+    public void setEndAt(LocalTime endAt) {
         this.endAt = endAt;
     }
 

@@ -17,16 +17,17 @@
   ~  */
 package edu.cmu.officient.api.qrcode;
 
+import java.time.LocalTime;
 import java.util.Date;
 
 import androidmads.library.qrgenearator.QRGEncoder;
-import edu.cmu.officient.api.qrcode.ObjectType;
 
 public abstract class QRBuilder {
-    private Integer id=0, ownerId=0;
+    private Integer id=0, ownerId=0, dayOfTheWeek=-1;
     private ObjectType type;
     private String name;
     private Date deadline=null, availableTill=null, published_time=null;
+    LocalTime startAt, endAt;
 
     public Integer getId() {
         return id;
@@ -82,6 +83,30 @@ public abstract class QRBuilder {
 
     public void setPublished_time(Date published_time) {
         this.published_time = published_time;
+    }
+
+    public LocalTime getStartAt() {
+        return startAt;
+    }
+
+    public void setStartAt(LocalTime startAt) {
+        this.startAt = startAt;
+    }
+
+    public LocalTime getEndAt() {
+        return endAt;
+    }
+
+    public void setEndAt(LocalTime endAt) {
+        this.endAt = endAt;
+    }
+
+    public Integer getDayOfTheWeek() {
+        return dayOfTheWeek;
+    }
+
+    public void setDayOfTheWeek(Integer dayOfTheWeek) {
+        this.dayOfTheWeek = dayOfTheWeek;
     }
 
     public abstract QRGEncoder build();
