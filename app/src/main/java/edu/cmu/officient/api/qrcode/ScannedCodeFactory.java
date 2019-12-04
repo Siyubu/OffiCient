@@ -15,7 +15,7 @@ import java.io.StringReader;
 import java.util.Properties;
 
 import edu.cmu.officient.model.*;
-import edu.cmu.officient.wservices.*;
+import edu.cmu.officient.storage.*;
 
 public class ScannedCodeFactory {
     public static ScannedQRCode loadCode(String output) {
@@ -27,7 +27,7 @@ public class ScannedCodeFactory {
         int userId = Integer.parseInt(properties.getProperty("OWNED_BY"));
         int id = Integer.parseInt(properties.getProperty("OBJECT_ID"));
         ObjectType type = ObjectType.fromString(properties.getProperty("OBJECT_TYPE"));
-        //OfficientStorage storage = new PermanentStorage();
+        //OfficientStorage storage = new RemoteStorage();
         OfficientStorage storage = new StaticStorage();
         User user = storage.getUser(userId);
         Scannable data = null;

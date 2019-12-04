@@ -10,6 +10,8 @@
 
 package edu.cmu.officient.api.qrcode;
 
+import android.content.Context;
+
 public class TimerInvalid extends TimerState {
     private String errorMessage;
 
@@ -19,7 +21,7 @@ public class TimerInvalid extends TimerState {
     }
 
     @Override
-    public void execute() {
+    public void execute(Context context) {
         getScannedCode().setState(getScannedCode().TIMER_STOPPED);
     }
 }

@@ -10,6 +10,13 @@
 
 package edu.cmu.officient.api.qrcode;
 
+import android.content.Context;
+
+import org.json.JSONException;
+
+import edu.cmu.officient.DBCommunication.RequestData;
+import edu.cmu.officient.logic.ApplicationManager;
+
 public class TimerStopping extends TimerState {
 
     public TimerStopping(ScannedQRCode code) {
@@ -17,8 +24,10 @@ public class TimerStopping extends TimerState {
     }
 
     @Override
-    public void execute() {
+    public void execute(Context context) {
         // Every DB actions should be done here
+        ApplicationManager.getInstance().endTask(context, getScannedCode().getData(), getScannedCode().getRecordId());
         getScannedCode().setState(getScannedCode().TIMER_STOPPED);
     }
+
 }

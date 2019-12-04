@@ -10,6 +10,8 @@
 
 package edu.cmu.officient.model;
 
+import android.content.ContentValues;
+
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
@@ -54,6 +56,16 @@ public class OfficeHours implements Scannable {
     public boolean userCanAccess(int id) {
         // Check if it is a student in the class
         return course.isAStudentOfCourse(id);
+    }
+
+    @Override
+    public String getLocalDatabaseName() {
+        return null;
+    }
+
+    @Override
+    public ContentValues getStorableData() {
+        return null;
     }
 
     public String getType(){

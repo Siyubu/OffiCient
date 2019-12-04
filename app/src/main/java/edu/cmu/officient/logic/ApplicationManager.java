@@ -12,17 +12,22 @@ package edu.cmu.officient.logic;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import edu.cmu.officient.R;
 import edu.cmu.officient.api.qrcode.ScannedQRCode;
+import edu.cmu.officient.model.Scannable;
 import edu.cmu.officient.model.User;
+import edu.cmu.officient.storage.OfficientLocalDbHelper;
+import edu.cmu.officient.storage.SQLiteStorage;
 
 public class ApplicationManager {
     private static final ApplicationManager APPLICATION_MANAGER = new ApplicationManager();
@@ -36,14 +41,14 @@ public class ApplicationManager {
     private ApplicationManager() {
     }
 
-    public ScannedCodeStatus processScannedCode(ScannedQRCode code){
+    public ScannedCodeStatus processScannedCode(Context context, ScannedQRCode code){
         // First check if it is inside the List
         for (ScannedQRCode scannedCode : scannedQRCodes) {
             if (scannedCode.equals(code)) {
                 // Check the state and do what is required
                 if (scannedCode.getState() == scannedCode.TIMER_STARTED) {
                     scannedCode.setState(scannedCode.TIMER_STOPPING);
-                    scannedCode.run(); // Execute the action in Stopping to stop it
+                    scannedCode.run(context); // Execute the action in Stopping to stop it
                     return ScannedCodeStatus.STOPPED;
                 }
                 // Here we had the data but it has already been stopped
@@ -52,15 +57,15 @@ public class ApplicationManager {
         // Not found
         scannedQRCodes.add(code); // Code state should be starting, so now we run the action
         if (code.getState() == code.TIMER_STARTING) {
-            code.run(); // Should be in STARTED state now
+            code.run(context); // Should be in STARTED state now
             return ScannedCodeStatus.RUNNING;
         }
         else
             return ScannedCodeStatus.EXPIRED;
     }
 
-    public ScannedCodeStatus processScannedCode(int position) {
-        return processScannedCode(scannedQRCodes.get(position));
+    public ScannedCodeStatus processScannedCode(Context context, int position) {
+        return processScannedCode(context, scannedQRCodes.get(position));
     }
 
     public List<ScannedQRCode> getOngoingActivities(){
@@ -101,5 +106,20 @@ public class ApplicationManager {
             return new User(userId, andrewId, name, altEmail, phoneNumber);
         }
         return null;
+    }
+
+    public long storeTask(Context context, Scannable scannable) {
+        Date now = new Date();
+        // For the static storage only
+        SQLiteDatabase database = new OfficientLocalDbHelper(context).getWritableDatabase();
+        SQLiteStorage storage = new SQLiteStorage(database);
+        return storage.addTaskRecord(scannable, now);
+    }
+
+    public void endTask(Context context, Scannable scannable, long id) {
+        Date now = new Date();
+        SQLiteDatabase database = new OfficientLocalDbHelper(context).getWritableDatabase();
+        SQLiteStorage storage = new SQLiteStorage(database);
+        storage.updateTaskRecord(id, now, scannable);
     }
 }

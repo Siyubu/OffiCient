@@ -10,9 +10,14 @@
 
 package edu.cmu.officient.model;
 
+import android.content.ContentValues;
+
 import androidx.annotation.Nullable;
 
 import java.util.Date;
+
+import edu.cmu.officient.storage.*;
+import edu.cmu.officient.storage.OfficientLocalDbContract.*;
 
 public class Assignment implements Scannable {
     private int id, expectedTime; // Expected time in hours
@@ -48,6 +53,25 @@ public class Assignment implements Scannable {
     }
 
     @Override
+    public ContentValues getStorableData() {
+        ContentValues values = new ContentValues();
+        values.put(ScannedAssignment.COL_ASSIGNMENT_ID, id);
+        values.put(ScannedAssignment.COL_ASSIGNMENT_TITLE, title);
+        values.put(ScannedAssignment.COL_DEADLINE, deadline.toString());
+        values.put(ScannedAssignment.COL_PUBLICATION_DATE, publishedOn.toString());
+        values.put(ScannedAssignment.COL_LATE_SUBMISSION_DATE, availableTill.toString());
+        values.put(ScannedAssignment.COL_COURSE_ID, course.getId());
+        values.put(ScannedAssignment.COL_COURSE_TITLE, course.getTitle());
+        
+        return values;
+    }
+
+    @Override
+    public String getLocalDatabaseName() {
+        return ScannedAssignment.TABLE_NAME;
+    }
+
+    @Override
     public boolean equals(@Nullable Object obj) {
         if (obj instanceof Assignment) {
             Assignment o = (Assignment) obj;
@@ -62,6 +86,9 @@ public class Assignment implements Scannable {
         return "Assignment";
     }
 
+    public int getId(){
+        return id;
+    }
     public void setId(int id) {
         this.id = id;
     }
