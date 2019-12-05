@@ -44,8 +44,7 @@ public class RegistrationActivity extends AppCompatActivity {
         completeRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if(new CheckInternetConnection(context).isAvailable()){
+                if(CheckInternetConnection.getInstance().isAvailable()){
                     new Register().execute("signup",username.getText().toString(),password.getText().toString());
                 }
                 else{

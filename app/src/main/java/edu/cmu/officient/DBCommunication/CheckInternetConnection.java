@@ -14,11 +14,17 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import edu.cmu.officient.model.Course;
+
 public class CheckInternetConnection {
 
-    Context context;
+    private Context context;
+    private final static CheckInternetConnection INSTANCE = new CheckInternetConnection();
 
-    public CheckInternetConnection(Context context){
+    private CheckInternetConnection(){
+
+    }
+    private CheckInternetConnection(Context context){
         this.context = context;
     }
 
@@ -27,8 +33,19 @@ public class CheckInternetConnection {
                 (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        boolean isConnected = activeNetwork != null &&
+        return activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
-        return isConnected;
+    }
+
+    public static CheckInternetConnection getInstance(){
+        return INSTANCE;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    public Context getContext(){
+        return context;
     }
 }

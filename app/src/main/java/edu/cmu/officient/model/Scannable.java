@@ -10,8 +10,14 @@
 
 package edu.cmu.officient.model;
 
+import android.content.ContentValues;
+
+import java.util.Properties;
+
 public interface Scannable {
     boolean isInRange();
     boolean userCanAccess(int id);
     String getType();
+    String getLocalDatabaseName();
+    ContentValues getStorableData();
 }

@@ -8,21 +8,15 @@
  *
  */
 
-package edu.cmu.officient.wservices;
+package edu.cmu.officient.storage;
 
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import edu.cmu.officient.model.*;
 
@@ -48,4 +42,16 @@ public class StaticStorage extends OfficientStorage implements ReadData, UpdateD
         List<Instructor> instructors = new ArrayList<>();
         return new Course(1, "Design Patterns for SD", "18785", term, instructors, new ArrayList<Student>(), new ArrayList<OfficeHours>());
     }
+
+    @Override
+    public long addTaskRecord(Scannable scannable, Date date) {
+        return 0;
+    }
+
+    @Override
+    public void updateTaskRecord(long id, Date endDate, Scannable scannable) {
+
+    }
+
+
 }

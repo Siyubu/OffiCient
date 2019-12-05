@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 
 import java.util.List;
 
-public class Course implements Scannable {
+public class Course /*implements Scannable*/ {
     private int id;
     private String title, code;
     private Term term;
@@ -36,7 +36,7 @@ public class Course implements Scannable {
         officeHours = oh;
     }
 
-    @Override
+    /*@Override
     public boolean isInRange() { // Get the list of all office hours and check whether it's okay
         // Should check if there is a valid office hours being held at the moment
         return true;
@@ -46,7 +46,7 @@ public class Course implements Scannable {
     public boolean userCanAccess(int id) {
         // Returns true if the user can access a certain office hour i.e there are registered in the class
         return isAStudentOfCourse(id);
-    }
+    }*/
 
     public boolean isAStudentOfCourse(int id) {
         for (Student student : students) {
@@ -80,9 +80,65 @@ public class Course implements Scannable {
         return false;
     }
 
-    @Override
+    /*@Override
     public String getType() {
         return "Assignment";
+    }*/
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Term getTerm() {
+        return term;
+    }
+
+    public void setTerm(Term term) {
+        this.term = term;
+    }
+
+    public List<Instructor> getInstructors() {
+        return instructors;
+    }
+
+    public void setInstructors(List<Instructor> instructors) {
+        this.instructors = instructors;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
+    public List<OfficeHours> getOfficeHours() {
+        return officeHours;
+    }
+
+    public void setOfficeHours(List<OfficeHours> officeHours) {
+        this.officeHours = officeHours;
     }
 
     @NonNull

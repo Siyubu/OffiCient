@@ -3,6 +3,7 @@ package edu.cmu.officient.ui.courses;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -11,6 +12,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import edu.cmu.officient.DBCommunication.CheckInternetConnection;
 import edu.cmu.officient.R;
 import edu.cmu.officient.api.qrcode.*;
 import edu.cmu.officient.logic.ApplicationManager;
@@ -24,6 +26,10 @@ public class CoursesList extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Set up the Internet Connection class
+        CheckInternetConnection checker = CheckInternetConnection.getInstance();
+        checker.setContext(getApplicationContext()); // Set it to the application context so it doesn't leak
+
         if (manager.getLoggedInUser(this) == null) {
             // If user not logged in, we have them go login
             Intent intent = new Intent(this, LoginActivity.class);
@@ -49,7 +55,7 @@ public class CoursesList extends AppCompatActivity {
             String output = data.getStringExtra("code");
             ScannedQRCode qrCode = ScannedCodeFactory.loadCode(output);
             if (qrCode != null) {
-                switch (manager.processScannedCode(qrCode)) {
+                switch (manager.processScannedCode(this, qrCode)) {
                     case RUNNING:
                         Toast.makeText(this, "Monitoring has started for " + qrCode.getData(), Toast.LENGTH_SHORT).show();
                         break;
@@ -62,7 +68,8 @@ public class CoursesList extends AppCompatActivity {
 
                 }
             }
-            Toast.makeText(this, R.string.invalid_qr_code, Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(this, R.string.invalid_qr_code, Toast.LENGTH_SHORT).show();
         }
     }
 }

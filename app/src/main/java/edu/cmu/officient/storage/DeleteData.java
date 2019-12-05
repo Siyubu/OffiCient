@@ -18,7 +18,7 @@
  *
  */
 
-package edu.cmu.officient.wservices;
+package edu.cmu.officient.storage;
 
 public interface DeleteData {
 }

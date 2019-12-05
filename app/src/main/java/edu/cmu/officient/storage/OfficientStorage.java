@@ -8,18 +8,15 @@
  *
  */
 
-package edu.cmu.officient.wservices;
+package edu.cmu.officient.storage;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
-import edu.cmu.officient.api.qrcode.ScannedQRCode;
 import edu.cmu.officient.model.*;
 
 public abstract class OfficientStorage{
-    static SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("dd/MM/yy HH:mm:ss", Locale.getDefault());
+    public static SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("dd/MM/yy HH:mm:ss", Locale.getDefault());
     public Assignment getAssignment(int id) { // Builds an object using the ID
         return new Assignment();
     }

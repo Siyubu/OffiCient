@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /*
+  ~  * @author Solange Iyubu
+  ~  * AndrewID : siyubu
+  ~  * Program : ECE
+  ~  *
+  ~  * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized assistance on this work.
+  ~  */
+  -->
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <external-path name="external_files" path="."/>
+    <files-path
+        name="files-path"
+        path="." />
+</paths>

@@ -18,7 +18,12 @@
  *
  */
 
-package edu.cmu.officient.wservices;
+package edu.cmu.officient.storage;
+
+import java.util.Date;
+
+import edu.cmu.officient.model.Scannable;
 
 public interface AddData {
+    long addTaskRecord(Scannable scannable, Date date);
 }

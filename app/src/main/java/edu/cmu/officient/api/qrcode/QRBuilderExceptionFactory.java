@@ -10,16 +10,10 @@
 
 package edu.cmu.officient.api.qrcode;
 
-import android.content.Context;
+import edu.cmu.officient.exception.BuilderException;
 
-public class TimerStopped extends TimerState {
-
-    public TimerStopped(ScannedQRCode code) {
-        super(code);
-    }
-
-    @Override
-    public void execute(Context context) {
-        getScannedCode().setState(getScannedCode().TIMER_STARTING);
+public class QRBuilderExceptionFactory {
+    public static BuilderException getBuilderException(QRBuilder builder) {
+        return null;
     }
 }

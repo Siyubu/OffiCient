@@ -10,6 +10,8 @@
 
 package edu.cmu.officient.api.qrcode;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -37,7 +39,7 @@ public abstract class TimerState {
         return new Date().getTime() - enteredAt.getTime();
     }
 
-    public abstract void execute();
+    public abstract void execute(Context context);
 
     public ScannedQRCode getScannedCode() {
         return scannedCode;

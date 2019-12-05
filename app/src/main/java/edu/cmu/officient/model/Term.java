@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 
 import java.util.Date;
 
-import edu.cmu.officient.Util.DateConversion;
+import edu.cmu.officient.util.DateConversion;
 
 public class Term {
     private int id;

@@ -8,9 +8,7 @@
  *
  */
 
-package edu.cmu.officient.wservices;
+package edu.cmu.officient.exception;
 
-
-public class PermanentStorage extends OfficientStorage implements ReadData, UpdateData, DeleteData, AddData{
-
+public class MissingTypeException extends BuilderException {
 }

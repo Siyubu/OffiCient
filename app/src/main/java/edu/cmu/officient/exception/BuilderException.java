@@ -8,18 +8,12 @@
  *
  */
 
-package edu.cmu.officient.api.qrcode;
+package edu.cmu.officient.exception;
 
-import android.content.Context;
+import android.util.Log;
 
-public class TimerStarted extends TimerState {
-
-    public TimerStarted(ScannedQRCode code) {
-        super(code);
-    }
-
-    @Override
-    public void execute(Context context) {
-
+public abstract class BuilderException extends OfficientException {
+    public void fix(){
+        Log.e(getClass().getSimpleName(), getMessage(), this);
     }
 }

@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 
 import edu.cmu.officient.R;
-import edu.cmu.officient.ui.MainActivity;
 import edu.cmu.officient.ui.courses.CoursesList;
 
 public class SuccessfulRegistration extends AppCompatActivity {

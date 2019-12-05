@@ -10,6 +10,8 @@
 
 package edu.cmu.officient.api.qrcode;
 
+import android.content.Context;
+
 import androidx.annotation.Nullable;
 
 import java.util.Date;
@@ -21,8 +23,10 @@ public class ScannedQRCode {
     private TimerState state;
     private User owner; // Represents the owner of the QR Code (Generally an instructor)
     private Scannable data;
+    private long recordId = -1;
+
     // Make it accessible from the package
-    public  final TimerState TIMER_INVALID = new TimerInvalid(this, ""), TIMER_STOPPING = new TimerStopping(this),
+    public final TimerState TIMER_INVALID = new TimerInvalid(this, ""), TIMER_STOPPING = new TimerStopping(this),
             TIMER_STARTING = new TimerStarting(this), TIMER_STARTED = new TimerStarted(this), TIMER_STOPPED = new TimerStopping(this);
 
     public ScannedQRCode(Scannable object){
@@ -42,8 +46,8 @@ public class ScannedQRCode {
         state = currentState;
     }
 
-    public void run(){
-        state.execute();
+    public void run(Context context){
+        state.execute(context);
     }
 
     public String status(){
@@ -91,5 +95,13 @@ public class ScannedQRCode {
 
     public void setData(Scannable data) {
         this.data = data;
+    }
+
+    public long getRecordId() {
+        return recordId;
+    }
+
+    public void setRecordId(long recordId) {
+        this.recordId = recordId;
     }
 }

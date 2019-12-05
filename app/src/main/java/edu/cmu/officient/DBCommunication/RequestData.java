@@ -33,7 +33,7 @@ public class RequestData {
 
     public JSONObject getResponse(){
         JSONObject jsonObject;
-        CheckInternetConnection checkInternetConnection = new CheckInternetConnection(context);
+        CheckInternetConnection checkInternetConnection = CheckInternetConnection.getInstance();
         if(checkInternetConnection.isAvailable()){
             JSONProtocol httpJsonParser = new JSONProtocol();
             Map<String, String> httpParams = new HashMap<>();

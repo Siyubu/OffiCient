@@ -8,7 +8,7 @@
  *
  */
 
-package edu.cmu.officient.wservices;
+package edu.cmu.officient.storage;
 
 import edu.cmu.officient.model.*;
 
