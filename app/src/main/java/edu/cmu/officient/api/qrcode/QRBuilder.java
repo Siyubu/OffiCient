@@ -17,17 +17,17 @@
   ~  */
 package edu.cmu.officient.api.qrcode;
 
-import java.time.LocalTime;
 import java.util.Date;
 
 import androidmads.library.qrgenearator.QRGEncoder;
+import edu.cmu.officient.util.Time;
 
 public abstract class QRBuilder {
     private Integer id=0, ownerId=0, dayOfTheWeek=-1;
     private ObjectType type;
     private String name;
     private Date deadline=null, availableTill=null, published_time=null;
-    LocalTime startAt, endAt;
+    Time startAt, endAt;
 
     public Integer getId() {
         return id;
@@ -85,19 +85,19 @@ public abstract class QRBuilder {
         this.published_time = published_time;
     }
 
-    public LocalTime getStartAt() {
+    public Time getStartAt() {
         return startAt;
     }
 
-    public void setStartAt(LocalTime startAt) {
+    public void setStartAt(Time startAt) {
         this.startAt = startAt;
     }
 
-    public LocalTime getEndAt() {
+    public Time getEndAt() {
         return endAt;
     }
 
-    public void setEndAt(LocalTime endAt) {
+    public void setEndAt(Time endAt) {
         this.endAt = endAt;
     }
 
