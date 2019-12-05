@@ -52,12 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(new CheckInternetConnection(context).isAvailable()){
-                    new Login().execute("login",username.getText().toString(), password.getText().toString());                }
-                else{
-                    Toast.makeText(context, "Unable to connect to the network", Toast.LENGTH_SHORT).show();
-                }
-
+                new Login().execute("login",username.getText().toString(), password.getText().toString());
             }
         });
         registrationOpener.setOnClickListener(new View.OnClickListener() {
