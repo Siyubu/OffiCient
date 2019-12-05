@@ -53,7 +53,6 @@ public class QRGenerator extends AppCompatActivity {
     private ImageView qrImage;
     private  Button start;
     private Bitmap bitmap;
-    private QRGEncoder qrgEncoder;
     private File file;
 
     public QRGenerator()

@@ -12,6 +12,9 @@ package edu.cmu.officient.ui.qr;
 
 import java.sql.Date;
 
+import androidmads.library.qrgenearator.QRGEncoder;
+import edu.cmu.officient.api.qrcode.QRBuilder;
+
 public class Assignment_QR_Builder extends QRBuilder {
 
 
@@ -50,4 +53,8 @@ public class Assignment_QR_Builder extends QRBuilder {
         return this.qrgen.txt;
     }
 
+    @Override
+    public QRGEncoder build() {
+        return null;
+    }
 }
