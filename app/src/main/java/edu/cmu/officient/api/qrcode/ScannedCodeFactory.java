@@ -16,13 +16,12 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Properties;
 
 import edu.cmu.officient.model.*;
 import edu.cmu.officient.storage.*;
+import edu.cmu.officient.util.Time;
 
 public class ScannedCodeFactory {
     public static ScannedQRCode loadCode(String output) {
@@ -51,7 +50,7 @@ public class ScannedCodeFactory {
                     assignment.setPublishedOn(publishedOn);
                     return new ScannedQRCode(assignment);
                 case OFFICE_HOURS:
-                    LocalTime startAt = LocalTime.parse(properties.getProperty("START_AT")), endAt = LocalTime.parse(properties.getProperty("END_AT"));
+                    Time startAt= Time.parse(properties.getProperty("START_AT")), endAt = Time.parse(properties.getProperty("END_AT"));
                     int day = Integer.parseInt(properties.getProperty("DAY")), instructorId = Integer.parseInt(properties.getProperty("OWNER_ID"));
                     User user = storage.getUser(instructorId);
 
@@ -61,7 +60,7 @@ public class ScannedCodeFactory {
                     officeHours.setEndAt(endAt);
                     officeHours.setDay(day);
                     officeHours.setHolder((Instructor) user);
-                    break;
+                    return new ScannedQRCode(officeHours);
             }
         }
         catch (IOException | ParseException e) {

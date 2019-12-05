@@ -12,15 +12,15 @@ package edu.cmu.officient.model;
 
 import android.content.ContentValues;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Calendar;
-import java.util.Date;
+
+import edu.cmu.officient.storage.OfficientLocalDbContract.*;
+import edu.cmu.officient.util.Time;
 
 public class OfficeHours implements Scannable {
     private int id, day; // Day is a 0 based value of the day in the week
     private String venue, description;
-    private LocalTime startAt, endAt;
+    private Time startAt, endAt;
     private Course course;
     private Instructor holder; // Instructor holding the office hours
 
@@ -28,7 +28,7 @@ public class OfficeHours implements Scannable {
 
     }
 
-    public OfficeHours(int id, int day, String venue, String description,  LocalTime startAt, LocalTime endAt,
+    public OfficeHours(int id, int day, String venue, String description,  Time startAt, Time endAt,
                        Course course, Instructor holder) {
         this.id = id;
         this.venue = venue;
@@ -44,13 +44,8 @@ public class OfficeHours implements Scannable {
     public boolean isInRange() {
         Calendar calendar = Calendar.getInstance();
         if (calendar.get(Calendar.DAY_OF_WEEK) == day ) { // We are the right day when the office hours is held
-            // Now we check the time
-            /*calendar.getTime().getTime();
-            startAt.
-            Date now = new Date();
-            if (startAt.before(now) && endAt.after(now) ) { // We are still in the range
-                return true;
-            }*/
+            Time now = Time.now();
+            return now.compareTo(startAt) >=0 && now.compareTo(endAt) <=0;
         }
         return false;
     }
@@ -58,16 +53,25 @@ public class OfficeHours implements Scannable {
     @Override
     public boolean userCanAccess(int id) {
         // Check if it is a student in the class
-        return course.isAStudentOfCourse(id);
+        /*return course.isAStudentOfCourse(id);*/
+        return true;
     }
 
     @Override
     public String getLocalDatabaseName() {
-        return null;
+        return ScannedOfficeHours.TABLE_NAME;
     }
 
     @Override
     public ContentValues getStorableData() {
+        ContentValues values = new ContentValues();
+        values.put(ScannedOfficeHours.COL_OH_ID, id);
+        values.put(ScannedOfficeHours.COL_INSTRUCTOR, holder.getFullname());
+        values.put(ScannedOfficeHours.COL_INSTRUCTOR_ID, holder.getId());
+        if (course != null) {
+            values.put(ScannedOfficeHours.COL_COURSE_ID, course.getId());
+            values.put(ScannedOfficeHours.COL_COURSE_TITLE, course.getTitle());
+        }
         return null;
     }
 
@@ -99,19 +103,19 @@ public class OfficeHours implements Scannable {
         this.description = description;
     }
 
-    public LocalTime getStartAt() {
+    public Time getStartAt() {
         return startAt;
     }
 
-    public void setStartAt(LocalTime startAt) {
+    public void setStartAt(Time startAt) {
         this.startAt = startAt;
     }
 
-    public LocalTime getEndAt() {
+    public Time getEndAt() {
         return endAt;
     }
 
-    public void setEndAt(LocalTime endAt) {
+    public void setEndAt(Time endAt) {
         this.endAt = endAt;
     }
 
