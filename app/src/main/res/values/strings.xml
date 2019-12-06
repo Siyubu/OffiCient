@@ -8,6 +8,8 @@
     <string name="prompt_password">Password</string>
     <string name="prompt_name">Name</string>
     <string name="prof_edit">EDIT PROFILE</string>
+    <string name="add_course">ADD COURSE</string>
+    <string name="add_ass">ADD ASSIGNMENT</string>
     <string name="prompt_password_confirmation">Confirm Password</string>
     <string name="integrity_notice">By clicking on the <b>Register</b> button, you confirm that the information that you provided is accurate and true.</string>
     <string name="prompt_registration">Register now</string>
@@ -36,8 +38,11 @@
     <string name="title_add_course">Add Course</string>
     <string name="course_code_prompt">Course Code</string>
     <string name="course_title_prompt">Course Title</string>
+    <string name="expected_prompt">Expected Time</string>
+    <string name="due_time_prompt">Due Time</string>
     <string name="term_prompt">Term Prompt</string>
     <string name="action_add_course">Add Course</string>
+    <string name="action_add_assignment">Add Assignment</string>
     <string name="scan_QR_Image">Share QR Image via email</string>
     <string name="Send_QR_Image_to_Email">Generate QR Image </string>
     <string name="title_activity_test_activiy">TestActiviy</string>

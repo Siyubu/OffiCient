@@ -8,7 +8,7 @@
  *
  */
 
-package edu.cmu.officient.Util;
+package edu.cmu.officient.util;
 
 import android.text.format.DateFormat;
 

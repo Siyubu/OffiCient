@@ -20,13 +20,14 @@ package edu.cmu.officient.api.qrcode;
 import java.util.Date;
 
 import androidmads.library.qrgenearator.QRGEncoder;
-import edu.cmu.officient.api.qrcode.ObjectType;
+import edu.cmu.officient.util.Time;
 
 public abstract class QRBuilder {
-    private Integer id=0, ownerId=0;
+    private Integer id=0, ownerId=0, dayOfTheWeek=-1;
     private ObjectType type;
     private String name;
     private Date deadline=null, availableTill=null, published_time=null;
+    Time startAt, endAt;
 
     public Integer getId() {
         return id;
@@ -82,6 +83,30 @@ public abstract class QRBuilder {
 
     public void setPublished_time(Date published_time) {
         this.published_time = published_time;
+    }
+
+    public Time getStartAt() {
+        return startAt;
+    }
+
+    public void setStartAt(Time startAt) {
+        this.startAt = startAt;
+    }
+
+    public Time getEndAt() {
+        return endAt;
+    }
+
+    public void setEndAt(Time endAt) {
+        this.endAt = endAt;
+    }
+
+    public Integer getDayOfTheWeek() {
+        return dayOfTheWeek;
+    }
+
+    public void setDayOfTheWeek(Integer dayOfTheWeek) {
+        this.dayOfTheWeek = dayOfTheWeek;
     }
 
     public abstract QRGEncoder build();

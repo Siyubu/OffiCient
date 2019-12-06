@@ -11,7 +11,6 @@
 package edu.cmu.officient.ui.courses;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -26,20 +25,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.bottomappbar.BottomAppBar;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import edu.cmu.officient.DBCommunication.RequestData;
 import edu.cmu.officient.R;
-import edu.cmu.officient.Util.DateConversion;
+import edu.cmu.officient.util.DateConversion;
 import edu.cmu.officient.model.Term;
 
 public class AddCourseActivity extends AppCompatActivity {
