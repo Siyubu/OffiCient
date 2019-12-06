@@ -29,11 +29,13 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import edu.cmu.officient.R;
+import edu.cmu.officient.ui.listener.AddCourseListener;
 import edu.cmu.officient.ui.listener.QRCodeGeneratorListener;
 
 public class CoursesFragment extends Fragment {
@@ -54,7 +56,7 @@ public class CoursesFragment extends Fragment {
         });
 
         Button test = root.findViewById(R.id.test);
-        test.setOnClickListener(new QRCodeGeneratorListener(getContext()));
+        test.setOnClickListener(new AddCourseListener((AppCompatActivity) getActivity()));
         return root;
     }
 }

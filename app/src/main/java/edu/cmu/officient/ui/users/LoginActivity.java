@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +20,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.cmu.officient.DBCommunication.CheckInternetConnection;
 import edu.cmu.officient.DBCommunication.JSONProtocol;
 import edu.cmu.officient.DBCommunication.RequestData;
 import edu.cmu.officient.R;
@@ -81,7 +83,9 @@ public class LoginActivity extends AppCompatActivity {
             System.out.println(jsonObject);
             try {
                 message = jsonObject.getString("message");
+                Log.e("LOGIN", jsonObject.toString());
             } catch (JSONException|NullPointerException e) {
+                e.printStackTrace();
                 message = "error";
             }
             return message;

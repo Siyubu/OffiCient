@@ -86,7 +86,8 @@ public class ApplicationManager {
                     .putString("user.andrew_id", response.getString("andrewId"))
                     .putString("user.name", response.getString("name"))
                     .putString("user.alt_email", response.getString("alternative_email"))
-                    .putString("user.phone_number", response.getString("phoneNumber"));
+                    .putString("user.phone_number", response.getString("phoneNumber"))
+                    .putBoolean("user.is_faculty", response.getBoolean("isFaculty"));
         }
         catch (JSONException e) {
             e.printStackTrace();
@@ -103,7 +104,8 @@ public class ApplicationManager {
             String name = preferences.getString("user.name", null);
             String altEmail = preferences.getString("user.alt_email", null);
             String phoneNumber = preferences.getString("user.phone_number", null);
-            return new User(userId, andrewId, name, altEmail, phoneNumber);
+            boolean isFaculty = preferences.getBoolean("user.is_faculty", false);
+            return new User(userId, andrewId, name, altEmail, phoneNumber, isFaculty);
         }
         return null;
     }

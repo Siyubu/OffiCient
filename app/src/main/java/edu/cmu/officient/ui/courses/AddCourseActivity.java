@@ -25,6 +25,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,8 +35,9 @@ import java.util.ArrayList;
 
 import edu.cmu.officient.DBCommunication.RequestData;
 import edu.cmu.officient.R;
-import edu.cmu.officient.util.DateConversion;
+import edu.cmu.officient.ui.util.NavigationInitializer;
 import edu.cmu.officient.model.Term;
+import edu.cmu.officient.util.DateConversion;
 
 public class AddCourseActivity extends AppCompatActivity {
 
@@ -61,6 +64,10 @@ public class AddCourseActivity extends AppCompatActivity {
         items = new ArrayList<>();
         adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
+
+        /*BottomNavigationView navView = findViewById(R.id.nav_view);
+        NavigationInitializer.setUpBottomNavigationBar(navView);*/
+
         addCourseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,16 +94,6 @@ public class AddCourseActivity extends AppCompatActivity {
         });
 
     }
-
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.bottom_nav_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-
 
     private class AddCourse extends AsyncTask<String, String, String> {
         private JSONObject jsonObject;
@@ -194,7 +191,6 @@ public class AddCourseActivity extends AppCompatActivity {
                 Toast.makeText(context, "term list empty", Toast.LENGTH_SHORT).show();
             }
             adapter.notifyDataSetChanged();
-
 
         }
     }

@@ -17,17 +17,27 @@ public class User {
     private final String EMAIL_PREFIX = "andrew.cmu.edu";
     private int id;
     private String andrewId, fullname, altEmail, phoneNumber;
+    private boolean isFaculty;
 
     public User(){
 
     }
 
-    public User(int id, String andrewId, String fullname, String altEmail, String phoneNumber) {
+    public User(int id, String andrewId, String fullname, String altEmail, String phoneNumber, boolean isFaculty) {
         this.id = id;
         this.andrewId = andrewId;
         this.fullname = fullname;
         this.altEmail = altEmail;
         this.phoneNumber = phoneNumber;
+        this.isFaculty = isFaculty;
+    }
+
+    public boolean isFaculty(){
+        return isFaculty;
+    }
+
+    public void setFaculty(boolean faculty) {
+        isFaculty = faculty;
     }
 
     public int getId() {

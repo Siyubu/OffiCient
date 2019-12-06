@@ -1,6 +1,7 @@
 package edu.cmu.officient.ui.courses;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.Button;
@@ -21,7 +22,7 @@ import edu.cmu.officient.ui.qr.QRCodeScanner;
 import edu.cmu.officient.ui.users.LoginActivity;
 import edu.cmu.officient.ui.util.NavigationInitializer;
 
-public class CoursesList extends AppCompatActivity {
+public class CoursesList extends AppCompatActivity{
     private ApplicationManager manager = ApplicationManager.getInstance();
 
     @Override
@@ -39,14 +40,13 @@ public class CoursesList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses_list);
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        /*BottomNavigationView navView = findViewById(R.id.nav_view);
         NavigationInitializer.setUpBottomNavigationBar(this, navView);
-
-        FloatingActionButton scanCode = findViewById(R.id.scan_code), viewStatus = findViewById(R.id.see_activities);
+*/
+        /*FloatingActionButton scanCode = findViewById(R.id.scan_code), viewStatus = findViewById(R.id.see_activities);
         scanCode.setOnClickListener(new QRCodeScannerListener(this));
-        viewStatus.setOnClickListener(new TrackedActivitiesViewerListener(this));
+        viewStatus.setOnClickListener(new TrackedActivitiesViewerListener(this));*/
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
