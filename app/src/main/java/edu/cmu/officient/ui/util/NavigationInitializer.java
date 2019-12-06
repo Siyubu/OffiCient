@@ -26,6 +26,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import edu.cmu.officient.R;
 import edu.cmu.officient.logic.ApplicationManager;
+import edu.cmu.officient.model.User;
 import edu.cmu.officient.ui.courses.CoursesFragment;
 import edu.cmu.officient.ui.dashboard.DashboardFragment;
 import edu.cmu.officient.ui.listener.AddCourseListener;
@@ -79,12 +80,12 @@ public class NavigationInitializer {
         addCourse.setOnClickListener(new AddCourseListener(activity));
 
         // Show what should be shown and hide otherwise
-        if (ApplicationManager.getInstance().getLoggedInUser(activity).isFaculty()) {
+        User loggedIn = ApplicationManager.getInstance().getLoggedInUser(activity);
+        if (loggedIn != null && loggedIn.isFaculty()) {
             viewStatus.setVisibility(View.GONE);
             scanCode.setVisibility(View.GONE);
             addCourse.setVisibility(View.VISIBLE);
         }
-        BottomNavigationView bottomNav = activity.findViewById(R.id.nav_view);
-        bottomNav.setOnNavigationItemSelectedListener(navListener);
+        navView.setOnNavigationItemSelectedListener(navListener);
     }
 }
