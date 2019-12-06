@@ -39,7 +39,8 @@ import edu.cmu.officient.ui.util.NavigationInitializer;
 import edu.cmu.officient.model.Term;
 import edu.cmu.officient.util.DateConversion;
 
-public class AddCourseActivity extends AppCompatActivity {
+public class AddCourseActivity extends AppCompatActivity
+{
 
     private Spinner dropdown;
     private Button addCourseBtn;
@@ -134,7 +135,8 @@ public class AddCourseActivity extends AppCompatActivity {
         }
     }
 
-    private class TermList extends AsyncTask<String, String, String> {
+    private class TermList extends AsyncTask<String, String, String>
+    {
         private JSONObject jsonObject;
         @Override
         protected void onPreExecute() {

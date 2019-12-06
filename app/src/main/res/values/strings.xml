@@ -40,6 +40,7 @@
     <string name="course_title_prompt">Course Title</string>
     <string name="expected_prompt">Expected Time</string>
     <string name="due_time_prompt">Due Time</string>
+    <string name="available_time_prompt">Available Till</string>
     <string name="term_prompt">Term Prompt</string>
     <string name="action_add_course">Add Course</string>
     <string name="action_add_assignment">Add Assignment</string>
