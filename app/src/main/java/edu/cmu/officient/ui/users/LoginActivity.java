@@ -20,6 +20,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.cmu.officient.DBCommunication.CheckInternetConnection;
 import edu.cmu.officient.DBCommunication.JSONProtocol;
 import edu.cmu.officient.DBCommunication.RequestData;
 import edu.cmu.officient.R;
