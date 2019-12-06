@@ -30,6 +30,10 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
+    public boolean isFaculty(){
+        return true;
+    }
+
     public int getId() {
         return id;
     }
