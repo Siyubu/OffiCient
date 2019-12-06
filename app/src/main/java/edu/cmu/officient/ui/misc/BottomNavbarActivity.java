@@ -14,8 +14,6 @@ import android.net.Uri;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import edu.cmu.officient.ui.courses.AddCourse;
-
 // Here we shall implement all the fragment interactions as a way of adding a level of abstraction
 
 public class BottomNavbarActivity extends AppCompatActivity implements AddCourse.OnFragmentInteractionListener {

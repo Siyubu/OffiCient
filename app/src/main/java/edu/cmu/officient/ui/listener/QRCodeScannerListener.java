@@ -21,7 +21,8 @@ import edu.cmu.officient.ui.qr.QRCodeScanner;
 public class QRCodeScannerListener implements View.OnClickListener {
     private AppCompatActivity parentActivity;
 
-    public QRCodeScannerListener(AppCompatActivity activity) {
+    public QRCodeScannerListener(AppCompatActivity activity)
+    {
         parentActivity = activity;
     }
 

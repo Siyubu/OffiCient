@@ -26,7 +26,8 @@ public class Course /*implements Scannable*/ {
 
     }
 
-    public Course(int id, String title, String code, Term term, List<Instructor> instructors, List<Student> students, List<OfficeHours> oh) {
+    public Course(int id, String title, String code, Term term, List<Instructor> instructors, List<Student> students, List<OfficeHours> oh)
+    {
         this.id = id;
         this.title = title;
         this.code = code;
@@ -34,6 +35,13 @@ public class Course /*implements Scannable*/ {
         this.instructors = instructors;
         this.students = students;
         officeHours = oh;
+    }
+
+    public Course(int id, String title, String code)
+    {
+        this.id = id;
+        this.title = title;
+        this.code = code;
     }
 
     /*@Override

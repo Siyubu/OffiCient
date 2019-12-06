@@ -10,15 +10,12 @@
 
 package edu.cmu.officient.ui.listener;
 
-import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import edu.cmu.officient.R;
-import edu.cmu.officient.ui.courses.AddCourse;
 import edu.cmu.officient.ui.courses.AddCourseActivity;
 
 public class AddCourseListener implements View.OnClickListener {
@@ -30,7 +27,7 @@ public class AddCourseListener implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, new AddCourse()).commit();
+        transaction.replace(R.id.fragment_container, new AddCourseActivity.AddCourse()).commit();
         transaction.addToBackStack(null);
         /*Intent intent = new Intent(activity, AddCourseActivity.class);
         activity.startActivity(intent);*/

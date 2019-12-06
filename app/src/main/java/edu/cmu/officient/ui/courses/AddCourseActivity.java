@@ -9,11 +9,9 @@
  */
 
 package edu.cmu.officient.ui.courses;
-
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,20 +20,13 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-
 import edu.cmu.officient.DBCommunication.RequestData;
 import edu.cmu.officient.R;
-import edu.cmu.officient.ui.util.NavigationInitializer;
 import edu.cmu.officient.model.Term;
 import edu.cmu.officient.util.DateConversion;
 
@@ -65,9 +56,6 @@ public class AddCourseActivity extends AppCompatActivity
         items = new ArrayList<>();
         adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
-
-        /*BottomNavigationView navView = findViewById(R.id.nav_view);
-        NavigationInitializer.setUpBottomNavigationBar(navView);*/
 
         addCourseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
