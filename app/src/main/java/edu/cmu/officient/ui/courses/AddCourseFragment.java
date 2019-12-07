@@ -129,8 +129,8 @@ public class AddCourseFragment extends Fragment {
                 Term term = items.get(dropdown.getSelectedItemPosition());
                 Course course = new Course(13, "DPSD", "18758", term, null, null, null);
                 //activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CourseDetailFragment(activity, course)).commit();
+                activity.getSupportFragmentManager().beginTransaction().remove(AddCourseFragment.this).commit();
                 FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-                transaction.remove(AddCourseFragment.this);
                 transaction.replace(R.id.fragment_container, new CourseDetailFragment(activity, course));
                 transaction.addToBackStack(null);
                 transaction.commit();

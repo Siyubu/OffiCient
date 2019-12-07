@@ -63,5 +63,6 @@
     <string name="object_title"><b>Title</b>: %s</string>
     <string name="object_code"><b>Code</b>: %s</string>
     <string name="term_title"><b>Term</b>: %s</string>
+    <string name="modify">Modify</string>
 
 </resources>

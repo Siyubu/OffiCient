@@ -51,7 +51,6 @@ public class CourseDetailFragment extends Fragment {
         title = view.findViewById(R.id.course_title);
         code = view.findViewById(R.id.course_code);
         term = view.findViewById(R.id.course_term);
-        qrCode = view.findViewById(R.id.qr_code_display);
         send = view.findViewById(R.id.send_code);
         finish = view.findViewById(R.id.finish);
 
@@ -62,7 +61,7 @@ public class CourseDetailFragment extends Fragment {
 
         try {
             Bitmap bitmap = new QRImageGenerator(activity).getQRCode(course);
-            qrCode.setImageBitmap(bitmap);
+            //qrCode.setImageBitmap(bitmap);
             finish.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
