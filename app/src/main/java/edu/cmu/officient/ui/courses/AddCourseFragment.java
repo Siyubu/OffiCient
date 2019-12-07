@@ -1,5 +1,16 @@
 /*
  *
+ *  * @author Wuyeh Jobe
+ *  * AndrewID : jwuyeh
+ *  * Program : MSIT
+ *  *
+ *  * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized assistance on this work.
+ *
+ */
+
+
+/*
+ *
  *  * @author Segla Boladji Vinny Trinite Adjibi
  *  * AndrewID : vadjibi
  *  * Program : MSIT
@@ -36,6 +47,7 @@ import java.util.ArrayList;
 
 import edu.cmu.officient.DBCommunication.RequestData;
 import edu.cmu.officient.R;
+import edu.cmu.officient.logic.ApplicationManager;
 import edu.cmu.officient.model.Course;
 import edu.cmu.officient.model.Term;
 import edu.cmu.officient.ui.listener.CourseDetailFragment;
@@ -75,7 +87,7 @@ public class AddCourseFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(selectedTerm !=null) {
-                    new AddCourse().execute("addCourse", course_code.getText().toString(), course_title.getText().toString(), selectedTerm.getId() + "");
+                    new AddCourse().execute("addCourse", ApplicationManager.getInstance().getLoggedInUser(getContext()).getId()+"", course_code.getText().toString(), course_title.getText().toString(), selectedTerm.getId() + "");
                 }
                 else{
                     Toast.makeText(activity, "Please select a term for the office hours", Toast.LENGTH_SHORT).show();
@@ -110,7 +122,7 @@ public class AddCourseFragment extends Fragment {
         @Override
         protected String doInBackground(String[] args) {
             String message;
-            String[] attributes = new String[]{"addCourse", "code", "title", "term_id"};
+            String[] attributes = new String[]{"addCourse","user_id", "code", "title", "term_id"};
             RequestData requestData = new RequestData( activity,"http://gamfruits.com/officient_api/functions.php", attributes, args);
             jsonObject = requestData.getResponse();
             System.out.println(jsonObject);
