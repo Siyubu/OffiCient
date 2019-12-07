@@ -224,13 +224,6 @@ public class AddAssignmentFragment extends Fragment
                 //items.add("Term list empty");
                 Toast.makeText(activity, "there is no such course", Toast.LENGTH_SHORT).show();
             }
-            Course sos=new Course(123,"Seminar","AB123");
-            Course pop=new Course(200,"Database","AC234");
-            Course kel=new Course(300,"French","AQ234");
-            courses.add(sos);
-            courses.add(pop);
-            courses.add(kel);
-
             adapter.notifyDataSetChanged();
 
         }
@@ -240,9 +233,9 @@ public class AddAssignmentFragment extends Fragment
     {
         // calender class's instance and get current date , month and year from calender
         final Calendar c = Calendar.getInstance();
-        int mYear = c.get(Calendar.YEAR); // current year
-        int mMonth = c.get(Calendar.MONTH); // current month
-        int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
         // date picker dialog
         DatePickerDialog datePickerDialog = new DatePickerDialog(activity,
                 new DatePickerDialog.OnDateSetListener() {

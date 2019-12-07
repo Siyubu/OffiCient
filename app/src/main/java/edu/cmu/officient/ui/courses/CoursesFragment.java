@@ -60,7 +60,8 @@ public class CoursesFragment extends Fragment {
     private AdvancedRecyclerView recyclerView;
 
 
-    public CoursesFragment(){
+    public CoursesFragment()
+    {
         activity = (AppCompatActivity) getActivity();
     }
 
