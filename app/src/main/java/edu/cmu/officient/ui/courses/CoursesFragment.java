@@ -60,6 +60,10 @@ public class CoursesFragment extends Fragment {
     private AdvancedRecyclerView recyclerView;
 
 
+    public CoursesFragment(){
+        activity = (AppCompatActivity) getActivity();
+    }
+
     public CoursesFragment (AppCompatActivity activity) {
         this.activity = activity;
     }
@@ -74,7 +78,7 @@ public class CoursesFragment extends Fragment {
         recyclerView = root.findViewById(R.id.courses_list);
 
         if (user.isFaculty())
-            new CourseList().execute("coursesList", "user_id"); // can add all the
+            new CourseList().execute("coursesList", "" + user.getId()); // can add all the
         else
             new CourseList().execute("coursesList");
         recyclerView.setEmptyView(root.findViewById(R.id.no_tasks));
@@ -97,8 +101,8 @@ public class CoursesFragment extends Fragment {
             String message;
             User user = ApplicationManager.getInstance().getLoggedInUser(activity);
             String[] attributes;
-            if (args.length > 1 && args[1].equals("user_id"))
-                attributes = new String[]{"coursesList", "" + user.getId()};
+            if (args.length > 1)
+                attributes = new String[]{"coursesList", "user_id"};
             else
                 attributes = new String[]{"coursesList"};
             RequestData requestData = new RequestData( activity,"http://gamfruits.com/officient_api/functions.php", attributes, args);
@@ -136,22 +140,13 @@ public class CoursesFragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Toast.makeText(activity, "Term List Retrieved", Toast.LENGTH_SHORT).show();
             }
             else if(result.equalsIgnoreCase("error")){
-                Toast.makeText(activity, "Unable to connect to the internet.", Toast.LENGTH_SHORT).show();
-                courses.add(new Course(13, "Design Patterns for Smartphone Development", "18-755", new Term("Fall", new Date(13, 1, 2019), new Date(14, 5, 2019))));
-                courses.add(new Course(11, "Data Structures and Algorithms", "04-611", new Term("Spring", new Date(13, 1, 2019), new Date(14, 5, 2019))));
-                courses.add(new Course(16, "Design Patterns for Smartphone Development", "18-755", new Term("Fall", new Date(13, 1, 2019), new Date(14, 5, 2019))));
-                courses.add(new Course(17, "Data Structures and Algorithms", "04-611", new Term("Spring", new Date(13, 1, 2019), new Date(14, 5, 2019))));
-                CourseAdapter adapter = new CourseAdapter(activity, courses);
-                recyclerView.setAdapter(adapter);
+                Toast.makeText(activity, R.string.network_unavailable, Toast.LENGTH_SHORT).show();
             }
             else if (result.equalsIgnoreCase("no_data")){
-                //items.add("Term list empty");
-                Toast.makeText(activity, "term list empty", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, R.string.data_empty, Toast.LENGTH_SHORT).show();
             }
-
         }
     }
 }

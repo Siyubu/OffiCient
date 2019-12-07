@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             setContentView(R.layout.activity_main);
-
             BottomNavigationView navView = findViewById(R.id.nav_view);
             NavigationInitializer navInitializer = new NavigationInitializer(this);
             navInitializer.setUpBottomNavigationBar(navView);

@@ -17,7 +17,8 @@
     android:paddingBottom="48dp">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="20dp">
         <edu.cmu.officient.ui.customviews.AdvancedRecyclerView
             android:id="@+id/courses_list"
             android:layout_width="match_parent"
@@ -41,6 +42,5 @@
             android:drawablePadding="10dp"
             android:layout_centerInParent="true"
             />
-
     </RelativeLayout>
 </ScrollView>
