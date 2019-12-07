@@ -26,7 +26,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class Time implements Comparable<Time>{
+public class  Time implements Comparable<Time>{
     private int hours=0, minutes=0, seconds=0;
 
     public Time(int hours, int minutes, int seconds) {

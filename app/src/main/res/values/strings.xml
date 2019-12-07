@@ -69,5 +69,12 @@
     <string name="no_courses">You don\'t seem to have a class now. Please add or register to classes to start.</string>
     <string name="instructors_count">%d instructors</string>
     <string name="office_hours">%d office hours</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="update">update</string>
+    <string name="done">Done</string>
+    <string name="leave_password_empty">Leave this empty to keep the old one</string>
+    <string name="update_your_name">Update your name</string>
+    <string name="update_alternative_email">Update Alternative email</string>
+    <string name="log_out">Log Out</string>
 
 </resources>

@@ -191,7 +191,7 @@ public class AddAssignmentFragment extends Fragment
             }
             else if (result.equalsIgnoreCase("no_data")){
                 //items.add("Term list empty");
-                Toast.makeText(activity, "there is no such course", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "No courses added", Toast.LENGTH_SHORT).show();
             }
             adapter.notifyDataSetChanged();
 

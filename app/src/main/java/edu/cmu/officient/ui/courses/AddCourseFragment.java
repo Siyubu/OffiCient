@@ -86,7 +86,13 @@ public class AddCourseFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(selectedTerm !=null) {
-                    new AddCourse().execute("addCourse", ApplicationManager.getInstance().getLoggedInUser(getContext()).getId()+"", course_code.getText().toString(), course_title.getText().toString(), selectedTerm.getId() + "");
+                    if (course_code.getText().toString().equalsIgnoreCase("") || course_title.getText().toString().equalsIgnoreCase("")){
+                        Toast.makeText(activity, "The title or code should not be blank", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        new AddCourse().execute("addCourse", ApplicationManager.getInstance().getLoggedInUser(getContext()).getId()+"", course_code.getText().toString(), course_title.getText().toString(), selectedTerm.getId() + "");
+                    }
+
                 }
                 else{
                     Toast.makeText(activity, "Please select a term for the office hours", Toast.LENGTH_SHORT).show();
@@ -153,6 +159,9 @@ public class AddCourseFragment extends Fragment {
             else if(result.equalsIgnoreCase("error")){
                 Toast.makeText(activity, "Unable to connect to the internet. Course not added", Toast.LENGTH_SHORT).show();
             }
+            else if(result.equalsIgnoreCase("already_added")){
+                Toast.makeText(activity, "Already Registered", Toast.LENGTH_SHORT).show();
+            }
             else if (result.equalsIgnoreCase("failed")){
                 Toast.makeText(activity, "Problem with App. Contact admin.", Toast.LENGTH_LONG).show();
             }
@@ -198,6 +207,7 @@ public class AddCourseFragment extends Fragment {
                     JSONObject row;
                     for(int i=0;i<jsonArray.length();i++){
                         row = (JSONObject) jsonArray.get(i);
+                        System.out.println(dateConversion.stringToDate(row.getString("start_date")));
                         items.add(new Term(row.getInt("id"), row.getString("name"),
                                 dateConversion.stringToDate(row.getString("start_date")),
                                 dateConversion.stringToDate(row.getString("end_date"))));
