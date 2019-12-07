@@ -62,16 +62,6 @@ public class NavigationInitializer {
     }
 
     public void setUpBottomNavigationBar(BottomNavigationView navView) {
-/*
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-                .build();
-        NavController navController = Navigation.findNavController(activity, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(activity, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(navView, navController);
-*/      // Starting the main fragment
-        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CoursesFragment()).commit();
-
         FloatingActionButton scanCode = activity.findViewById(R.id.scan_code), viewStatus = activity.findViewById(R.id.see_activities)
                 , addCourse = activity.findViewById(R.id.add_course_fab);
 
@@ -80,7 +70,8 @@ public class NavigationInitializer {
         addCourse.setOnClickListener(new AddCourseListener(activity));
 
         // Show what should be shown and hide otherwise
-        User loggedIn = ApplicationManager.getInstance().getLoggedInUser(activity);
+        User loggedIn = ApplicationManager.getInstance()
+                .getLoggedInUser(activity);
         if (loggedIn != null && loggedIn.isFaculty()) {
             viewStatus.setVisibility(View.GONE);
             scanCode.setVisibility(View.GONE);

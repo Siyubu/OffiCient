@@ -10,29 +10,25 @@
 
 package edu.cmu.officient.ui.listener;
 
-import android.content.Context;
-import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import edu.cmu.officient.R;
-import edu.cmu.officient.ui.courses.AddCourse;
-import edu.cmu.officient.ui.courses.AddCourseActivity;
+import edu.cmu.officient.ui.courses.AddCourseFragment;
 
 public class AddCourseListener implements View.OnClickListener {
     private AppCompatActivity activity;
 
-    public AddCourseListener(AppCompatActivity activity/*, Context context*/) {
+    public AddCourseListener(AppCompatActivity activity) {
         this.activity = activity;
     }
     @Override
     public void onClick(View view) {
         FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, new AddCourse()).commit();
+        transaction.replace(R.id.fragment_container, new AddCourseFragment(activity)).commit();
         transaction.addToBackStack(null);
-        /*Intent intent = new Intent(activity, AddCourseActivity.class);
-        activity.startActivity(intent);*/
     }
 }

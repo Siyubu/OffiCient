@@ -10,11 +10,13 @@
 
 package edu.cmu.officient.model;
 
+import android.content.ContentValues;
+
 import androidx.annotation.NonNull;
 
 import java.util.List;
 
-public class Course /*implements Scannable*/ {
+public class Course implements Scannable {
     private int id;
     private String title, code;
     private Term term;
@@ -36,7 +38,7 @@ public class Course /*implements Scannable*/ {
         officeHours = oh;
     }
 
-    /*@Override
+    @Override
     public boolean isInRange() { // Get the list of all office hours and check whether it's okay
         // Should check if there is a valid office hours being held at the moment
         return true;
@@ -46,7 +48,7 @@ public class Course /*implements Scannable*/ {
     public boolean userCanAccess(int id) {
         // Returns true if the user can access a certain office hour i.e there are registered in the class
         return isAStudentOfCourse(id);
-    }*/
+    }
 
     public boolean isAStudentOfCourse(int id) {
         for (Student student : students) {
@@ -54,6 +56,21 @@ public class Course /*implements Scannable*/ {
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public String getType() {
+        return "Course";
+    }
+
+    @Override
+    public String getLocalDatabaseName() {
+        return null;
+    }
+
+    @Override
+    public ContentValues getStorableData() {
+        return null;
     }
 
     public boolean isAStudentOfCourse(Student student) {
