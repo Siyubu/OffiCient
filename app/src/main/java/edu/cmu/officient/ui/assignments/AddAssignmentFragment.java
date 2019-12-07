@@ -1,8 +1,8 @@
 /*
  *
- *  * @author Solange Iyubu
- *  * AndrewID :siyubu
- *  * Program : ECE
+ *  * @author Segla Boladji Vinny Trinite Adjibi
+ *  * AndrewID : vadjibi
+ *  * Program : MSIT
  *  *
  *  * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized assistance on this work.
  *
@@ -10,12 +10,17 @@
 
 package edu.cmu.officient.ui.assignments;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,9 +38,10 @@ import java.util.ArrayList;
 import edu.cmu.officient.DBCommunication.RequestData;
 import edu.cmu.officient.R;
 import edu.cmu.officient.model.Course;
-import edu.cmu.officient.model.Term;
 
-public class Add_assignment extends AppCompatActivity {
+public class AddAssignmentFragment extends Fragment
+{
+
     private Spinner selectCourse;
     private Button addAssignmentBtn;
     private EditText assign_title;
@@ -43,45 +49,54 @@ public class Add_assignment extends AppCompatActivity {
     private EditText deadline;
     private EditText availability;
     private ProgressBar progressBar;
-    private Context context;
+  //  private Context context;
     private ArrayAdapter adapter;
     private LocalDateTime posted_on;
     ArrayList<Course> courses;
+    private AppCompatActivity activity;
+
     Course selectedCourse;
 
+    public AddAssignmentFragment(AppCompatActivity activity)
+    {
+       this.activity=activity;
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_assignment2);
-
-        context = this;
-        progressBar = findViewById(R.id.load);
-
-        selectCourse=findViewById(R.id.select_course);
-        addAssignmentBtn=findViewById(R.id.add_course);
-        assign_title=findViewById(R.id.ass_title);
-        expect_time=findViewById(R.id.exp_time);
-        deadline=findViewById(R.id.due_date);
-        availability=findViewById(R.id.avail_time);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState)
+    {
+        View view = inflater.inflate(R.layout.fragment_add_assigment, container, false);
+        progressBar =view.findViewById(R.id.load);
+        selectCourse=view.findViewById(R.id.select_course);
+        new CourseList().execute("Courses");
+        addAssignmentBtn=view.findViewById(R.id.add_course);
+        assign_title=view.findViewById(R.id.ass_title);
+        expect_time=view.findViewById(R.id.exp_time);
+        deadline=view.findViewById(R.id.due_date);
+        availability=view.findViewById(R.id.avail_time);
 
         courses = new ArrayList<>();
-        adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, courses);
+        adapter = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_dropdown_item, courses);
         selectCourse.setAdapter(adapter);
 
         addAssignmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                if(selectedCourse!=null) {
+            public void onClick(View v)
+            {
+                if(selectedCourse!=null)
+                {
                     new AddAssignment().execute("addAssignment",assign_title.getText().toString(),deadline.getText().toString(),posted_on.toString(),
-                         availability.getText().toString(),expect_time.getText().toString(), selectedCourse.getId() + "");
+                            availability.getText().toString(),expect_time.getText().toString(), selectedCourse.getId() + "");
                 }
                 else{
-                    Toast.makeText(context, "Please select a course for the assignment", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, "Please select a course for the assignment", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
+      return view;
     }
+
     private class AddAssignment extends AsyncTask<String, String, String>
     {
         private JSONObject jsonObject;
@@ -97,7 +112,7 @@ public class Add_assignment extends AppCompatActivity {
         {
             String message=" ";
             String[] attributes = new String[]{"addAssignment", "title", "deadline", "published_on", "avalability","expected_time","course_id"};
-            RequestData requestData = new RequestData(context, "http://gamfruits.com/officient_api/functions.php", attributes, args);
+            RequestData requestData = new RequestData(activity, "http://gamfruits.com/officient_api/functions.php", attributes, args);
             jsonObject = requestData.getResponse();
             System.out.println(jsonObject);
             try {
@@ -111,13 +126,15 @@ public class Add_assignment extends AppCompatActivity {
         protected void onPostExecute(String result){
             progressBar.setVisibility(View.GONE);
             if (result.equalsIgnoreCase("success")){
-                Toast.makeText(context, "Assignment added Successfully", Toast.LENGTH_LONG).show();
+                Toast.makeText(activity, "Assignment added Successfully", Toast.LENGTH_LONG).show();
+//                Intent intent = new Intent(context, CoursesList.class);
+//                startActivity(intent);
             }
             else if(result.equalsIgnoreCase("error")){
-                Toast.makeText(context, "Unable to connect to the internet. Assignment not added", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "Unable to connect to the internet. Assignment not added", Toast.LENGTH_SHORT).show();
             }
             else if (result.equalsIgnoreCase("failed")){
-                Toast.makeText(context, "Problem with App. Contact admin.", Toast.LENGTH_LONG).show();
+                Toast.makeText(activity, "Problem with App. Contact admin.", Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -135,7 +152,7 @@ public class Add_assignment extends AppCompatActivity {
         protected String doInBackground(String[] args) {
             String message;
             String[] attributes = new String[]{"courses"};
-            RequestData requestData = new RequestData( context,"http://gamfruits.com/officient_api/functions.php", attributes, args);
+            RequestData requestData = new RequestData(activity,"http://gamfruits.com/officient_api/functions.php", attributes, args);
             jsonObject = requestData.getResponse();
             System.out.println(jsonObject);
             if(jsonObject!=null){
@@ -167,14 +184,14 @@ public class Add_assignment extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Toast.makeText(context, "Course List Retrieved", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "Course List Retrieved", Toast.LENGTH_SHORT).show();
             }
             else if(result.equalsIgnoreCase("error")){
-                Toast.makeText(context, "Unable to connect to the internet. The course list won't be updated", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "Unable to connect to the internet. The course list won't be updated", Toast.LENGTH_SHORT).show();
             }
             else if (result.equalsIgnoreCase("no_data")){
                 //items.add("Term list empty");
-                Toast.makeText(context, "there is no such course", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "there is no such course", Toast.LENGTH_SHORT).show();
             }
             adapter.notifyDataSetChanged();
 
@@ -182,4 +199,3 @@ public class Add_assignment extends AppCompatActivity {
     }
 
 }
-

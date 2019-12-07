@@ -40,12 +40,13 @@ public class CoursesList extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses_list);
 
-        /*BottomNavigationView navView = findViewById(R.id.nav_view);
-        NavigationInitializer.setUpBottomNavigationBar(this, navView);
-*/
-        FloatingActionButton scanCode = findViewById(R.id.scan_code), viewStatus = findViewById(R.id.see_activities);
-        scanCode.setOnClickListener(new AddCourseListener(this));
-        viewStatus.setOnClickListener(new TrackedActivitiesViewerListener(this));
+//        /*BottomNavigationView navView = findViewById(R.id.nav_view);
+//        NavigationInitializer.setUpBottomNavigationBar(this, navView);
+//*/
+       // FloatingActionButton scanCode = findViewById(R.id.scan_code);
+        //viewStatus = findViewById(R.id.see_activities);
+      //  scanCode.setOnClickListener(new AddCourseListener(this));
+       // viewStatus.setOnClickListener(new TrackedActivitiesViewerListener(this));
     }
 
     @Override

@@ -10,26 +10,29 @@
 
 package edu.cmu.officient.ui.listener;
 
-import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 
-import edu.cmu.officient.ui.assignments.Add_assignment;
-import edu.cmu.officient.ui.qr.QRGenerator;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
+
+import edu.cmu.officient.R;
+import edu.cmu.officient.ui.assignments.AddAssignmentFragment;
+
 
 public class AddAssignmentListener implements View.OnClickListener
 {
-    private Context context;
+    private AppCompatActivity activity;
 
-    public AddAssignmentListener(Context context)
+    public AddAssignmentListener(AppCompatActivity activity)
     {
-        this.context=context;
+        this.activity=activity;
     }
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(context, Add_assignment.class);
-        context.startActivity(intent);
+        FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, new AddAssignmentFragment(activity)).commit();
+        transaction.addToBackStack(null);
 
     }
 }
