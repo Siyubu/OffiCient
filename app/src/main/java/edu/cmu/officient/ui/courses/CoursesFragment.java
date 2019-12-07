@@ -51,6 +51,7 @@ import edu.cmu.officient.model.Course;
 import edu.cmu.officient.model.Term;
 import edu.cmu.officient.model.User;
 import edu.cmu.officient.ui.customviews.AdvancedRecyclerView;
+import edu.cmu.officient.util.ModelObjectBuilder;
 
 public class CoursesFragment extends Fragment {
 
@@ -70,9 +71,8 @@ public class CoursesFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-                ViewModelProviders.of(this).get(CoursesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_courses, container, false);
-        User user = ApplicationManager.getInstance().getLoggedInUser(activity);
+        User user = ApplicationManager.getInstance(activity).getLoggedInUser();
 
         progressBar = root.findViewById(R.id.progress_bar);
         recyclerView = root.findViewById(R.id.courses_list);
@@ -99,7 +99,6 @@ public class CoursesFragment extends Fragment {
         @Override
         protected String doInBackground(String[] args) {
             String message;
-            User user = ApplicationManager.getInstance().getLoggedInUser(activity);
             String[] attributes;
             if (args.length > 1)
                 attributes = new String[]{"coursesList", "user_id"};
@@ -131,8 +130,7 @@ public class CoursesFragment extends Fragment {
                     JSONObject row;
                     for(int i=0;i<jsonArray.length();i++){
                         row = (JSONObject) jsonArray.get(i);
-                        courses.add(new Course(row));
-                        Log.e("QUERY", row.toString());
+                        courses.add(ModelObjectBuilder.buildCourse(row));
                     }
                     // Now we can set the adapter here
                     CourseAdapter adapter = new CourseAdapter(activity, courses);

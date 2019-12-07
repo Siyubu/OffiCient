@@ -70,7 +70,7 @@
     <string name="modify">Modify</string>
     <string name="no_courses">You don\'t seem to have a class now. Please add or register to classes to start.</string>
     <string name="instructors_count">%d instructors</string>
-    <string name="office_hours">%d office hours</string>
+    <string name="office_hours_count">%d office hours</string>
     <string name="network_unavailable">Unable to connect to the network</string>
     <string name="data_empty">Empty data retrieved.</string>
 

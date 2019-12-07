@@ -66,8 +66,7 @@ public class NavigationInitializer {
         addCourse.setOnClickListener(new AddCourseListener(activity));
 
         // Show what should be shown and hide otherwise
-        User loggedIn = ApplicationManager.getInstance()
-                .getLoggedInUser(activity);
+        User loggedIn = ApplicationManager.getInstance(activity).getLoggedInUser();
         if (loggedIn != null && loggedIn.isFaculty()) {
             viewStatus.setVisibility(View.GONE);
             scanCode.setVisibility(View.GONE);
