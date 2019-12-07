@@ -38,7 +38,7 @@ public class NavigationInitializer {
     private AppCompatActivity activity;
     private BottomNavigationView.OnNavigationItemSelectedListener navListener;
 
-    public NavigationInitializer(AppCompatActivity runningActivity) {
+    public NavigationInitializer(final AppCompatActivity runningActivity) {
         activity = runningActivity;
         navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -46,7 +46,7 @@ public class NavigationInitializer {
                 Fragment selected = null;
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        selected = new CoursesFragment();
+                        selected = new CoursesFragment(runningActivity);
                         break;
                     case R.id.navigation_dashboard:
                         selected = new DashboardFragment();
