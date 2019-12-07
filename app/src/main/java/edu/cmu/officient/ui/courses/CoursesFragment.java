@@ -35,6 +35,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import edu.cmu.officient.R;
+import edu.cmu.officient.ui.listener.AddAssignmentListener;
 import edu.cmu.officient.ui.listener.AddCourseListener;
 import edu.cmu.officient.ui.listener.QRCodeGeneratorListener;
 
@@ -57,6 +58,9 @@ public class CoursesFragment extends Fragment {
 
         Button test = root.findViewById(R.id.test);
         test.setOnClickListener(new AddCourseListener((AppCompatActivity) getActivity()));
+
+        Button addAss=root.findViewById(R.id.addAssignment);
+        addAss.setOnClickListener( new AddAssignmentListener((AppCompatActivity) getActivity()));
         return root;
     }
 }
