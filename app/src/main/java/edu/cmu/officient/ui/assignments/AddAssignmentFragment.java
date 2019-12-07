@@ -116,6 +116,13 @@ public class AddAssignmentFragment extends Fragment
 
             }
         });
+        availability.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendar_time(availability);
+
+            }
+        });
 
         return view;
     }
@@ -253,16 +260,4 @@ public class AddAssignmentFragment extends Fragment
 
     }
 
-    public void getAssignmentQRGenerator() throws WriterException {
-        Assignment assignment=new Assignment();
-        Bitmap assignQRGenerator;
-
-        if(assignment.getTitle().equalsIgnoreCase(assign_title.getText().toString()))
-        {
-            assignQRGenerator=new QRImageGenerator(activity).getQRCode(assignment);
-
-        }
-
-
-    }
 }
