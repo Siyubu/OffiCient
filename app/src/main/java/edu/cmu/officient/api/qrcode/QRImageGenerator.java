@@ -38,7 +38,8 @@ public class QRImageGenerator {
         this.context = context;
     }
 
-    public Bitmap getQRCode(Scannable scannable) throws WriterException {
+    public Bitmap getQRCode(Scannable scannable) throws WriterException
+    {
         QRBuilder builder;
         if (scannable instanceof Assignment)
         {

@@ -10,8 +10,8 @@
 
 package edu.cmu.officient.ui.assignments;
 
-import android.content.Context;
-import android.net.Uri;
+import android.app.DatePickerDialog;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -24,23 +24,27 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.zxing.WriterException;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import edu.cmu.officient.DBCommunication.RequestData;
 import edu.cmu.officient.R;
+import edu.cmu.officient.api.qrcode.QRImageGenerator;
+import edu.cmu.officient.model.Assignment;
 import edu.cmu.officient.model.Course;
-import edu.cmu.officient.model.Term;
 
 public class AddAssignmentFragment extends Fragment
 {
@@ -53,7 +57,6 @@ public class AddAssignmentFragment extends Fragment
     private EditText availability;
     private ProgressBar progressBar;
     private ArrayAdapter adapter;
-  //  private LocalDateTime posted_on;
     ArrayList<Course> courses;
     private AppCompatActivity activity;
     Course selectedCourse;
@@ -106,7 +109,15 @@ public class AddAssignmentFragment extends Fragment
                 selectedCourse= null;
             }
         });
-      return view;
+        deadline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendar_time(deadline);
+
+            }
+        });
+
+        return view;
     }
 
     private class AddAssignment extends AsyncTask<String, String, String>
@@ -218,4 +229,40 @@ public class AddAssignmentFragment extends Fragment
         }
     }
 
+    public void calendar_time(final EditText editText)
+    {
+        // calender class's instance and get current date , month and year from calender
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR); // current year
+        int mMonth = c.get(Calendar.MONTH); // current month
+        int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+        // date picker dialog
+        DatePickerDialog datePickerDialog = new DatePickerDialog(activity,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        // set day of month , month and year value in the edit text
+                        editText.setText(dayOfMonth + "/"
+                                + (monthOfYear + 1) + "/" + year);
+
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
+
+    }
+
+    public void getAssignmentQRGenerator() throws WriterException {
+        Assignment assignment=new Assignment();
+        Bitmap assignQRGenerator;
+
+        if(assignment.getTitle().equalsIgnoreCase(assign_title.getText().toString()))
+        {
+            assignQRGenerator=new QRImageGenerator(activity).getQRCode(assignment);
+
+        }
+
+
+    }
 }
