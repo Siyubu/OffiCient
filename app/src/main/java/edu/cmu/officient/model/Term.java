@@ -12,6 +12,7 @@ package edu.cmu.officient.model;
 
 import androidx.annotation.Nullable;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import edu.cmu.officient.util.DateConversion;
@@ -75,6 +76,8 @@ public class Term {
 
     public String toString(){
         DateConversion dateConversion = new DateConversion();
-        return name+ " (From "+dateConversion.datePart(getStartDate())+ " to "+ dateConversion.datePart(getEndDate())+")";
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(endDate);
+        return name + " " + cal.get(Calendar.YEAR);
     }
 }

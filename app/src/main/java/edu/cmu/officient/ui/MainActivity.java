@@ -16,12 +16,11 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import edu.cmu.officient.DBCommunication.CheckInternetConnection;
 import edu.cmu.officient.R;
 import edu.cmu.officient.logic.ApplicationManager;
-import edu.cmu.officient.ui.listener.AddCourseListener;
+import edu.cmu.officient.ui.courses.CoursesFragment;
 import edu.cmu.officient.ui.users.LoginActivity;
 import edu.cmu.officient.ui.util.NavigationInitializer;
 
@@ -35,9 +34,6 @@ public class MainActivity extends AppCompatActivity {
         CheckInternetConnection checker = CheckInternetConnection.getInstance();
         checker.setContext(getApplicationContext()); // Set it to the application context so it doesn't leak
 
-          // FloatingActionButton scanCode = findViewById(R.id.scan_code);
-         // scanCode.setOnClickListener(new AddCourseListener(this));
-
         if (manager.getLoggedInUser(this) == null) {
             // If user not logged in, we have them go login
             Intent intent = new Intent(this, LoginActivity.class);
@@ -50,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
             BottomNavigationView navView = findViewById(R.id.nav_view);
             NavigationInitializer navInitializer = new NavigationInitializer(this);
             navInitializer.setUpBottomNavigationBar(navView);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CoursesFragment(this)).commit();
         }
     }
 }

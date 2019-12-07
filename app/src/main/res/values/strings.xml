@@ -66,5 +66,8 @@
     <string name="object_code"><b>Code</b>: %s</string>
     <string name="term_title"><b>Term</b>: %s</string>
     <string name="modify">Modify</string>
+    <string name="no_courses">You don\'t seem to have a class now. Please add or register to classes to start.</string>
+    <string name="instructors_count">%d instructors</string>
+    <string name="office_hours">%d office hours</string>
 
 </resources>

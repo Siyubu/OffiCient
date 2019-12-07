@@ -17,7 +17,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".ui.listener.CourseDetailFragment">
+    tools:context=".ui.courses.CourseDetailFragment">
     <TextView
         android:id="@+id/course_title"
         android:layout_width="wrap_content"
@@ -26,18 +26,20 @@
     <TextView
         android:id="@+id/course_code"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
     <TextView
         android:id="@+id/course_term"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/send_code"
+            android:id="@+id/modify"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/modify"
