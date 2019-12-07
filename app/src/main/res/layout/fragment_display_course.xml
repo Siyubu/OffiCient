@@ -1,24 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /*
-  ~  * @author Segla Boladji Vinny Trinite Adjibi
-  ~  * AndrewID : vadjibi
-  ~  * Program : MSIT
+  ~  * @author Solange Iyubu
+  ~  * AndrewID : siyubu
+  ~  * Program : MSECE
   ~  *
   ~  * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized assistance on this work.
   ~  */
   -->
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.courses.DisplayCourse">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    android:fillViewport="true"
+    android:paddingBottom="48dp">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+        <edu.cmu.officient.ui.customviews.AdvancedRecyclerView
+            android:id="@+id/courses_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
 
-</FrameLayout>
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+        <TextView
+            android:id="@+id/course_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textAlignment="center"
+            android:drawablePadding="10dp"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
+</ScrollView>

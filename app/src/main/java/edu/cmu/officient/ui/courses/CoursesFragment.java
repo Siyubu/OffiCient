@@ -70,8 +70,9 @@ public class CoursesFragment extends Fragment {
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-                ViewModelProviders.of(this).get(CoursesViewModel.class);
+                             ViewGroup container, Bundle savedInstanceState)
+    {
+        ViewModelProviders.of(this).get(CoursesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_courses, container, false);
         User user = ApplicationManager.getInstance().getLoggedInUser(activity);
 
