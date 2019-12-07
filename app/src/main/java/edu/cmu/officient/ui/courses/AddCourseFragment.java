@@ -50,8 +50,8 @@ public class AddCourseFragment extends Fragment {
     private ArrayAdapter adapter;
     private ArrayList<Term> items;
     private Term selectedTerm;
-    public AddCourseFragment(AppCompatActivity activity) {
-        // Required empty public constructor
+    public AddCourseFragment(AppCompatActivity activity)
+    {
         this.activity = activity;
     }
 
