@@ -10,15 +10,13 @@
 
 package edu.cmu.officient.ui.misc;
 
-import android.net.Uri;
-
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
-// Here we shall implement all the fragment interactions as a way of adding a level of abstraction
+public class ShiftableFragment extends Fragment {
+    private AppCompatActivity activity;
 
-public class BottomNavbarActivity extends AppCompatActivity implements AddCourse.OnFragmentInteractionListener {
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
+    public ShiftableFragment(AppCompatActivity activity) {
+        this.activity = activity;
     }
 }

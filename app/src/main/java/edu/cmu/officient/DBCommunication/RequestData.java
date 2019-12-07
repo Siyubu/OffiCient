@@ -47,7 +47,6 @@ public class RequestData {
             jsonObject = null;
         }
 
-
         return jsonObject;
     }
 

@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
             String[] attributes = new String[]{"login", "andrewId", "password"};
             RequestData requestData = new RequestData( context,"http://gamfruits.com/officient_api/functions.php", attributes, args);
             jsonObject = requestData.getResponse();
-            System.out.println(jsonObject);
+            //System.out.println(jsonObject);
             try {
                 message = jsonObject.getString("message");
                 Log.e("LOGIN", jsonObject.toString());
@@ -100,7 +100,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 // Log in to the app (i.e store data to local storage)
                 try {
-                    ApplicationManager.getInstance().logUserIn(jsonObject.getJSONObject("data"), LoginActivity.this);
+                    ApplicationManager.getInstance()
+                            .logUserIn(LoginActivity.this, jsonObject.getJSONObject("data"), jsonObject.getBoolean("isFaculty"));
                 }
                 catch (JSONException e) {
                     e.printStackTrace();

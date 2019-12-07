@@ -77,7 +77,7 @@ public class ApplicationManager {
         return activities;
     }
 
-    public void logUserIn(JSONObject response, Context context){
+    public void logUserIn(Context context, JSONObject response, boolean isFaculty){
         SharedPreferences preferences = context.getSharedPreferences(context.getString(R.string.prefs_file_name), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         // Start storing all the data
@@ -87,7 +87,7 @@ public class ApplicationManager {
                     .putString("user.name", response.getString("name"))
                     .putString("user.alt_email", response.getString("alternative_email"))
                     .putString("user.phone_number", response.getString("phoneNumber"))
-                    .putBoolean("user.is_faculty", response.getBoolean("isFaculty"));
+                    .putBoolean("user.is_faculty", isFaculty);
         }
         catch (JSONException e) {
             e.printStackTrace();

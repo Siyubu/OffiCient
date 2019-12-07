@@ -17,7 +17,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ui.courses.AddCourseActivity"
+    tools:context=".ui.courses.AddCourseFragment"
     tools:showIn="@layout/activity_add_course">
 
     <androidx.constraintlayout.widget.Guideline
@@ -97,6 +97,8 @@
         android:paddingBottom="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
+
+
 
     <Button
         android:id="@+id/add_course"
