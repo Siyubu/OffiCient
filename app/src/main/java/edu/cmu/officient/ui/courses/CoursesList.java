@@ -43,9 +43,9 @@ public class CoursesList extends AppCompatActivity{
         /*BottomNavigationView navView = findViewById(R.id.nav_view);
         NavigationInitializer.setUpBottomNavigationBar(this, navView);
 */
-        /*FloatingActionButton scanCode = findViewById(R.id.scan_code), viewStatus = findViewById(R.id.see_activities);
-        scanCode.setOnClickListener(new QRCodeScannerListener(this));
-        viewStatus.setOnClickListener(new TrackedActivitiesViewerListener(this));*/
+        FloatingActionButton scanCode = findViewById(R.id.scan_code), viewStatus = findViewById(R.id.see_activities);
+        scanCode.setOnClickListener(new AddCourseListener(this));
+        viewStatus.setOnClickListener(new TrackedActivitiesViewerListener(this));
     }
 
     @Override

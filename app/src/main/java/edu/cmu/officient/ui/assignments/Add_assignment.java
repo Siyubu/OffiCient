@@ -125,11 +125,6 @@ public class Add_assignment extends AppCompatActivity {
         }
     }
 
-
-
-
-
-
     private class CourseList extends AsyncTask<String, String, String>
     {
         private JSONObject jsonObject;
@@ -170,22 +165,19 @@ public class Add_assignment extends AppCompatActivity {
                     JSONObject row;
                     for(int i=0;i<jsonArray.length();i++){
                         row = (JSONObject) jsonArray.get(i);
-//                        courses.add(new Course(row.getInt("id"), row.getString("title"),
-//                                dateConversion.stringToDate(row.getString("start_date")),
-//                                dateConversion.stringToDate(row.getString("end_date"))));
-//                        //items.add(row.getString("name") +" ( From " +row.getString("start_date")+" to "+row.getString("end_date")+")");
+                        courses.add(new Course(row.getInt("id"),row.getString("title"),row.getString("code")));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Toast.makeText(context, "Term List Retrieved", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Course List Retrieved", Toast.LENGTH_SHORT).show();
             }
             else if(result.equalsIgnoreCase("error")){
-                Toast.makeText(context, "Unable to connect to the internet. The term list won't be updated", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Unable to connect to the internet. The course list won't be updated", Toast.LENGTH_SHORT).show();
             }
             else if (result.equalsIgnoreCase("no_data")){
                 //items.add("Term list empty");
-                Toast.makeText(context, "term list empty", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "there is no such course", Toast.LENGTH_SHORT).show();
             }
             adapter.notifyDataSetChanged();
 
