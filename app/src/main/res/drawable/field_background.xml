@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /*
+  ~  * @author Segla Boladji Vinny Trinite Adjibi
+  ~  * AndrewID : vadjibi
+  ~  * Program : MSIT
+  ~  *
+  ~  * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized assistance on this work.
+  ~  */
+  -->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <size android:width="100dp" android:height="40dp" />
+    <stroke android:color="@color/black" android:width="0.5dp"/>
+    <corners android:radius="2dp"/>
+</shape>

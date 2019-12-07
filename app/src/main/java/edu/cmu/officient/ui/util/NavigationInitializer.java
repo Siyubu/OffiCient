@@ -16,10 +16,6 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -46,13 +42,13 @@ public class NavigationInitializer {
                 Fragment selected = null;
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        selected = new CoursesFragment(runningActivity);
+                        selected = new CoursesFragment(activity);
                         break;
                     case R.id.navigation_dashboard:
                         selected = new DashboardFragment();
                         break;
                     case R.id.navigation_notifications:
-                        selected = new ProfileFragment();
+                        selected = new ProfileFragment(activity);
                         break;
                 }
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selected).commit();

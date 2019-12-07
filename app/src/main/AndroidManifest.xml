@@ -37,15 +37,6 @@
         <activity android:name=".ui.qr.QRGenerator" />
         <activity android:name=".ui.qr.QRCodeScanner" />
         <activity
-            android:name=".ui.users.Profile"
-            android:label="@string/title_activity_profile"
-            android:parentActivityName=".ui.courses.CoursesList"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="edu.cmu.officient.ui.courses.CoursesList" />
-        </activity>
-        <activity
             android:name=".ui.courses.CoursesList"
             android:label="@string/app_name">
 

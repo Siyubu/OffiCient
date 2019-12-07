@@ -10,8 +10,11 @@
 
 package edu.cmu.officient.model;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -50,7 +53,15 @@ public class Course /*implements Scannable*/ {
     }
 
     public Course(JSONObject object) {
-
+        try {
+            int id = object.getInt("course_id"), termId = object.getInt("term_id");
+            String code = object.getString("code");
+            String title = object.getString("title");
+        }
+        catch (JSONException e) {
+            /* */
+        }
+        Log.e(getClass().getSimpleName(), object.toString());
     }
 
     /*@Override

@@ -44,7 +44,6 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         holder.title.setText(course.getTitle());
         holder.term.setText(course.getTerm().toString());
         holder.instructorsCount.setText(parentActivity.getString(R.string.instructors_count, course.getInstructors().size()));
-        holder.officeHoursCount.setText(parentActivity.getString(R.string.instructors_count, course.getOfficeHours().size()));
     }
 
     @NonNull
@@ -62,16 +61,13 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
 
     class ViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
-        Button more;
-        TextView title, term, instructorsCount, officeHoursCount;
+        TextView title, term, instructorsCount;
 
         ViewHolder(View view) {
             super(view);
-            //cardView = view.findViewById(R.id.course_block);
-            more = view.findViewById(R.id.course_more);
+            cardView = view.findViewById(R.id.course_block);
             title = view.findViewById(R.id.course_title);
             term = view.findViewById(R.id.term);
-            officeHoursCount = view.findViewById(R.id.office_hours);
             instructorsCount = view.findViewById(R.id.instructors_count);
         }
     }
