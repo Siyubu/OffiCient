@@ -20,43 +20,138 @@
 
 package edu.cmu.officient.ui.courses;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import edu.cmu.officient.DBCommunication.RequestData;
 import edu.cmu.officient.R;
-import edu.cmu.officient.ui.listener.AddCourseListener;
-import edu.cmu.officient.ui.listener.QRCodeGeneratorListener;
+import edu.cmu.officient.logic.ApplicationManager;
+import edu.cmu.officient.model.Course;
+import edu.cmu.officient.model.Term;
+import edu.cmu.officient.model.User;
+import edu.cmu.officient.ui.customviews.AdvancedRecyclerView;
 
 public class CoursesFragment extends Fragment {
 
-    private CoursesViewModel coursesViewModel;
+    private ProgressBar progressBar;
+    private AppCompatActivity activity;
+    private List<Course> courses = new ArrayList<>();
+    private AdvancedRecyclerView recyclerView;
+
+
+    public CoursesFragment (AppCompatActivity activity) {
+        this.activity = activity;
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        coursesViewModel =
                 ViewModelProviders.of(this).get(CoursesViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        coursesViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        View root = inflater.inflate(R.layout.fragment_courses, container, false);
+        User user = ApplicationManager.getInstance().getLoggedInUser(activity);
 
-        Button test = root.findViewById(R.id.test);
-        test.setOnClickListener(new AddCourseListener((AppCompatActivity) getActivity()));
+        progressBar = root.findViewById(R.id.progress_bar);
+        recyclerView = root.findViewById(R.id.courses_list);
+
+        if (user.isFaculty())
+            new CourseList().execute("coursesList", "user_id"); // can add all the
+        else
+            new CourseList().execute("coursesList");
+        recyclerView.setEmptyView(root.findViewById(R.id.no_tasks));
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager llm = new LinearLayoutManager(activity);
+        recyclerView.setLayoutManager(llm);
         return root;
+    }
+
+    private class CourseList extends AsyncTask<String, String, String> {
+        private JSONObject jsonObject;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(String[] args) {
+            String message;
+            User user = ApplicationManager.getInstance().getLoggedInUser(activity);
+            String[] attributes;
+            if (args.length > 1 && args[1].equals("user_id"))
+                attributes = new String[]{"coursesList", "" + user.getId()};
+            else
+                attributes = new String[]{"coursesList"};
+            RequestData requestData = new RequestData( activity,"http://gamfruits.com/officient_api/functions.php", attributes, args);
+            jsonObject = requestData.getResponse();
+            System.out.println(jsonObject);
+            if(jsonObject!=null){
+                try {
+                    message = jsonObject.getString("message");
+                } catch (JSONException e) {
+                    message = "error";
+                    e.printStackTrace();
+                }
+            }
+            else {
+                message = "error";
+            }
+            return message;
+        }
+
+        protected void onPostExecute(String result){
+            progressBar.setVisibility(View.GONE);
+            System.out.println(result);
+            if (result.equalsIgnoreCase("success")){
+                try {
+                    JSONArray jsonArray = jsonObject.getJSONArray("data");
+                    JSONObject row;
+                    for(int i=0;i<jsonArray.length();i++){
+                        row = (JSONObject) jsonArray.get(i);
+                        courses.add(new Course(row));
+                        Log.e("QUERY", row.toString());
+                    }
+                    // Now we can set the adapter here
+                    CourseAdapter adapter = new CourseAdapter(activity, courses);
+                    recyclerView.setAdapter(adapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Toast.makeText(activity, "Term List Retrieved", Toast.LENGTH_SHORT).show();
+            }
+            else if(result.equalsIgnoreCase("error")){
+                Toast.makeText(activity, "Unable to connect to the internet.", Toast.LENGTH_SHORT).show();
+                courses.add(new Course(13, "Design Patterns for Smartphone Development", "18-755", new Term("Fall", new Date(13, 1, 2019), new Date(14, 5, 2019))));
+                courses.add(new Course(11, "Data Structures and Algorithms", "04-611", new Term("Spring", new Date(13, 1, 2019), new Date(14, 5, 2019))));
+                courses.add(new Course(16, "Design Patterns for Smartphone Development", "18-755", new Term("Fall", new Date(13, 1, 2019), new Date(14, 5, 2019))));
+                courses.add(new Course(17, "Data Structures and Algorithms", "04-611", new Term("Spring", new Date(13, 1, 2019), new Date(14, 5, 2019))));
+                CourseAdapter adapter = new CourseAdapter(activity, courses);
+                recyclerView.setAdapter(adapter);
+            }
+            else if (result.equalsIgnoreCase("no_data")){
+                //items.add("Term list empty");
+                Toast.makeText(activity, "term list empty", Toast.LENGTH_SHORT).show();
+            }
+
+        }
     }
 }

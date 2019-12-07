@@ -12,15 +12,18 @@ package edu.cmu.officient.model;
 
 import androidx.annotation.NonNull;
 
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Course /*implements Scannable*/ {
     private int id;
     private String title, code;
     private Term term;
-    private List<Instructor> instructors;
-    private List<Student> students;
-    private List<OfficeHours> officeHours;
+    private List<Instructor> instructors = new ArrayList<>();
+    private List<Student> students = new ArrayList<>();
+    private List<OfficeHours> officeHours = new ArrayList<>();
 
     public Course(){
 
@@ -28,13 +31,15 @@ public class Course /*implements Scannable*/ {
 
     public Course(int id, String title, String code, Term term, List<Instructor> instructors, List<Student> students, List<OfficeHours> oh)
     {
-        this.id = id;
-        this.title = title;
-        this.code = code;
-        this.term = term;
+        this(id, title, code, term);
         this.instructors = instructors;
         this.students = students;
         officeHours = oh;
+    }
+
+    public Course (int id, String title, String code, Term term) {
+        this(id, title, code);
+        this.term = term;
     }
 
     public Course(int id, String title, String code)
@@ -42,6 +47,10 @@ public class Course /*implements Scannable*/ {
         this.id = id;
         this.title = title;
         this.code = code;
+    }
+
+    public Course(JSONObject object) {
+
     }
 
     /*@Override

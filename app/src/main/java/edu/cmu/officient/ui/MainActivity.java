@@ -20,6 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import edu.cmu.officient.DBCommunication.CheckInternetConnection;
 import edu.cmu.officient.R;
 import edu.cmu.officient.logic.ApplicationManager;
+import edu.cmu.officient.ui.courses.CoursesFragment;
 import edu.cmu.officient.ui.users.LoginActivity;
 import edu.cmu.officient.ui.util.NavigationInitializer;
 
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
             BottomNavigationView navView = findViewById(R.id.nav_view);
             NavigationInitializer navInitializer = new NavigationInitializer(this);
             navInitializer.setUpBottomNavigationBar(navView);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CoursesFragment(this)).commit();
         }
     }
 }

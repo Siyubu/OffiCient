@@ -38,7 +38,6 @@ import edu.cmu.officient.DBCommunication.RequestData;
 import edu.cmu.officient.R;
 import edu.cmu.officient.model.Course;
 import edu.cmu.officient.model.Term;
-import edu.cmu.officient.ui.listener.CourseDetailFragment;
 import edu.cmu.officient.util.DateConversion;
 
 public class AddCourseFragment extends Fragment {
@@ -87,7 +86,6 @@ public class AddCourseFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedTerm = (Term) parent.getSelectedItem();
-                Toast.makeText(activity, selectedTerm.getId()+"", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -127,14 +125,18 @@ public class AddCourseFragment extends Fragment {
             if (result.equalsIgnoreCase("success")){
                 Toast.makeText(activity, "Course added Successfully", Toast.LENGTH_LONG).show();
                 Term term = items.get(dropdown.getSelectedItemPosition());
-                Course course = new Course(13, "DPSD", "18758", term, null, null, null);
-                //activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CourseDetailFragment(activity, course)).commit();
-                activity.getSupportFragmentManager().beginTransaction().remove(AddCourseFragment.this).commit();
-                FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragment_container, new CourseDetailFragment(activity, course));
-                transaction.addToBackStack(null);
-                transaction.commit();
-                //transaction.replace(R.id.fragment_container, new CourseDetailFragment(activity, course)).commit();
+                try {
+                    JSONObject object = jsonObject.getJSONObject("data");
+                    int id = object.getInt("course_id");
+                    Course course = new Course(id,  course_title.getText().toString(), course_code.getText().toString(), term, null, null, null);
+                    activity.getSupportFragmentManager().beginTransaction().remove(AddCourseFragment.this).commit();
+                    FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.fragment_container, new CourseDetailFragment(activity, course));
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                }
+                catch (JSONException e) {/* */}
+
             }
             else if(result.equalsIgnoreCase("error")){
                 Toast.makeText(activity, "Unable to connect to the internet. Course not added", Toast.LENGTH_SHORT).show();

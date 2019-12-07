@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /*
+  ~  * @author Segla Boladji Vinny Trinite Adjibi
+  ~  * AndrewID : vadjibi
+  ~  * Program : MSIT
+  ~  *
+  ~  * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized assistance on this work.
+  ~  */
+  -->
+
+<!--<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:id="@+id/course_block"
+    android:layout_marginBottom="15dp">-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+        <TextView
+            android:id="@+id/course_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:paddingBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+            android:id="@+id/term"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:paddingBottom="30dp"
+            app:layout_constraintTop_toBottomOf="@id/course_title"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/instructors_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_supervisor_account_black_24dp"
+            android:drawableLeft="@drawable/ic_supervisor_account_black_24dp"
+            android:drawableRight="@drawable/ic_brightness_1_black_24dp"
+            android:drawableEnd="@drawable/ic_brightness_1_black_24dp"
+            android:drawablePadding="10dp"
+            android:paddingRight="10dp"
+            android:paddingEnd="10dp"
+            android:paddingStart="0dp"
+            android:paddingLeft="0dp"
+            app:layout_constraintTop_toBottomOf="@id/term"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/office_hours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/instructors_count"
+            app:layout_constraintTop_toBottomOf="@id/term" />
+        <Button
+            android:id="@+id/course_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="5dp"
+            android:minHeight="0dp"
+            android:padding="0dp"
+            android:drawableLeft="@drawable/ic_more_vert_black_24dp"
+            android:drawableStart="@drawable/ic_more_vert_black_24dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            style="?android:attr/borderlessButtonStyle" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/cmu_gray"
+        android:paddingLeft="30dp"
+        android:paddingStart="30dp"
+        android:paddingRight="30dp"
+        android:paddingEnd="30dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/office_hours" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+<!--
+</androidx.cardview.widget.CardView>-->
