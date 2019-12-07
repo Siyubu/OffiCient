@@ -1,8 +1,8 @@
 /*
  *
- *  * @author Solange Iyubu
- *  * AndrewID : siyubu
- *  * Program : MSECE
+ *  * @author Segla Boladji Vinny Trinite Adjibi
+ *  * AndrewID : vadjibi
+ *  * Program : MSIT
  *  *
  *  * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized assistance on this work.
  *
@@ -10,8 +10,8 @@
 
 /*
  *
- *  * @author Wuyeh Jobe
- *  * AndrewID : jwuyeh
+ *  * @author Segla Boladji Vinny Trinite Adjibi
+ *  * AndrewID : vadjibi
  *  * Program : MSIT
  *  *
  *  * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized assistance on this work.
@@ -24,69 +24,56 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import edu.cmu.officient.R;
 import edu.cmu.officient.logic.ApplicationManager;
 import edu.cmu.officient.model.User;
 
 public class ProfileFragment extends Fragment {
+    private AppCompatActivity activity;
+    private EditText name, altEmail, phoneNumber, password;
 
-    private TextView header;
-    private TextView name;
-    private TextView email;
-    private TextView altEmail;
-    private TextView password;
-    private Button update;
-    private Button done;
-    private Button logout;
+    public ProfileFragment(){
+
+    }
+
+    public ProfileFragment(AppCompatActivity activity) {
+        this.activity = activity;
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-//        profileViewModel =
-//                ViewModelProviders.of(this).get(ProfileViewModel.class);
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        header = view.findViewById(R.id.header);
-        name = view.findViewById(R.id.name);
-        email = view.findViewById(R.id.email);
-        altEmail = view.findViewById(R.id.altEmail);
-        password = view.findViewById(R.id.password);
-        update = view.findViewById(R.id.update);
-        done = view.findViewById(R.id.done);
+        View root = inflater.inflate(R.layout.fragment_profile, container, false);
+        User user = ApplicationManager.getInstance().getLoggedInUser(activity);
+        EditText andrewId = root.findViewById(R.id.field_andrewId);
+        name = root.findViewById(R.id.field_name);
+        altEmail = root.findViewById(R.id.field_alt_email);
+        phoneNumber = root.findViewById(R.id.field_phone_number);
+        password = root.findViewById(R.id.field_password);
 
-        final User user = ApplicationManager.getInstance().getLoggedInUser(getContext());
-        header.setText("My Profile ("+ user.getAndrewId()+")");
-        if(!user.getFullname().equalsIgnoreCase("")){
-            name.setText(user.getFullname());
-        }
-        email.setText(user.getAndrewId()+"@andrew.cmu.edu");
-        if(!user.getAltEmail().equalsIgnoreCase("")){
-            altEmail.setText(user.getFullname());
-        }
 
-        update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                name.setEnabled(true);
-                email.setEnabled(true);
-                altEmail.setEnabled(true);
-                password.setEnabled(true);
-                update.setEnabled(false);
-                done.setEnabled(true);
+        andrewId.setText(user.getAndrewId());
+        name.setText(user.getFullname());
+        altEmail.setText(user.getAltEmail());
+        phoneNumber.setText(user.getPhoneNumber());
 
-            }
-        });
-        //final TextView textView = view.findViewById(R.id.text_notifications);
-//        profileViewModel.getText().observe(this, new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
-        return view;
+        // The buttons
+
+
+        return root;
     }
 }

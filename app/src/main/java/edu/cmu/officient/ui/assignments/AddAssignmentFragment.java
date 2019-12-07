@@ -1,8 +1,8 @@
 /*
  *
- *  * @author Segla Boladji Vinny Trinite Adjibi
- *  * AndrewID : vadjibi
- *  * Program : MSIT
+ *  * @author Solange Iyubu
+ *  * AndrewID : siyubu
+ *  * Program : MSECE
  *  *
  *  * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized assistance on this work.
  *
@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,10 +35,12 @@ import org.json.JSONObject;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 
 import edu.cmu.officient.DBCommunication.RequestData;
 import edu.cmu.officient.R;
 import edu.cmu.officient.model.Course;
+import edu.cmu.officient.model.Term;
 
 public class AddAssignmentFragment extends Fragment
 {
@@ -49,12 +52,10 @@ public class AddAssignmentFragment extends Fragment
     private EditText deadline;
     private EditText availability;
     private ProgressBar progressBar;
-  //  private Context context;
     private ArrayAdapter adapter;
-    private LocalDateTime posted_on;
+  //  private LocalDateTime posted_on;
     ArrayList<Course> courses;
     private AppCompatActivity activity;
-
     Course selectedCourse;
 
     public AddAssignmentFragment(AppCompatActivity activity)
@@ -86,12 +87,23 @@ public class AddAssignmentFragment extends Fragment
             {
                 if(selectedCourse!=null)
                 {
-                    new AddAssignment().execute("addAssignment",assign_title.getText().toString(),deadline.getText().toString(),posted_on.toString(),
+                    new AddAssignment().execute("addAssignment",assign_title.getText().toString(),deadline.getText().toString(),new Date().toString(),
                             availability.getText().toString(),expect_time.getText().toString(), selectedCourse.getId() + "");
                 }
                 else{
                     Toast.makeText(activity, "Please select a course for the assignment", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+        selectCourse.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedCourse = (Course) parent.getSelectedItem();
+                Toast.makeText(activity, selectedCourse.getId()+"", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                selectedCourse= null;
             }
         });
       return view;
@@ -122,13 +134,12 @@ public class AddAssignmentFragment extends Fragment
             }
             return message;
         }
-
-        protected void onPostExecute(String result){
+        @Override
+        protected void onPostExecute(String result)
+        {
             progressBar.setVisibility(View.GONE);
             if (result.equalsIgnoreCase("success")){
                 Toast.makeText(activity, "Assignment added Successfully", Toast.LENGTH_LONG).show();
-//                Intent intent = new Intent(context, CoursesList.class);
-//                startActivity(intent);
             }
             else if(result.equalsIgnoreCase("error")){
                 Toast.makeText(activity, "Unable to connect to the internet. Assignment not added", Toast.LENGTH_SHORT).show();
@@ -168,7 +179,7 @@ public class AddAssignmentFragment extends Fragment
             }
             return message;
         }
-
+        @Override
         protected void onPostExecute(String result){
             progressBar.setVisibility(View.GONE);
             System.out.println(result);
@@ -179,7 +190,9 @@ public class AddAssignmentFragment extends Fragment
                     JSONObject row;
                     for(int i=0;i<jsonArray.length();i++){
                         row = (JSONObject) jsonArray.get(i);
+                        Course sos=new Course(123,"Seminar","AB123");
                         courses.add(new Course(row.getInt("id"),row.getString("title"),row.getString("code")));
+                        courses.add(sos);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -193,6 +206,13 @@ public class AddAssignmentFragment extends Fragment
                 //items.add("Term list empty");
                 Toast.makeText(activity, "No courses added", Toast.LENGTH_SHORT).show();
             }
+            Course sos=new Course(123,"Seminar","AB123");
+            Course pop=new Course(200,"Database","AC234");
+            Course kel=new Course(300,"French","AQ234");
+            courses.add(sos);
+            courses.add(pop);
+            courses.add(kel);
+
             adapter.notifyDataSetChanged();
 
         }
