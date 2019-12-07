@@ -57,22 +57,7 @@ public class CourseDetailFragment extends Fragment {
         title.setText(getString(R.string.object_title, course.getTitle()));
         code.setText(getString(R.string.object_code, course.getCode()));
         term.setText(getString(R.string.term_title, course.getTerm()));
-
-
-        try {
-            Bitmap bitmap = new QRImageGenerator(activity).getQRCode(course);
-            //qrCode.setImageBitmap(bitmap);
-            finish.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(activity, "Finishing the adding", Toast.LENGTH_SHORT).show();
-                }
-            });
-            send.setOnClickListener(new QRCodeSendByEmailListener(activity, bitmap));
-        }
-        catch (WriterException e) {
-            /* */
-        }
+        
         activity.getSupportActionBar().setTitle(R.string.course_details_label);
         return view;
     }
