@@ -9,28 +9,15 @@
  */
 
 package edu.cmu.officient.ui.qr;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
-
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
-
 import com.google.zxing.WriterException;
-
 import java.io.File;
-import java.io.FileOutputStream;
-import java.util.Date;
-
-import androidmads.library.qrgenearator.QRGEncoder;
 import edu.cmu.officient.R;
 import edu.cmu.officient.api.qrcode.QRImageGenerator;
 import edu.cmu.officient.model.Assignment;
@@ -44,7 +31,6 @@ public class QRGenerator extends AppCompatActivity {
     private ImageView qrImage;
     private  Button start;
     private Bitmap bitmap;
-    private QRGEncoder qrgEncoder;
     private File file;
 
     public QRGenerator()

@@ -4,7 +4,12 @@
     <string name="title_activity_login">Sign in</string>
     <string name="action_register">Register now</string>
     <string name="prompt_email">Email</string>
+    <string name="alt_email">Alternative email address</string>
     <string name="prompt_password">Password</string>
+    <string name="prompt_name">Name</string>
+    <string name="prof_edit">EDIT PROFILE</string>
+    <string name="add_course">ADD COURSE</string>
+    <string name="add_ass">ADD ASSIGNMENT</string>
     <string name="prompt_password_confirmation">Confirm Password</string>
     <string name="integrity_notice">By clicking on the <b>Register</b> button, you confirm that the information that you provided is accurate and true.</string>
     <string name="prompt_registration">Register now</string>
@@ -18,6 +23,7 @@
     <string name="or">OR</string>
     <string name="title_activity_registration">Registration</string>
     <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
     <string name="thanks_for_registrating">Thanks you for registering in OffiCient. You can start using the application :).</string>
     <string name="open_now">Open Now</string>
     <string name="congratulations">Congratulations</string>
@@ -32,8 +38,12 @@
     <string name="title_add_course">Add Course</string>
     <string name="course_code_prompt">Course Code</string>
     <string name="course_title_prompt">Course Title</string>
+    <string name="expected_prompt">Expected Time</string>
+    <string name="due_time_prompt">Due Time</string>
+    <string name="available_time_prompt">Available Till</string>
     <string name="term_prompt">Term Prompt</string>
     <string name="action_add_course">Add Course</string>
+    <string name="action_add_assignment">Add Assignment</string>
     <string name="scan_QR_Image">Share QR Image via email</string>
     <string name="Send_QR_Image_to_Email">Generate QR Image </string>
     <string name="title_activity_test_activiy">TestActiviy</string>
@@ -41,6 +51,8 @@
     <string name="stop">Stop</string>
     <string name="no_tasks">You don\'t seem to have started a task now. Please go to the Home page and scan a QR code to start monitoring.</string>
     <string name="ongoing_tasks">Ongoing Tasks</string>
+    <string name="class_prompt">Choose a Class</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="prefs_file_name">xyz_details</string>

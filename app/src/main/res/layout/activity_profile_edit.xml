@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--    /*-->
+<!--    *-->
+<!--    *  * @author Solange Iyubu-->
+<!--    *  * AndrewID : siyubu-->
+<!--    *  * Program : ECE-->
+<!--    *  *-->
+<!--    *  * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized assistance on this work.-->
+<!--    *-->
+<!--    */-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <Space
@@ -12,7 +22,7 @@
         android:id="@+id/editName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="EDIT YOUR PROFILE"
+        android:text="@string/prof_edit"
         android:textSize="26sp"
         android:textStyle="bold"/>
 
@@ -24,7 +34,7 @@
         android:id="@+id/textName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name" />
+        android:text="@string/prompt_name" />
 
     <Space
         android:layout_width="match_parent"
@@ -44,7 +54,7 @@
         android:id="@+id/textEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email Address" />
+        android:text="@string/prompt_email" />
 
     <Space
         android:layout_width="match_parent"
@@ -64,7 +74,7 @@
         android:id="@+id/textAltEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Alternative email address" />
+        android:text="@string/alt_email" />
 
     <Space
         android:layout_width="match_parent"
@@ -83,7 +93,7 @@
         android:id="@+id/textpaswd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="PassWorld" />
+        android:text="@string/prompt_password" />
 
     <Space
         android:layout_width="match_parent"
@@ -109,7 +119,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Submit"
+            android:text="@string/submit"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="100dp" />
 
@@ -118,8 +128,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Cancel"
+            android:text="@string/cancel"
             android:layout_marginLeft="40dp" />
     </LinearLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="?android:attr/windowBackground"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_nav_menu" />
 
 </LinearLayout>

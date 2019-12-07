@@ -1,8 +1,8 @@
 /*
  *
- *  * @author Segla Boladji Vinny Trinite Adjibi
- *  * AndrewID : vadjibi
- *  * Program : MSIT
+ *  * @author Solange Iyubu
+ *  * AndrewID : siyubu
+ *  * Program : ECE
  *  *
  *  * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized assistance on this work.
  *
@@ -40,11 +40,11 @@ public class QRImageGenerator {
 
     public Bitmap getQRCode(Scannable scannable) throws WriterException {
         QRBuilder builder;
-        if (scannable instanceof Assignment) {
+        if (scannable instanceof Assignment)
+        {
             // Here assignment
             Assignment assignment = (Assignment) scannable;
             builder = new AssignmentQRBuilder();
-
             builder.setId(assignment.getId());
             builder.setName(assignment.getTitle());
             builder.setType(ObjectTypeFactory.getObjectType(scannable));

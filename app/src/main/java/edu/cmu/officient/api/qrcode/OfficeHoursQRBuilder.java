@@ -1,5 +1,14 @@
 /*
  *
+ *  * @author Solange Iyubu
+ *  * AndrewID :siyubu
+ *  * Program : ECE
+ *  *
+ *  * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized assistance on this work.
+ *
+ */
+/*
+ *
  *  * @author Segla Boladji Vinny Trinite Adjibi
  *  * AndrewID : vadjibi
  *  * Program : MSIT
