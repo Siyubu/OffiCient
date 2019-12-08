@@ -1,5 +1,16 @@
 /*
  *
+ *  * @author Wuyeh Jobe
+ *  * AndrewID : jwuyeh
+ *  * Program : MSIT
+ *  *
+ *  * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized assistance on this work.
+ *
+ */
+
+
+/*
+ *
  *  * @author Segla Boladji Vinny Trinite Adjibi
  *  * AndrewID : vadjibi
  *  * Program : MSIT
@@ -36,6 +47,7 @@ import java.util.ArrayList;
 
 import edu.cmu.officient.DBCommunication.RequestData;
 import edu.cmu.officient.R;
+import edu.cmu.officient.logic.ApplicationManager;
 import edu.cmu.officient.model.Course;
 import edu.cmu.officient.model.Term;
 import edu.cmu.officient.util.DateConversion;
@@ -74,7 +86,13 @@ public class AddCourseFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(selectedTerm !=null) {
-                    new AddCourse().execute("addCourse", course_code.getText().toString(), course_title.getText().toString(), selectedTerm.getId() + "");
+                    if (course_code.getText().toString().equalsIgnoreCase("") || course_title.getText().toString().equalsIgnoreCase("")){
+                        Toast.makeText(activity, "The title or code should not be blank", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        new AddCourse().execute("addCourse", ApplicationManager.getInstance(getContext()).getLoggedInUser().getId()+"", course_code.getText().toString(), course_title.getText().toString(), selectedTerm.getId() + "");
+                    }
+
                 }
                 else{
                     Toast.makeText(activity, "Please select a term for the office hours", Toast.LENGTH_SHORT).show();
@@ -108,7 +126,7 @@ public class AddCourseFragment extends Fragment {
         @Override
         protected String doInBackground(String[] args) {
             String message;
-            String[] attributes = new String[]{"addCourse", "code", "title", "term_id"};
+            String[] attributes = new String[]{"addCourse","user_id", "code", "title", "term_id"};
             RequestData requestData = new RequestData( activity,"http://gamfruits.com/officient_api/functions.php", attributes, args);
             jsonObject = requestData.getResponse();
             System.out.println(jsonObject);
@@ -131,7 +149,7 @@ public class AddCourseFragment extends Fragment {
                     Course course = new Course(id,  course_title.getText().toString(), course_code.getText().toString(), term, null, null, null);
                     activity.getSupportFragmentManager().beginTransaction().remove(AddCourseFragment.this).commit();
                     FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.fragment_container, new CourseDetailFragment(activity, course));
+                    transaction.replace(R.id.fragment_container, new CourseAddedFragment(activity, course));
                     transaction.addToBackStack(null);
                     transaction.commit();
                 }
@@ -140,6 +158,9 @@ public class AddCourseFragment extends Fragment {
             }
             else if(result.equalsIgnoreCase("error")){
                 Toast.makeText(activity, "Unable to connect to the internet. Course not added", Toast.LENGTH_SHORT).show();
+            }
+            else if(result.equalsIgnoreCase("already_added")){
+                Toast.makeText(activity, "Already Registered", Toast.LENGTH_SHORT).show();
             }
             else if (result.equalsIgnoreCase("failed")){
                 Toast.makeText(activity, "Problem with App. Contact admin.", Toast.LENGTH_LONG).show();
@@ -186,6 +207,7 @@ public class AddCourseFragment extends Fragment {
                     JSONObject row;
                     for(int i=0;i<jsonArray.length();i++){
                         row = (JSONObject) jsonArray.get(i);
+                        System.out.println(dateConversion.stringToDate(row.getString("start_date")));
                         items.add(new Term(row.getInt("id"), row.getString("name"),
                                 dateConversion.stringToDate(row.getString("start_date")),
                                 dateConversion.stringToDate(row.getString("end_date"))));

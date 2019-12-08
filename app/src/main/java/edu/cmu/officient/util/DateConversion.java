@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateConversion {
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-dd-MM");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     public Date stringToDate(String dateString){
         //String dateString = "03/26/2012 11:49:00 AM";
         Date convertedDate = new Date();

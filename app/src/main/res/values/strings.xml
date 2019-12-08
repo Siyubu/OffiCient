@@ -75,6 +75,25 @@
     <string name="data_empty">Empty data retrieved.</string>
 
     <string name="label_name">Name</string>
-    <string name="change_pwd_notice">Choose a new password</string>
+    <string name="change_pwd_notice">Create a new password</string>
+    <string name="update">update</string>
+    <string name="done">done</string>
+    <string name="edit">edit</string>
+    <string name="click_on_edit_btn">Click on Edit button to edit</string>
+    <string name="taught_by">Taught by %s</string>
+    <string name="enroll">Enroll in</string>
+    <string name="add_assignment">Create assignment</string>
+    <string name="add_office_hours">Add office hours</string>
+    <string name="add_ta">Add Teaching Assistant</string>
+    <string name="view_statistics">View statistics</string>
+    <string name="tmpl_course_name">%s - %s</string>
+    <string name="tas">Teaching Assistants</string>
+    <string name="office_hours">Office Hours</string>
+    <string name="assignments">Assignments</string>
+    <string name="select_ta">Choose a Teaching Assistant</string>
+    <string name="pick_student">Pick a student/alumni</string>
+    <string name="oh_day_hours">%s, %s - %s</string>
+    <string name="due_on">Due on %s</string>
+    <string name="no_data">Nothing available here yet.</string>
 
 </resources>

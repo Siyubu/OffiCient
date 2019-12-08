@@ -33,6 +33,7 @@ public class Course /*implements Scannable*/ {
     private List<Instructor> instructors = new ArrayList<>();
     private List<Student> students = new ArrayList<>();
     private List<OfficeHours> officeHours = new ArrayList<>();
+    private List<Assignment> assignments = new ArrayList<>();
 
     public Course(){
 
@@ -45,6 +46,14 @@ public class Course /*implements Scannable*/ {
         this.students = students;
         officeHours = oh;
     }
+
+    public Course(int id, String title, String code, Term term, List<Assignment> assignments, List<OfficeHours> oh)
+    {
+        this(id, title, code, term);
+        this.assignments = assignments;
+        officeHours = oh;
+    }
+
 
     public Course (int id, String title, String code, Term term) {
         this(id, title, code);
@@ -161,6 +170,14 @@ public class Course /*implements Scannable*/ {
 
     public void setOfficeHours(List<OfficeHours> officeHours) {
         this.officeHours = officeHours;
+    }
+
+    public List<Assignment> getAssignments() {
+        return assignments;
+    }
+
+    public void setAssignments(List<Assignment> assignments) {
+        this.assignments = assignments;
     }
 
     @NonNull
