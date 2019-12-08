@@ -10,8 +10,8 @@
 
 package edu.cmu.officient.ui.assignments;
 
-import android.content.Context;
-import android.net.Uri;
+import android.app.DatePickerDialog;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -24,23 +24,27 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.zxing.WriterException;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import edu.cmu.officient.DBCommunication.RequestData;
 import edu.cmu.officient.R;
+import edu.cmu.officient.api.qrcode.QRImageGenerator;
+import edu.cmu.officient.model.Assignment;
 import edu.cmu.officient.model.Course;
-import edu.cmu.officient.model.Term;
 
 public class AddAssignmentFragment extends Fragment
 {
@@ -53,7 +57,6 @@ public class AddAssignmentFragment extends Fragment
     private EditText availability;
     private ProgressBar progressBar;
     private ArrayAdapter adapter;
-  //  private LocalDateTime posted_on;
     ArrayList<Course> courses;
     private AppCompatActivity activity;
     Course selectedCourse;
@@ -106,7 +109,22 @@ public class AddAssignmentFragment extends Fragment
                 selectedCourse= null;
             }
         });
-      return view;
+        deadline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendar_time(deadline);
+
+            }
+        });
+        availability.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendar_time(availability);
+
+            }
+        });
+
+        return view;
     }
 
     private class AddAssignment extends AsyncTask<String, String, String>
@@ -206,16 +224,33 @@ public class AddAssignmentFragment extends Fragment
                 //items.add("Term list empty");
                 Toast.makeText(activity, "No courses added", Toast.LENGTH_SHORT).show();
             }
-            Course sos=new Course(123,"Seminar","AB123");
-            Course pop=new Course(200,"Database","AC234");
-            Course kel=new Course(300,"French","AQ234");
-            courses.add(sos);
-            courses.add(pop);
-            courses.add(kel);
-
             adapter.notifyDataSetChanged();
 
         }
+    }
+
+    public void calendar_time(final EditText editText)
+    {
+        // calender class's instance and get current date , month and year from calender
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+        // date picker dialog
+        DatePickerDialog datePickerDialog = new DatePickerDialog(activity,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        // set day of month , month and year value in the edit text
+                        editText.setText(dayOfMonth + "/"
+                                + (monthOfYear + 1) + "/" + year);
+
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
+
     }
 
 }
