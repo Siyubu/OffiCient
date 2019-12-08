@@ -95,5 +95,6 @@
     <string name="oh_day_hours">%s, %s - %s</string>
     <string name="due_on">Due on %s</string>
     <string name="no_data">Nothing available here yet.</string>
+    <string name="loading">Loading</string>
 
 </resources>

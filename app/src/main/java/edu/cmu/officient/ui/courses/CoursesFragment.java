@@ -50,6 +50,8 @@ import edu.cmu.officient.logic.ApplicationManager;
 import edu.cmu.officient.model.Course;
 import edu.cmu.officient.model.Term;
 import edu.cmu.officient.model.User;
+import edu.cmu.officient.networktaks.RequestTaskFactory;
+import edu.cmu.officient.networktaks.StandardRequestTask;
 import edu.cmu.officient.ui.customviews.AdvancedRecyclerView;
 import edu.cmu.officient.util.ModelObjectBuilder;
 
@@ -78,10 +80,19 @@ public class CoursesFragment extends Fragment {
         recyclerView = root.findViewById(R.id.courses_list);
 
         if (courses.size() == 0 ) {
-            if (user.isFaculty())
+            StandardRequestTask task;
+            String [] args;
+            /*if (user.isFaculty())
                 new CourseList().execute("coursesList", "" + user.getId()); // can add all the
             else
-                new CourseList().execute("coursesList");
+                new CourseList().execute("coursesList");*/
+            if (user.isFaculty())
+                args = new String[] {"coursesList", "" + user.getId()};
+            else
+                args = new String[] {"coursesList"};
+            task = RequestTaskFactory.getTask(progressBar, root, activity, recyclerView, args);
+            if (task != null)
+                task.execute(args);
         }
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager llm = new LinearLayoutManager(activity);
