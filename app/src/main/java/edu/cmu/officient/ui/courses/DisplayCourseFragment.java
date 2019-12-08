@@ -94,7 +94,7 @@ public class DisplayCourseFragment extends Fragment {
 
 
 
-            
+
             else
                 attributes = new String[]{"coursesList"};
             RequestData requestData = new RequestData( activity,"http://gamfruits.com/officient_api/functions.php", attributes, args);
