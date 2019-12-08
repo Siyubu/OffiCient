@@ -9,35 +9,25 @@
  */
 package edu.cmu.officient.ui.courses;
 
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import edu.cmu.officient.DBCommunication.RequestData;
 import edu.cmu.officient.R;
 import edu.cmu.officient.logic.ApplicationManager;
 import edu.cmu.officient.model.Course;
 import edu.cmu.officient.model.User;
-import edu.cmu.officient.networktaks.RequestTaskFactory;
-import edu.cmu.officient.networktaks.RoleQueryRequestTask;
-import edu.cmu.officient.networktaks.StandardRequestTask;
+import edu.cmu.officient.networktasks.RequestTaskFactory;
+import edu.cmu.officient.networktasks.StandardRequestTask;
 import edu.cmu.officient.ui.customviews.AdvancedRecyclerView;
 import edu.cmu.officient.ui.listener.AddAssignmentListener;
 import edu.cmu.officient.ui.listener.AddOfficeHoursListener;
@@ -75,7 +65,6 @@ public class CourseDetailFragment extends Fragment {
         if (user.isFaculty()) {
             enroll.setVisibility(View.GONE);
             addTA.setVisibility(View.VISIBLE);
-
         }
         else {
             // Should depend on what's the user status with the course
@@ -100,7 +89,15 @@ public class CourseDetailFragment extends Fragment {
         hwList.setAdapter(new AssignmentAdapter(activity, course.getAssignments()));
 
         // Buttons
-        addTaBis.setOnClickListener(new AddTAListener());
+        addTA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                StandardRequestTask task = RequestTaskFactory.getTask(null, null, activity, null, "allStudents", "" + course.getId());
+                if (task != null)
+                    task.execute("allStudents", "" + course.getId());
+            }
+        });
+        addTaBis.setOnClickListener(new AddTAListener(activity, course));
         addHwBis.setOnClickListener(new AddAssignmentListener(activity, course));
         addOHBis.setOnClickListener(new AddOfficeHoursListener());
         enroll.setOnClickListener(new View.OnClickListener() {

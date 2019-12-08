@@ -8,16 +8,14 @@
  *
  */
 
-package edu.cmu.officient.networktaks;
+package edu.cmu.officient.networktasks;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
@@ -40,7 +38,8 @@ public abstract class StandardRequestTask extends AsyncTask<String, String, Stri
     protected void onPreExecute() {
         super.onPreExecute();
         // Hide the view
-        progress.setVisibility(View.VISIBLE);
+        if (progress != null)
+            progress.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -70,7 +69,8 @@ public abstract class StandardRequestTask extends AsyncTask<String, String, Stri
         else { // This is not a common case
             processData(s);
         }
-        progress.setVisibility(View.GONE);
+        if (progress != null)
+            progress.setVisibility(View.GONE);
     }
 
     abstract protected String getOutput();

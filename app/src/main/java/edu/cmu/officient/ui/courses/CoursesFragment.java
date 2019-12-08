@@ -39,8 +39,8 @@ import java.util.List;
 import edu.cmu.officient.R;
 import edu.cmu.officient.logic.ApplicationManager;
 import edu.cmu.officient.model.*;
-import edu.cmu.officient.networktaks.RequestTaskFactory;
-import edu.cmu.officient.networktaks.StandardRequestTask;
+import edu.cmu.officient.networktasks.RequestTaskFactory;
+import edu.cmu.officient.networktasks.StandardRequestTask;
 
 public class CoursesFragment extends Fragment {
 

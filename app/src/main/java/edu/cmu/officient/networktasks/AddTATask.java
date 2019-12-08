@@ -8,40 +8,45 @@
  *
  */
 
-package edu.cmu.officient.networktaks;
+package edu.cmu.officient.networktasks;
 
-import android.content.Intent;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
 
-import edu.cmu.officient.ui.users.SuccessfulRegistration;
+public class AddTATask extends StandardRequestTask {
 
-public class RegisterUserTask extends StandardRequestTask {
-    public RegisterUserTask(AppCompatActivity activity, View root, View progressMarker) {
+    public AddTATask(AppCompatActivity activity, View root, View progressMarker) {
         super(activity, root, progressMarker);
     }
 
     @Override
     protected String getOutput() {
+        System.out.println(getData());
         try {
             return getData().getString("message");
         }
         catch (JSONException e) {
-            return  "error";
+            e.printStackTrace();
+            return "error";
         }
     }
 
     @Override
     protected void processData(String s) {
-        Intent intent = new Intent(getBaseActivity(), SuccessfulRegistration.class);
-        getBaseActivity().startActivity(intent);
+        if (s.equalsIgnoreCase("success")) {
+            Toast.makeText(getRoot().getContext(), "Added successfully", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(getRoot().getContext(), "An error occured while processing your request.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
     protected String[] getRequestParameters() {
-        return new String[]{"signup", "andrewId", "password"};
+        return new String[]{"enrollTA", "course_id", "andrewId"};
     }
 }
