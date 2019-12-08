@@ -16,22 +16,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import edu.cmu.officient.R;
+import edu.cmu.officient.model.Course;
 import edu.cmu.officient.ui.assignments.AddAssignmentFragment;
 
 
 public class AddAssignmentListener implements View.OnClickListener
 {
     private AppCompatActivity activity;
+    private Course course;
 
-    public AddAssignmentListener(AppCompatActivity activity)
+    public AddAssignmentListener(AppCompatActivity activity,Course course)
     {
         this.activity=activity;
+        this.course=course;
     }
 
     @Override
     public void onClick(View v) {
         FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, new AddAssignmentFragment(activity)).commit();
+        transaction.replace(R.id.fragment_container, new AddAssignmentFragment(activity,course)).commit();
         transaction.addToBackStack(null);
 
     }

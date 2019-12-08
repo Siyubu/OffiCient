@@ -63,8 +63,7 @@ public class CourseDetailFragment extends Fragment {
             addTA.setVisibility(View.VISIBLE);
         }
         else {
-            // Should depend on what's the user status with the course
-            // Make a query to get the user role
+
             final String [] parameters = new String[] {""+ user.getId(), "" + course.getId()};
         }
 
@@ -85,7 +84,7 @@ public class CourseDetailFragment extends Fragment {
         // Buttons
         Button addTaBis = root.findViewById(R.id.add_ta_btn), addHwBis = root.findViewById(R.id.add_assignment_btn), addOHBis = root.findViewById(R.id.add_office_hours_btn);
         addTaBis.setOnClickListener(new AddTAListener());
-        addHwBis.setOnClickListener(new AddAssignmentListener(activity));
+        addHwBis.setOnClickListener(new AddAssignmentListener(activity,course));
         addOHBis.setOnClickListener(new AddOfficeHoursListener());
         return root;
     }
