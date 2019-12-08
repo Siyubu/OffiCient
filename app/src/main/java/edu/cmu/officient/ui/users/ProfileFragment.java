@@ -46,12 +46,13 @@ import edu.cmu.officient.DBCommunication.RequestData;
 import edu.cmu.officient.R;
 import edu.cmu.officient.logic.ApplicationManager;
 import edu.cmu.officient.model.User;
+import edu.cmu.officient.networktaks.RequestTaskFactory;
+import edu.cmu.officient.networktaks.StandardRequestTask;
 
 public class ProfileFragment extends Fragment {
     private AppCompatActivity activity;
     private EditText name, altEmail, phoneNumber, password;
     private Button update, done;
-    User user;
     public ProfileFragment(){
 
     }
@@ -67,8 +68,8 @@ public class ProfileFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_profile, container, false);
-        user = ApplicationManager.getInstance(activity).getLoggedInUser();
+        final View root = inflater.inflate(R.layout.fragment_profile, container, false);
+        User user = ApplicationManager.getInstance(activity).getLoggedInUser();
         final EditText andrewId = root.findViewById(R.id.field_andrewId);
         name = root.findViewById(R.id.field_name);
         altEmail = root.findViewById(R.id.field_alt_email);
@@ -92,7 +93,9 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 update.setEnabled(true);
-                new EditProfile().execute("update_profile", andrewId.getText().toString(), name.getText().toString(), altEmail.getText().toString(), phoneNumber.getText().toString(),password.getText().toString());
+                StandardRequestTask task = RequestTaskFactory.getTask(done, root, activity, null, "update_profile", andrewId.getText().toString(), name.getText().toString(), altEmail.getText().toString(), phoneNumber.getText().toString(),password.getText().toString());
+                if (task != null)
+                    task.execute("update_profile", andrewId.getText().toString(), name.getText().toString(), altEmail.getText().toString(), phoneNumber.getText().toString(),password.getText().toString());
                 disableFields();
             }
         });
@@ -118,54 +121,5 @@ public class ProfileFragment extends Fragment {
         password.setEnabled(true);
         done.setVisibility(View.INVISIBLE);
         update.setEnabled(true);
-    }
-
-    private class EditProfile extends AsyncTask<String, String, String> {
-        private JSONObject jsonObject;
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            update.setText("updating...");
-            done.setVisibility(View.GONE);
-        }
-
-        @Override
-        protected String doInBackground(String[] args) {
-            String message;
-            String[] attributes = new String[]{"update_profile", "andrewId", "name", "altEmail", "phoneNumber","password"};
-            RequestData requestData = new RequestData( activity,"http://gamfruits.com/officient_api/functions.php", attributes, args);
-            jsonObject = requestData.getResponse();
-            System.out.println(jsonObject);
-            if(jsonObject!=null){
-                try {
-                    message = jsonObject.getString("message");
-                } catch (JSONException e) {
-                    message = "error";
-                    e.printStackTrace();
-                }
-            }
-            else {
-                message = "error";
-            }
-            return message;
-        }
-
-        protected void onPostExecute(String result){
-            update.setText("Edit");
-            update.setEnabled(true);
-            if (result.equalsIgnoreCase("success")){
-                ApplicationManager.getInstance()
-                        .logUserIn(activity,name.getText().toString(), altEmail.getText().toString(),phoneNumber.getText().toString());
-                Toast.makeText(activity, "Profile Updated", Toast.LENGTH_SHORT).show();
-            }
-            else if(result.equalsIgnoreCase("error")){
-                Toast.makeText(activity, "Unable to connect to the internet. The term list won't be updated", Toast.LENGTH_SHORT).show();
-            }
-            else if (result.equalsIgnoreCase("failed")){
-                //items.add("Term list empty");
-                Toast.makeText(activity, "There was a problem", Toast.LENGTH_SHORT).show();
-            }
-
-        }
     }
 }
