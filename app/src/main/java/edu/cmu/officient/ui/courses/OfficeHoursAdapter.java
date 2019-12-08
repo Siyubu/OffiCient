@@ -8,12 +8,12 @@
  *
  */
 
+
 package edu.cmu.officient.ui.courses;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,35 +21,34 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.card.MaterialCardView;
-
+import java.text.DateFormatSymbols;
 import java.util.List;
+import java.util.Locale;
 
 import edu.cmu.officient.R;
 import edu.cmu.officient.model.Course;
-import edu.cmu.officient.ui.tasks.TaskAdapter;
+import edu.cmu.officient.model.OfficeHours;
 
-public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder> {
-    private List<Course> courses;
+public class OfficeHoursAdapter extends RecyclerView.Adapter<OfficeHoursAdapter.ViewHolder> {
+    private List<OfficeHours> officeHours;
     private AppCompatActivity parentActivity;
 
-    public CourseAdapter(AppCompatActivity activity, List<Course> courseList){
+    public OfficeHoursAdapter(AppCompatActivity activity, List<OfficeHours> ohList){
         parentActivity = activity;
-        courses = courseList;
+        officeHours = ohList;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final Course course = courses.get(position);
-        holder.title.setText(course.getTitle());
-        holder.term.setText(course.getTerm().toString());
-        holder.officeHoursCount.setText(parentActivity.getString(R.string.office_hours_count, course.getOfficeHours().size()));
+        final OfficeHours oh = officeHours.get(position);
+        holder.title.setText(oh.getHolder().toString());
+        holder.day.setText(parentActivity.getString(R.string.oh_day_hours,
+                DateFormatSymbols.getInstance(Locale.getDefault()).getWeekdays()[oh.getDay()], oh.getStartAt(), oh.getEndAt()));
+        holder.venue.setText(oh.getVenue());
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Start the detail fragment
-                parentActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CourseDetailFragment(parentActivity, course))
-                        .addToBackStack(null).commit();
+
             }
         });
     }
@@ -58,25 +57,25 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.layout_course, parent, false);
-        return new CourseAdapter.ViewHolder(view);
+        View view = inflater.inflate(R.layout.layout_office_hours, parent, false);
+        return new OfficeHoursAdapter.ViewHolder(view);
     }
 
     @Override
     public int getItemCount() {
-        return courses.size();
+        return officeHours.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
-        TextView title, term, officeHoursCount;
+        TextView title, day, venue;
 
         ViewHolder(View view) {
             super(view);
-            cardView = view.findViewById(R.id.course_block);
-            title = view.findViewById(R.id.course_title);
-            term = view.findViewById(R.id.term);
-            officeHoursCount = view.findViewById(R.id.office_hours_count);
+            cardView = view.findViewById(R.id.oh_block);
+            title = view.findViewById(R.id.title);
+            day = view.findViewById(R.id.timeframe);
+            venue = view.findViewById(R.id.venue);
         }
     }
 

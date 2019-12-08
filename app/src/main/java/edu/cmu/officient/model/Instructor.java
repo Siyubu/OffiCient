@@ -10,5 +10,17 @@
 
 package edu.cmu.officient.model;
 
-public abstract class Instructor extends User {
+public class Instructor extends User {
+    public Instructor(){
+
+    }
+
+    public Instructor(int id, String andrewId, String fullname, String altEmail, String phoneNumber, boolean isFaculty) {
+        this(id, andrewId, fullname, altEmail, phoneNumber);
+        setFaculty(isFaculty);
+    }
+
+    public Instructor(int id, String andrewId, String fullname, String altEmail, String phoneNumber) {
+        super(id, andrewId, fullname, altEmail, phoneNumber);
+    }
 }

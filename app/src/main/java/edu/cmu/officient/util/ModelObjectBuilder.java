@@ -44,11 +44,27 @@ public class ModelObjectBuilder {
                     calendar.setTime(date);
                     int day = calendar.get(Calendar.DAY_OF_WEEK);
 
+                    Instructor user = new Instructor(data.getInt("user_id"), data.getString("andrewId"), data.getString("name"), data.getString("alternative_email"),
+                            data.getString("phoneNumber"));
+
                     officeHours.add(new OfficeHours(data.getInt("id"), day, data.getString("venue"), data.getString("description"),
-                            converter.stringToTime((data.getString("scheduled_start_time"))), converter.stringToTime(data.getString("scheduled_end_time")), null, null));
+                            converter.stringToTime((data.getString("scheduled_start_time"))), converter.stringToTime(data.getString("scheduled_end_time")), null, user));
+
                 }
             }
-            return new Course(id, title, code, term, new ArrayList<Instructor>(), new ArrayList<Student>(), officeHours);
+
+            List<Assignment> assignments = new ArrayList<>();
+            // Assignments
+            if (object.has("assignments")) {
+                JSONArray array = object.getJSONArray("assignments");
+                for (int i=0; i<array.length(); ++i) {
+                    JSONObject data = (JSONObject) array.get(i);
+                    assignments.add(new Assignment(data.getInt("id"), (int) data.getDouble("expected_time"), converter.stringToDate(data.getString("published_on")),
+                            converter.stringToDate(data.getString("deadline")), converter.stringToDate(data.getString("availability")), data.getString("title"), null));
+                }
+
+            }
+            return new Course(id, title, code, term, assignments, officeHours);
 
         }
         catch (JSONException e) {
