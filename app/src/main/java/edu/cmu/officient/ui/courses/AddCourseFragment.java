@@ -149,7 +149,7 @@ public class AddCourseFragment extends Fragment {
                     Course course = new Course(id,  course_title.getText().toString(), course_code.getText().toString(), term, null, null, null);
                     activity.getSupportFragmentManager().beginTransaction().remove(AddCourseFragment.this).commit();
                     FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.fragment_container, new CourseDetailFragment(activity, course));
+                    transaction.replace(R.id.fragment_container, new CourseAddedFragment(activity, course));
                     transaction.addToBackStack(null);
                     transaction.commit();
                 }

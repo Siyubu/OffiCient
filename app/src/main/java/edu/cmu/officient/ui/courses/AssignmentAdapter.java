@@ -8,12 +8,12 @@
  *
  */
 
+
 package edu.cmu.officient.ui.courses;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,35 +21,32 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.card.MaterialCardView;
-
 import java.util.List;
 
 import edu.cmu.officient.R;
+import edu.cmu.officient.model.Assignment;
 import edu.cmu.officient.model.Course;
-import edu.cmu.officient.ui.tasks.TaskAdapter;
 
-public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder> {
-    private List<Course> courses;
+public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.ViewHolder> {
+    private List<Assignment> assignments;
     private AppCompatActivity parentActivity;
 
-    public CourseAdapter(AppCompatActivity activity, List<Course> courseList){
+    public AssignmentAdapter(AppCompatActivity activity, List<Assignment> hwList){
         parentActivity = activity;
-        courses = courseList;
+        assignments = hwList;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final Course course = courses.get(position);
-        holder.title.setText(course.getTitle());
-        holder.term.setText(course.getTerm().toString());
-        holder.officeHoursCount.setText(parentActivity.getString(R.string.office_hours_count, course.getOfficeHours().size()));
+        final Assignment assignment = assignments.get(position);
+        holder.title.setText(assignment.getTitle());
+        //holder.course.setText(assignment.getTerm().toString());
+        holder.deadline.setText(parentActivity.getString(R.string.due_on, assignment.getDeadline()));
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Start the detail fragment
-                parentActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CourseDetailFragment(parentActivity, course))
-                        .addToBackStack(null).commit();
+
             }
         });
     }
@@ -58,25 +55,25 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.layout_course, parent, false);
-        return new CourseAdapter.ViewHolder(view);
+        View view = inflater.inflate(R.layout.layout_assignment, parent, false);
+        return new AssignmentAdapter.ViewHolder(view);
     }
 
     @Override
     public int getItemCount() {
-        return courses.size();
+        return assignments.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
-        TextView title, term, officeHoursCount;
+        TextView title, course, deadline;
 
         ViewHolder(View view) {
             super(view);
-            cardView = view.findViewById(R.id.course_block);
-            title = view.findViewById(R.id.course_title);
-            term = view.findViewById(R.id.term);
-            officeHoursCount = view.findViewById(R.id.office_hours_count);
+            cardView = view.findViewById(R.id.assignment_block);
+            title = view.findViewById(R.id.title);
+            course = view.findViewById(R.id.course);
+            deadline = view.findViewById(R.id.due_date);
         }
     }
 

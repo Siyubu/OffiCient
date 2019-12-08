@@ -58,7 +58,7 @@ public class CoursesFragment extends Fragment {
     private ProgressBar progressBar;
     private AppCompatActivity activity;
     private List<Course> courses = new ArrayList<>();
-    private AdvancedRecyclerView recyclerView;
+    private RecyclerView recyclerView;
 
 
     public CoursesFragment(){
@@ -77,11 +77,12 @@ public class CoursesFragment extends Fragment {
         progressBar = root.findViewById(R.id.progress_bar);
         recyclerView = root.findViewById(R.id.courses_list);
 
-        if (user.isFaculty())
-            new CourseList().execute("coursesList", "" + user.getId()); // can add all the
-        else
-            new CourseList().execute("coursesList");
-        recyclerView.setEmptyView(root.findViewById(R.id.no_tasks));
+        if (courses.size() == 0 ) {
+            if (user.isFaculty())
+                new CourseList().execute("coursesList", "" + user.getId()); // can add all the
+            else
+                new CourseList().execute("coursesList");
+        }
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager llm = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(llm);
@@ -97,7 +98,7 @@ public class CoursesFragment extends Fragment {
         }
 
         @Override
-        protected String doInBackground(String[] args) {
+        protected String doInBackground(String... args) {
             String message;
             String[] attributes;
             if (args.length > 1)
@@ -123,7 +124,6 @@ public class CoursesFragment extends Fragment {
 
         protected void onPostExecute(String result){
             progressBar.setVisibility(View.GONE);
-            System.out.println(result);
             if (result.equalsIgnoreCase("success")){
                 try {
                     JSONArray jsonArray = jsonObject.getJSONArray("data");

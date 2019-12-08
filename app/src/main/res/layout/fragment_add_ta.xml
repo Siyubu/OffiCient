@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /*
+  ~  * @author Segla Boladji Vinny Trinite Adjibi
+  ~  * AndrewID : vadjibi
+  ~  * Program : MSIT
+  ~  *
+  ~  * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized assistance on this work.
+  ~  */
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pick_student"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:layout_marginBottom="10dp" />
+
+    <AutoCompleteTextView
+        android:id="@+id/search"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/select_ta"
+        android:inputType="text"
+        android:background="@drawable/field_background"
+        android:padding="10dp"
+        android:imeOptions="actionSend"/>
+</LinearLayout>

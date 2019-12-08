@@ -7,43 +7,37 @@
  *  * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized assistance on this work.
  *
  */
-
-/*
- *
- *  * @author Segla Boladji Vinny Trinite Adjibi
- *  * AndrewID : vadjibi
- *  * Program : MSIT
- *  *
- *  * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized assistance on this work.
- *
- */
-
 package edu.cmu.officient.ui.courses;
 
-import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.zxing.WriterException;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import edu.cmu.officient.R;
-import edu.cmu.officient.api.qrcode.QRImageGenerator;
+import edu.cmu.officient.logic.ApplicationManager;
 import edu.cmu.officient.model.Course;
+import edu.cmu.officient.model.User;
+import edu.cmu.officient.ui.customviews.AdvancedRecyclerView;
+import edu.cmu.officient.ui.listener.AddAssignmentListener;
+import edu.cmu.officient.ui.listener.AddOfficeHoursListener;
+import edu.cmu.officient.ui.listener.AddTAListener;
 
 public class CourseDetailFragment extends Fragment {
     private Course course;
     private AppCompatActivity activity;
+    ProgressBar progressBar;
 
     public CourseDetailFragment(AppCompatActivity activity, Course course) {
         this.activity = activity;
@@ -54,40 +48,63 @@ public class CourseDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         activity.getSupportActionBar().setTitle(R.string.course_details_label);
-        // Inflate the layout for this fragment
-        TextView title, code, term;
-        ImageView qrCode;
-        Button modify, finish;
 
-        View view = inflater.inflate(R.layout.fragment_course_detail, container, false);
-        title = view.findViewById(R.id.course_title);
-        code = view.findViewById(R.id.course_code);
-        term = view.findViewById(R.id.course_term);
-        modify = view.findViewById(R.id.modify);
-        finish = view.findViewById(R.id.finish);
+        View root = inflater.inflate(R.layout.fragment_course_detail, container, false);
+        progressBar = root.findViewById(R.id.progress_bar);
+        TextView courseName = root.findViewById(R.id.course_name), term = root.findViewById(R.id.term);
+        courseName.setText(getString(R.string.tmpl_course_name, course.getCode(), course.getTitle()));
+        term.setText(course.getTerm().toString());
+        User user = ApplicationManager.getInstance(activity).getLoggedInUser();
+        Button addTA = root.findViewById(R.id.add_ta), addAssignment = root.findViewById(R.id.add_assignment),
+                enroll = root.findViewById(R.id.enroll_in), viewStatistics = root.findViewById(R.id.view_statistics);
 
-        modify.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Here we should start the fragment to set details of a course
-            }
-        });
+        if (user.isFaculty()) {
+            enroll.setVisibility(View.GONE);
+            addTA.setVisibility(View.VISIBLE);
+        }
+        else {
 
-        finish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activity.getSupportFragmentManager().beginTransaction().remove(CourseDetailFragment.this).commit();
-                FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragment_container, new CoursesFragment(activity));
-                transaction.addToBackStack(null);
-                transaction.commit();
-            }
-        });
+            final String [] parameters = new String[] {""+ user.getId(), "" + course.getId()};
+        }
 
-        title.setText(getString(R.string.object_title, course.getTitle()));
-        code.setText(getString(R.string.object_code, course.getCode()));
-        term.setText(getString(R.string.term_title, course.getTerm()));
+        // Set the recyclcer views
+        AdvancedRecyclerView tasList = root.findViewById(R.id.tas_recycler), ohrsList = root.findViewById(R.id.oh_recycler), hwList = root.findViewById(R.id.assignment_recycler);
+        RecyclerView.LayoutManager llm1 = new LinearLayoutManager(activity), llm2 = new LinearLayoutManager(activity), llm3 = new LinearLayoutManager(activity);
+        tasList.setLayoutManager(llm1);
+        ohrsList.setLayoutManager(llm2);
+        hwList.setLayoutManager(llm3);
+        tasList.setEmptyView(root.findViewById(R.id.tas_not_found));
+        ohrsList.setEmptyView(root.findViewById(R.id.oh_not_found));
+        hwList.setEmptyView(root.findViewById(R.id.hw_not_found));
 
-        return view;
+        //tasList.setAdapter(n);
+        ohrsList.setAdapter(new OfficeHoursAdapter(activity, course.getOfficeHours()));
+        hwList.setAdapter(new AssignmentAdapter(activity, course.getAssignments()));
+
+        // Buttons
+        Button addTaBis = root.findViewById(R.id.add_ta_btn), addHwBis = root.findViewById(R.id.add_assignment_btn), addOHBis = root.findViewById(R.id.add_office_hours_btn);
+        addTaBis.setOnClickListener(new AddTAListener());
+        addHwBis.setOnClickListener(new AddAssignmentListener(activity,course));
+        addOHBis.setOnClickListener(new AddOfficeHoursListener());
+        return root;
+    }
+
+    private class RoleQuery extends AsyncTask<String, String, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            progressBar.setVisibility(View.GONE);
+        }
     }
 }

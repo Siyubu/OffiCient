@@ -23,12 +23,16 @@ public class User {
 
     }
 
-    public User(int id, String andrewId, String fullname, String altEmail, String phoneNumber, boolean isFaculty) {
+    public User(int id, String andrewId, String fullname, String altEmail, String phoneNumber) {
         this.id = id;
         this.andrewId = andrewId;
         this.fullname = fullname;
         this.altEmail = altEmail;
         this.phoneNumber = phoneNumber;
+    }
+
+    public User(int id, String andrewId, String fullname, String altEmail, String phoneNumber, boolean isFaculty) {
+        this(id, andrewId, fullname, altEmail, phoneNumber);
         this.isFaculty = isFaculty;
     }
 
@@ -95,6 +99,8 @@ public class User {
     @NonNull
     @Override
     public String toString() {
+        if (fullname == null || fullname.equals(""))
+            return andrewId;
         return fullname;
     }
 }
