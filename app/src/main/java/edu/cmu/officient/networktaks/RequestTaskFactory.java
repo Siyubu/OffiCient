@@ -22,6 +22,12 @@ public class RequestTaskFactory {
                 return new RoleQueryRequestTask(activity, root, progress);
             case "coursesList":
                 return new CoursesListQueryTask(activity, root, progress, args.length, recycler);
+            case "login":
+                return new LogUserInTask(activity, root, progress);
+            case "signup":
+                return new RegisterUserTask(activity, root, progress);
+            case "update_profile":
+                return new UpdateProfileTask(activity, root, progress, args);
         }
         return null;
     }

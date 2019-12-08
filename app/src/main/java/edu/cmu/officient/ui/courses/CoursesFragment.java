@@ -20,40 +20,27 @@
 
 package edu.cmu.officient.ui.courses;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import edu.cmu.officient.DBCommunication.RequestData;
 import edu.cmu.officient.R;
 import edu.cmu.officient.logic.ApplicationManager;
-import edu.cmu.officient.model.Course;
-import edu.cmu.officient.model.Term;
-import edu.cmu.officient.model.User;
+import edu.cmu.officient.model.*;
 import edu.cmu.officient.networktaks.RequestTaskFactory;
 import edu.cmu.officient.networktaks.StandardRequestTask;
-import edu.cmu.officient.ui.customviews.AdvancedRecyclerView;
-import edu.cmu.officient.util.ModelObjectBuilder;
 
 public class CoursesFragment extends Fragment {
 
@@ -82,10 +69,6 @@ public class CoursesFragment extends Fragment {
         if (courses.size() == 0 ) {
             StandardRequestTask task;
             String [] args;
-            /*if (user.isFaculty())
-                new CourseList().execute("coursesList", "" + user.getId()); // can add all the
-            else
-                new CourseList().execute("coursesList");*/
             if (user.isFaculty())
                 args = new String[] {"coursesList", "" + user.getId()};
             else
@@ -100,62 +83,4 @@ public class CoursesFragment extends Fragment {
         return root;
     }
 
-    private class CourseList extends AsyncTask<String, String, String> {
-        private JSONObject jsonObject;
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            progressBar.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected String doInBackground(String... args) {
-            String message;
-            String[] attributes;
-            if (args.length > 1)
-                attributes = new String[]{"coursesList", "user_id"};
-            else
-                attributes = new String[]{"coursesList"};
-            RequestData requestData = new RequestData( activity,"http://gamfruits.com/officient_api/functions.php", attributes, args);
-            jsonObject = requestData.getResponse();
-            System.out.println(jsonObject);
-            if(jsonObject!=null){
-                try {
-                    message = jsonObject.getString("message");
-                } catch (JSONException e) {
-                    message = "error";
-                    e.printStackTrace();
-                }
-            }
-            else {
-                message = "error";
-            }
-            return message;
-        }
-
-        protected void onPostExecute(String result){
-            progressBar.setVisibility(View.GONE);
-            if (result.equalsIgnoreCase("success")){
-                try {
-                    JSONArray jsonArray = jsonObject.getJSONArray("data");
-                    JSONObject row;
-                    for(int i=0;i<jsonArray.length();i++){
-                        row = (JSONObject) jsonArray.get(i);
-                        courses.add(ModelObjectBuilder.buildCourse(row));
-                    }
-                    // Now we can set the adapter here
-                    CourseAdapter adapter = new CourseAdapter(activity, courses);
-                    recyclerView.setAdapter(adapter);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-            else if(result.equalsIgnoreCase("error")){
-                Toast.makeText(activity, R.string.network_unavailable, Toast.LENGTH_SHORT).show();
-            }
-            else if (result.equalsIgnoreCase("no_data")){
-                Toast.makeText(activity, R.string.data_empty, Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 }
