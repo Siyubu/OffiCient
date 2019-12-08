@@ -101,7 +101,7 @@ public class CourseDetailFragment extends Fragment {
 
         // Buttons
         addTaBis.setOnClickListener(new AddTAListener());
-        addHwBis.setOnClickListener(new AddAssignmentListener(activity));
+        addHwBis.setOnClickListener(new AddAssignmentListener(activity, course));
         addOHBis.setOnClickListener(new AddOfficeHoursListener());
         enroll.setOnClickListener(new View.OnClickListener() {
             @Override
