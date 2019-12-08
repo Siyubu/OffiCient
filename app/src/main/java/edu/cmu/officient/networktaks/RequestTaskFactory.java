@@ -28,6 +28,8 @@ public class RequestTaskFactory {
                 return new RegisterUserTask(activity, root, progress);
             case "update_profile":
                 return new UpdateProfileTask(activity, root, progress, args);
+            case "enrollStudent":
+                return new EnrollUserTask(activity, root, progress);
         }
         return null;
     }

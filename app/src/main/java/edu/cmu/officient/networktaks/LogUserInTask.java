@@ -40,18 +40,31 @@ public class LogUserInTask extends StandardRequestTask {
 
     @Override
     protected void processData(String s) {
-        Toast.makeText(getBaseActivity(), "Login Successful", Toast.LENGTH_SHORT).show();
-        // Log in to the app (i.e store data to local storage)
-        try {
-            ApplicationManager.getInstance()
-                    .logUserIn(getBaseActivity(), getData().getJSONObject("data"), getData().getBoolean("isFaculty"));
+        if (s.equalsIgnoreCase("success")) {
+
+            Toast.makeText(getBaseActivity(), "Login Successful", Toast.LENGTH_SHORT).show();
+            // Log in to the app (i.e store data to local storage)
+            try {
+                ApplicationManager.getInstance()
+                        .logUserIn(getBaseActivity(), getData().getJSONObject("data"), getData().getBoolean("isFaculty"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            Intent intent = new Intent(getBaseActivity(), MainActivity.class);
+            getBaseActivity().startActivity(intent);
+            getBaseActivity().finish();
         }
-        catch (JSONException e) {
-            e.printStackTrace();
+        else if (s.equalsIgnoreCase("no_account")){
+            Toast.makeText(getBaseActivity(), "You have not registered", Toast.LENGTH_SHORT).show();
         }
-        Intent intent = new Intent(getBaseActivity(), MainActivity.class);
-        getBaseActivity().startActivity(intent);
-        getBaseActivity().finish();
+        else if (s.equalsIgnoreCase("wrong_password")){
+            try {
+                System.out.println(getData().getString("data"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            Toast.makeText(getBaseActivity(), "Wrong password", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
