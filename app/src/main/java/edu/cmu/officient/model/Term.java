@@ -76,6 +76,7 @@ public class Term {
 
     public String toString(){
         Calendar cal = Calendar.getInstance();
+        System.out.println(endDate);
         cal.setTime(endDate);
         return name + " " + cal.get(Calendar.YEAR);
     }

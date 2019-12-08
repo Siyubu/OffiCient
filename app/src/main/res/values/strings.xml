@@ -75,7 +75,11 @@
     <string name="data_empty">Empty data retrieved.</string>
 
     <string name="label_name">Name</string>
-    <string name="change_pwd_notice">Choose a new password</string>
+    <string name="change_pwd_notice">Create a new password</string>
+    <string name="update">update</string>
+    <string name="done">done</string>
+    <string name="edit">edit</string>
+    <string name="click_on_edit_btn">Click on Edit button to edit</string>
     <string name="taught_by">Taught by %s</string>
     <string name="enroll">Enroll in</string>
     <string name="add_assignment">Create assignment</string>

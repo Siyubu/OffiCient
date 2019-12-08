@@ -8,6 +8,16 @@
  *
  */
 
+/*
+ *
+ *  * @author Wuyeh Jobe
+ *  * AndrewID : jwuyeh
+ *  * Program : MSIT
+ *  *
+ *  * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized assistance on this work.
+ *
+ */
+
 package edu.cmu.officient.logic;
 
 import android.content.Context;
@@ -106,6 +116,16 @@ public class ApplicationManager {
         catch (JSONException e) {
             e.printStackTrace();
         }
+        editor.apply();
+    }
+
+    public void logUserIn(Context context, String name, String alt_email, String phoneNumber){
+        SharedPreferences preferences = context.getSharedPreferences(context.getString(R.string.prefs_file_name), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        // Start storing all the data
+        editor.putString("user.name", name)
+                .putString("user.alt_email", alt_email)
+                .putString("user.phone_number", phoneNumber);
         editor.apply();
     }
 
