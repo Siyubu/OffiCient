@@ -43,7 +43,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         final Course course = courses.get(position);
         holder.title.setText(course.getTitle());
         holder.term.setText(course.getTerm().toString());
-        holder.instructorsCount.setText(parentActivity.getString(R.string.instructors_count, course.getInstructors().size()));
+        holder.officeHoursCount.setText(parentActivity.getString(R.string.office_hours_count, course.getOfficeHours().size()));
     }
 
     @NonNull
@@ -61,14 +61,14 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
 
     class ViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
-        TextView title, term, instructorsCount;
+        TextView title, term, officeHoursCount;
 
         ViewHolder(View view) {
             super(view);
             cardView = view.findViewById(R.id.course_block);
             title = view.findViewById(R.id.course_title);
             term = view.findViewById(R.id.term);
-            instructorsCount = view.findViewById(R.id.instructors_count);
+            officeHoursCount = view.findViewById(R.id.office_hours_count);
         }
     }
 

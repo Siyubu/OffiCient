@@ -61,7 +61,7 @@ public class QRImageGenerator {
             builder = new CourseQRBuilder();
 
             builder.setId(course.getId());
-            builder.setOwnerId(ApplicationManager.getInstance().getLoggedInUser(context).getId()); // Assuming it is generated only by instructors
+            builder.setOwnerId(ApplicationManager.getInstance(context).getLoggedInUser().getId()); // Assuming it is generated only by instructors
             builder.setName(course.getTitle());
 
             return builder.build().encodeAsBitmap();
@@ -75,7 +75,7 @@ public class QRImageGenerator {
             builder.setStartAt(officeHours.getStartAt());
             builder.setEndAt(officeHours.getEndAt());
             builder.setDayOfTheWeek(officeHours.getDay());
-            builder.setOwnerId(ApplicationManager.getInstance().getLoggedInUser(context).getId()); // QR Code is only seen by creator
+            builder.setOwnerId(ApplicationManager.getInstance(context).getLoggedInUser().getId()); // QR Code is only seen by creator
 
             return builder.build().encodeAsBitmap();
         }

@@ -58,7 +58,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
-        User user = ApplicationManager.getInstance().getLoggedInUser(activity);
+        User user = ApplicationManager.getInstance(activity).getLoggedInUser();
         EditText andrewId = root.findViewById(R.id.field_andrewId);
         name = root.findViewById(R.id.field_name);
         altEmail = root.findViewById(R.id.field_alt_email);

@@ -72,7 +72,7 @@ public class OfficeHours implements Scannable {
             values.put(ScannedOfficeHours.COL_COURSE_ID, course.getId());
             values.put(ScannedOfficeHours.COL_COURSE_TITLE, course.getTitle());
         }
-        return null;
+        return values;
     }
 
     public String getType(){

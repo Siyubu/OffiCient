@@ -14,11 +14,17 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import javax.xml.transform.Templates;
+
+import edu.cmu.officient.util.DateConversion;
 
 public class Course /*implements Scannable*/ {
     private int id;
@@ -52,18 +58,6 @@ public class Course /*implements Scannable*/ {
         this.code = code;
     }
 
-    public Course(JSONObject object) {
-        try {
-            int id = object.getInt("course_id"), termId = object.getInt("term_id");
-            String code = object.getString("code");
-            String title = object.getString("title");
-        }
-        catch (JSONException e) {
-            /* */
-        }
-        Log.e(getClass().getSimpleName(), object.toString());
-    }
-
     /*@Override
     public boolean isInRange() { // Get the list of all office hours and check whether it's okay
         // Should check if there is a valid office hours being held at the moment
@@ -92,13 +86,13 @@ public class Course /*implements Scannable*/ {
         return false;
     }
 
-    public OfficeHours getAppropriateOfficeHours(int instructorId) {
+    /*public OfficeHours getAppropriateOfficeHours(int instructorId) {
         for (OfficeHours oh : officeHours) {
             if (oh.isInRange() && oh.getHolder().getId() == instructorId)
                 return oh;
         }
         return null;
-    }
+    }*/
 
     public boolean equals(Object obj) {
         if (obj instanceof Course) {

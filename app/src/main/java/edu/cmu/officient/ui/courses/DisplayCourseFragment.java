@@ -40,7 +40,7 @@ import edu.cmu.officient.model.Course;
 import edu.cmu.officient.model.User;
 import edu.cmu.officient.ui.customviews.AdvancedRecyclerView;
 
-public class DisplayCourse extends Fragment {
+public class DisplayCourseFragment extends Fragment {
 
     private Course course;
     private AppCompatActivity activity;
@@ -49,7 +49,7 @@ public class DisplayCourse extends Fragment {
     private ProgressBar progressBar;
 
 
-    public DisplayCourse(AppCompatActivity activity)
+    public DisplayCourseFragment(AppCompatActivity activity)
     {
         this.activity = activity;
     }
@@ -58,10 +58,16 @@ public class DisplayCourse extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        User user = ApplicationManager.getInstance().getLoggedInUser(activity);
+        User user = ApplicationManager.getInstance(activity).getLoggedInUser();
         View view = inflater.inflate(R.layout.fragment_display_course, container, false);
         progressBar = view.findViewById(R.id.progress);
         view_course_detail = view.findViewById(R.id.course_detail);
+
+
+
+
+
+
 
         return view;
     }
@@ -78,10 +84,17 @@ public class DisplayCourse extends Fragment {
         @Override
         protected String doInBackground(String[] args) {
             String message;
-            User user = ApplicationManager.getInstance().getLoggedInUser(activity);
+          //  User user = ApplicationManager.getInstance().getLoggedInUser(activity);
             String[] attributes;
             if (args.length > 1)
-                attributes = new String[]{"coursesList", "user_id"};
+                attributes = new String[]{"coursesList", "course_title","Course_term","course_students","Course_officeHours"};
+
+
+
+
+
+
+            
             else
                 attributes = new String[]{"coursesList"};
             RequestData requestData = new RequestData( activity,"http://gamfruits.com/officient_api/functions.php", attributes, args);
@@ -101,31 +114,5 @@ public class DisplayCourse extends Fragment {
             return message;
         }
 
-        protected void onPostExecute(String result){
-            progressBar.setVisibility(View.GONE);
-            System.out.println(result);
-            if (result.equalsIgnoreCase("success")){
-                try {
-                    JSONArray jsonArray = jsonObject.getJSONArray("data");
-                    JSONObject row;
-                    for(int i=0;i<jsonArray.length();i++){
-                        row = (JSONObject) jsonArray.get(i);
-                     //   courses.add(new Course(row));
-                        Log.e("QUERY", row.toString());
-                    }
-                    // Now we can set the adapter here
-                   // CourseAdapter adapter = new CourseAdapter(activity, courses);
-                   // recyclerView.setAdapter(adapter);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-            else if(result.equalsIgnoreCase("error")){
-                Toast.makeText(activity, R.string.network_unavailable, Toast.LENGTH_SHORT).show();
-            }
-            else if (result.equalsIgnoreCase("no_data")){
-                Toast.makeText(activity, R.string.data_empty, Toast.LENGTH_SHORT).show();
-            }
-        }
     }
 }
