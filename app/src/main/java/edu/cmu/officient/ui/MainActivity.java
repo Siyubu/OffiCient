@@ -25,7 +25,7 @@ import edu.cmu.officient.ui.users.LoginActivity;
 import edu.cmu.officient.ui.util.NavigationInitializer;
 
 public class MainActivity extends AppCompatActivity {
-    private ApplicationManager manager = ApplicationManager.getInstance();
+    private ApplicationManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,9 @@ public class MainActivity extends AppCompatActivity {
         CheckInternetConnection checker = CheckInternetConnection.getInstance();
         checker.setContext(getApplicationContext()); // Set it to the application context so it doesn't leak
 
-        if (manager.getLoggedInUser(this) == null) {
+        manager = ApplicationManager.getInstance(this);
+
+        if (manager.getLoggedInUser() == null) {
             // If user not logged in, we have them go login
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);

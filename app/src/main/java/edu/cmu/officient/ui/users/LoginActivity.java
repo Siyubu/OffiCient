@@ -17,16 +17,10 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import edu.cmu.officient.DBCommunication.CheckInternetConnection;
-import edu.cmu.officient.DBCommunication.JSONProtocol;
 import edu.cmu.officient.DBCommunication.RequestData;
 import edu.cmu.officient.R;
 import edu.cmu.officient.logic.ApplicationManager;
-import edu.cmu.officient.ui.courses.AddCourseActivity;
-import edu.cmu.officient.ui.courses.CoursesList;
+import edu.cmu.officient.ui.MainActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -59,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         registrationOpener.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, AddCourseActivity.class);
+                Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
                 startActivity(intent);
             }
         });
@@ -106,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
                 catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Intent intent = new Intent(context, CoursesList.class);
+                Intent intent = new Intent(context, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -127,10 +121,5 @@ public class LoginActivity extends AppCompatActivity {
 
 
         }
-    }
-
-    public void goStraight(View view) {
-        Intent intent = new Intent(this, CoursesList.class);
-        startActivity(intent);
     }
 }

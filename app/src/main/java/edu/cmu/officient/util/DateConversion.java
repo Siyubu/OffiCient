@@ -35,4 +35,9 @@ public class DateConversion {
         return (String) df.format("yyyy-MM-dd", date);
 
     }
+
+    public Time stringToTime(String date) {
+        String [] parts = date.split(" ");
+        return Time.parse(parts[1]);
+    }
 }

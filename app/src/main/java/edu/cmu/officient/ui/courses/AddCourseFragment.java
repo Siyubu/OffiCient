@@ -90,7 +90,7 @@ public class AddCourseFragment extends Fragment {
                         Toast.makeText(activity, "The title or code should not be blank", Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        new AddCourse().execute("addCourse", ApplicationManager.getInstance().getLoggedInUser(getContext()).getId()+"", course_code.getText().toString(), course_title.getText().toString(), selectedTerm.getId() + "");
+                        new AddCourse().execute("addCourse", ApplicationManager.getInstance(getContext()).getLoggedInUser().getId()+"", course_code.getText().toString(), course_title.getText().toString(), selectedTerm.getId() + "");
                     }
 
                 }
