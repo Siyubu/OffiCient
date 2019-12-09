@@ -26,6 +26,7 @@ import java.util.List;
 import edu.cmu.officient.R;
 import edu.cmu.officient.model.Assignment;
 import edu.cmu.officient.model.Course;
+import edu.cmu.officient.ui.assignments.AssignmentQRGenerator;
 
 public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.ViewHolder> {
     private List<Assignment> assignments;
@@ -46,6 +47,8 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.Vi
             @Override
             public void onClick(View view) {
                 // Start the detail fragment
+                parentActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AssignmentQRGenerator(parentActivity, assignment))
+                        .addToBackStack(null).commit();
 
             }
         });

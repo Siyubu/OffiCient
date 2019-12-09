@@ -12,6 +12,7 @@ package edu.cmu.officient.networktasks;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -36,8 +37,14 @@ public class RegisterUserTask extends StandardRequestTask {
 
     @Override
     protected void processData(String s) {
-        Intent intent = new Intent(getBaseActivity(), SuccessfulRegistration.class);
-        getBaseActivity().startActivity(intent);
+        if(s.equalsIgnoreCase("already_registered")){
+            Toast.makeText(getBaseActivity(), "User is already registered", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Intent intent = new Intent(getBaseActivity(), SuccessfulRegistration.class);
+            getBaseActivity().startActivity(intent);
+        }
+
     }
 
     @Override
