@@ -44,7 +44,7 @@ public class LogUserInTask extends StandardRequestTask {
             Toast.makeText(getBaseActivity(), "Login Successful", Toast.LENGTH_SHORT).show();
             // Log in to the app (i.e store data to local storage)
             try {
-                ApplicationManager.getInstance()
+                ApplicationManager.getInstance(getBaseActivity())
                         .logUserIn(getBaseActivity(), getData().getJSONObject("data"), getData().getBoolean("isFaculty"));
             } catch (JSONException e) {
                 e.printStackTrace();

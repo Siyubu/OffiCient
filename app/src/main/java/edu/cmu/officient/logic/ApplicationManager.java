@@ -47,9 +47,9 @@ public class ApplicationManager {
     private User loggedInUser = null;
 
 
-    public static ApplicationManager getInstance() {
+    /*public static ApplicationManager getInstance() {
         return APPLICATION_MANAGER;
-    }
+    }*/
 
     public static ApplicationManager getInstance(Context context) {
         if (APPLICATION_MANAGER_TEMP == null) {
@@ -66,6 +66,29 @@ public class ApplicationManager {
     }
 
     public ScannedCodeStatus processScannedCode(Context context, ScannedQRCode code){
+        // First check if it is inside the List
+        for (ScannedQRCode scannedCode : scannedQRCodes) {
+            if (scannedCode.equals(code)) {
+                // Check the state and do what is required
+                if (scannedCode.getState() == scannedCode.TIMER_STARTED) {
+                    scannedCode.setState(scannedCode.TIMER_STOPPING);
+                    scannedCode.run(context); // Execute the action in Stopping to stop it
+                    return ScannedCodeStatus.STOPPED;
+                }
+                // Here we had the data but it has already been stopped
+            }
+        }
+        // Not found
+        scannedQRCodes.add(code); // Code state should be starting, so now we run the action
+        if (code.getState() == code.TIMER_STARTING) {
+            code.run(context); // Should be in STARTED state now
+            return ScannedCodeStatus.RUNNING;
+        }
+        else
+            return ScannedCodeStatus.EXPIRED;
+    }
+
+    public ScannedCodeStatus processScannedCode(ScannedQRCode code){
         // First check if it is inside the List
         for (ScannedQRCode scannedCode : scannedQRCodes) {
             if (scannedCode.equals(code)) {

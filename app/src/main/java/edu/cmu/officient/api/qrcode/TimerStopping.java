@@ -26,7 +26,7 @@ public class TimerStopping extends TimerState {
     @Override
     public void execute(Context context) {
         // Every DB actions should be done here
-        ApplicationManager.getInstance().endTask(context, getScannedCode().getData(), getScannedCode().getRecordId());
+        ApplicationManager.getInstance(context).endTask(context, getScannedCode().getData(), getScannedCode().getRecordId());
         getScannedCode().setState(getScannedCode().TIMER_STOPPED);
     }
 
