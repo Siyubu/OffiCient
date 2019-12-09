@@ -96,7 +96,7 @@ public class ProfileFragment extends Fragment {
                 //ApplicationManager
                 Intent intent = new Intent(activity, LoginActivity.class);
                 startActivity(intent);
-                ApplicationManager.getInstance(activity).logUserOut(activity);
+                ApplicationManager.getInstance(activity).logUserOut();
             }
         });
 
