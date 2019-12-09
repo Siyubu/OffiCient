@@ -129,6 +129,13 @@ public class ApplicationManager {
         editor.apply();
     }
 
+    public  void logUserOut(Context context){
+        SharedPreferences preferences = context.getSharedPreferences(context.getString(R.string.prefs_file_name), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove("user.name");
+        editor.apply();
+    }
+
 /*
     public User getLoggedInUser(Context context){
         SharedPreferences preferences = context.getSharedPreferences(context.getString(R.string.prefs_file_name), Context.MODE_PRIVATE);
@@ -160,6 +167,7 @@ public class ApplicationManager {
         }
         return null;
     }
+
 
     public long storeTask(Context context, Scannable scannable) {
         Date now = new Date();

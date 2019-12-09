@@ -20,6 +20,7 @@
 
 package edu.cmu.officient.ui.users;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -52,7 +53,7 @@ import edu.cmu.officient.networktaks.StandardRequestTask;
 public class ProfileFragment extends Fragment {
     private AppCompatActivity activity;
     private EditText name, altEmail, phoneNumber, password;
-    private Button update, done;
+    private Button update, done, logout;
     public ProfileFragment(){
 
     }
@@ -77,7 +78,7 @@ public class ProfileFragment extends Fragment {
         password = root.findViewById(R.id.field_password);
         update = root.findViewById(R.id.update);
         done = root.findViewById(R.id.done);
-
+        logout = root.findViewById(R.id.logout);
         andrewId.setText(user.getAndrewId());
         name.setText(user.getFullname());
         altEmail.setText(user.getAltEmail());
@@ -99,6 +100,18 @@ public class ProfileFragment extends Fragment {
                 disableFields();
             }
         });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //parentActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AssignmentQRGenerator(parentActivity, assignment))
+                        //.addToBackStack(null).commit();
+                //ApplicationManager.getInstance(activity).getLoggedInUser().
+                //ApplicationManager
+                Intent intent = new Intent(activity, LoginActivity.class);
+                startActivity(intent);
+                ApplicationManager.getInstance().logUserOut(activity);
+            }
+        });
 
         return root;
     }
@@ -106,10 +119,12 @@ public class ProfileFragment extends Fragment {
     private void enableFields(){
         name.setEnabled(true);
         altEmail.setEnabled(true);
-        altEmail.setEnabled(true);
         phoneNumber.setEnabled(true);
         password.setEnabled(true);
         password.setHint("Leave it blank you don't wish to change");
+        name.setHint("update name");
+        altEmail.setHint("update alternative email");
+        phoneNumber.setHint("update phone number");
         done.setVisibility(View.VISIBLE);
         update.setEnabled(false);
     }
