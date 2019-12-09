@@ -16,119 +16,78 @@
     android:layout_height="match_parent"
     android:fillViewport="true">
 
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".ui.assignments.AddAssignmentFragment"
     android:padding="20dp">
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/left_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00C06A6A"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.2" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/right_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.8" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/logo_bottom_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
 
     <TextView
         android:id="@+id/page_assignment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:layout_marginBottom="30dp"
         android:text="@string/add_ass"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
 
     <EditText
         android:id="@+id/ass_title"
-        android:layout_width="363dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="436dp"
         android:drawablePadding="@dimen/login_field_icon_padding"
         android:hint="@string/assign_title_prompt"
         android:inputType="text"
-        android:maxLength="@integer/max_title_length"
-        android:selectAllOnFocus="true"
         android:padding="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/field_background"
+        android:layout_below="@id/page_assignment"/>
 
     <EditText
         android:id="@+id/exp_time"
-        android:layout_width="363dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="380dp"
         android:hint="@string/expected_prompt"
         android:inputType="time"
         android:padding="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/field_background"
+        android:layout_below="@id/ass_title"/>
 
     <EditText
         android:id="@+id/due_date"
-        android:layout_width="363dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="324dp"
+        android:layout_marginBottom="20dp"
         android:hint="@string/due_time_prompt"
         android:inputType="datetime"
         android:padding="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:background="@drawable/field_background"
+        android:layout_below="@id/exp_time"/>
 
     <EditText
         android:id="@+id/avail_time"
-        android:layout_width="363dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/available_time_prompt"
         android:inputType="datetime"
         android:padding="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/due_date"
-        app:layout_constraintVertical_bias="0.06" />
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/field_background"
+        android:layout_below="@id/due_date"/>
 
     <Button
         android:id="@+id/add_course"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/primary_button_background"
         android:text="@string/action_add_assignment"
         android:textColor="@color/white"
         android:padding="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.468"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/avail_time"
-        app:layout_constraintVertical_bias="0.071" />
+        android:layout_below="@id/avail_time"/>
 
     <ProgressBar
         android:id="@+id/load"
@@ -138,14 +97,10 @@
         android:layout_marginTop="64dp"
         android:layout_marginBottom="64dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
+        android:layout_centerInParent="true"/>
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
 
 </ScrollView>

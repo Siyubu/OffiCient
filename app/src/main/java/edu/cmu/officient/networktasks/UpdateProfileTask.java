@@ -43,8 +43,8 @@ public class UpdateProfileTask extends StandardRequestTask {
     @Override
     protected void processData(String s) {
         // We assume that the user has sent the data appropriately. Not good coding but we stick to it for now for the sake of code clarity
-        ApplicationManager.getInstance()
-                .logUserIn(getBaseActivity(), fields[0], fields[1], fields[2]);
+        ApplicationManager.getInstance(getBaseActivity())
+                .logUserIn(fields[0], fields[1], fields[2]);
         Toast.makeText(getBaseActivity(), "Profile Updated", Toast.LENGTH_SHORT).show();
     }
 

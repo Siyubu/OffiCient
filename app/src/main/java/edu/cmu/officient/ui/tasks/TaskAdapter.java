@@ -45,7 +45,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     }
 
     public void remove(int position) {
-        ApplicationManager.getInstance().processScannedCode(context, codes.get(position)); // After here, for sure the element is gone
+        ApplicationManager.getInstance(context).processScannedCode(codes.get(position)); // After here, for sure the element is gone
         codes.remove(position);
         notifyItemRemoved(position);
     }

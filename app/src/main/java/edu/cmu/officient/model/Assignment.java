@@ -60,8 +60,10 @@ public class Assignment implements Scannable {
         values.put(ScannedAssignment.COL_DEADLINE, deadline.toString());
         values.put(ScannedAssignment.COL_PUBLICATION_DATE, publishedOn.toString());
         values.put(ScannedAssignment.COL_LATE_SUBMISSION_DATE, availableTill.toString());
-        values.put(ScannedAssignment.COL_COURSE_ID, course.getId());
-        values.put(ScannedAssignment.COL_COURSE_TITLE, course.getTitle());
+        if (course != null) {
+            values.put(ScannedAssignment.COL_COURSE_ID, "");
+            values.put(ScannedAssignment.COL_COURSE_TITLE, course.getTitle());
+        }
         
         return values;
     }
@@ -75,9 +77,11 @@ public class Assignment implements Scannable {
     public boolean equals(@Nullable Object obj) {
         if (obj instanceof Assignment) {
             Assignment o = (Assignment) obj;
-            return id==o.id && expectedTime==o.expectedTime && publishedOn.equals(o.publishedOn) &&
-                    deadline.equals(o.deadline) && availableTill.equals(o.availableTill) && title.equals(o.title)
-                    && course.equals(o.course);
+            boolean ans = id==o.id && expectedTime==o.expectedTime && publishedOn.equals(o.publishedOn) &&
+                    deadline.equals(o.deadline) && availableTill.equals(o.availableTill) && title.equals(o.title);
+            if (course != null)
+                return ans && course.equals(o.course);
+            return ans;
         }
         return false;
     }

@@ -10,10 +10,14 @@
 
 package edu.cmu.officient.util;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -52,19 +56,28 @@ public class ModelObjectBuilder {
 
                 }
             }
-
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
             List<Assignment> assignments = new ArrayList<>();
             // Assignments
             if (object.has("assignments")) {
                 JSONArray array = object.getJSONArray("assignments");
+                Log.e("TEST", array.toString());
                 for (int i=0; i<array.length(); ++i) {
                     JSONObject data = (JSONObject) array.get(i);
-                    assignments.add(new Assignment(data.getInt("id"), (int) data.getDouble("expected_time"), converter.stringToDate(data.getString("published_on")),
-                            converter.stringToDate(data.getString("deadline")), converter.stringToDate(data.getString("availability")), data.getString("title"), null));
+                    try {
+                        Log.e("TEST", (formatter.parse(data.getString("deadline"))).toString());
+                        assignments.add(new Assignment(data.getInt("id"), (int) data.getDouble("expected_time"), formatter.parse(data.getString("published_on")),
+                                formatter.parse(data.getString("deadline")), formatter.parse(data.getString("availability")), data.getString("title"), null));
+                    }
+                    catch (ParseException e) {e.printStackTrace();}
                 }
 
             }
-            return new Course(id, title, code, term, assignments, officeHours);
+            Course course = new Course(id, title, code, term, assignments, officeHours);
+            for (Assignment assignment : assignments) {
+                assignment.setCourse(course);
+            }
+            return course;
 
         }
         catch (JSONException e) {

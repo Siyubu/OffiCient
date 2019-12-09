@@ -64,9 +64,9 @@ public class ScannedQRCode {
 
     @Override
     public boolean equals(@Nullable Object obj) {
-        if (obj instanceof ScannedQRCode) {
+        if (obj instanceof ScannedQRCode /*&& owner !=null & data != null*/) {
             ScannedQRCode code = (ScannedQRCode) obj;
-            return owner.equals(code.owner) && data.equals(code.data);
+            return /*owner.equals(code.owner) &&*/ data.equals(code.data);
         }
         return false;
     }
