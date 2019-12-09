@@ -99,7 +99,7 @@ public class CourseDetailFragment extends Fragment {
         });
         addTaBis.setOnClickListener(new AddTAListener(activity, course));
         addHwBis.setOnClickListener(new AddAssignmentListener(activity, course));
-        addOHBis.setOnClickListener(new AddOfficeHoursListener());
+        addOHBis.setOnClickListener(new AddOfficeHoursListener(activity,course));
         enroll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
