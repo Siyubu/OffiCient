@@ -35,6 +35,8 @@ public class RequestTaskFactory {
                 return new GetCandidateTAList(activity, root, progress, Integer.parseInt(args[1]));
             case "enrollTA":
                 return new AddTATask(activity, root, progress);
+            case "addAssignment":
+                return new AddAssignmentTask(activity, root, progress);
         }
         return null;
     }

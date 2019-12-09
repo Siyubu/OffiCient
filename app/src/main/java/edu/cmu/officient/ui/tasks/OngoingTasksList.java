@@ -37,7 +37,7 @@ public class OngoingTasksList extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        List<ScannedQRCode> scannedCodes = ApplicationManager.getInstance().getOngoingActivities();
+        List<ScannedQRCode> scannedCodes = ApplicationManager.getInstance(this).getOngoingActivities();
         TaskAdapter adapter = new TaskAdapter(this, scannedCodes);
         recyclerView.setEmptyView(findViewById(R.id.no_tasks));
         recyclerView.setAdapter(adapter);

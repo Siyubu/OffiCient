@@ -15,6 +15,7 @@ import android.text.format.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class DateConversion {
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -28,6 +29,11 @@ public class DateConversion {
             e.printStackTrace();
         }
         return convertedDate;
+    }
+
+    public String getStringDateTime (Date datetime, String separator) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy" + separator + "MM" + separator + "dd HH:mm:ss", Locale.getDefault());
+        return format.format(datetime);
     }
 
     public String datePart(Date date){

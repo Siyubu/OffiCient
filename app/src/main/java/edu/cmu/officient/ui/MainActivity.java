@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == QRCodeScanner.QR_CODE_READER && data != null) {
             String output = data.getStringExtra("code");
             ScannedQRCode qrCode = ScannedCodeFactory.loadCode(output);
+            Toast.makeText(this, output, Toast.LENGTH_SHORT).show();
             if (qrCode != null) {
                 switch (manager.processScannedCode(qrCode)) {
                     case RUNNING:

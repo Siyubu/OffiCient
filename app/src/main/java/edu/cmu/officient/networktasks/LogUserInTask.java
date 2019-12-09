@@ -45,7 +45,7 @@ public class LogUserInTask extends StandardRequestTask {
             // Log in to the app (i.e store data to local storage)
             try {
                 ApplicationManager.getInstance(getBaseActivity())
-                        .logUserIn(getBaseActivity(), getData().getJSONObject("data"), getData().getBoolean("isFaculty"));
+                        .logUserIn(getData().getJSONObject("data"), getData().getBoolean("isFaculty"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }

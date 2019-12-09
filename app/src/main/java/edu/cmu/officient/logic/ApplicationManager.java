@@ -65,7 +65,7 @@ public class ApplicationManager {
         this.context = context;
     }
 
-    public ScannedCodeStatus processScannedCode(Context context, ScannedQRCode code){
+    /*public ScannedCodeStatus processScannedCode(Context context, ScannedQRCode code){
         // First check if it is inside the List
         for (ScannedQRCode scannedCode : scannedQRCodes) {
             if (scannedCode.equals(code)) {
@@ -87,7 +87,7 @@ public class ApplicationManager {
         else
             return ScannedCodeStatus.EXPIRED;
     }
-
+*/
     public ScannedCodeStatus processScannedCode(ScannedQRCode code){
         // First check if it is inside the List
         for (ScannedQRCode scannedCode : scannedQRCodes) {
@@ -111,8 +111,8 @@ public class ApplicationManager {
             return ScannedCodeStatus.EXPIRED;
     }
 
-    public ScannedCodeStatus processScannedCode(Context context, int position) {
-        return processScannedCode(context, scannedQRCodes.get(position));
+    public ScannedCodeStatus processScannedCode(int position) {
+        return processScannedCode(scannedQRCodes.get(position));
     }
 
     public List<ScannedQRCode> getOngoingActivities(){
@@ -124,7 +124,7 @@ public class ApplicationManager {
         return activities;
     }
 
-    public void logUserIn(Context context, JSONObject response, boolean isFaculty){
+    public void logUserIn(/*Context context, */JSONObject response, boolean isFaculty){
         SharedPreferences preferences = context.getSharedPreferences(context.getString(R.string.prefs_file_name), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         // Start storing all the data
@@ -142,7 +142,7 @@ public class ApplicationManager {
         editor.apply();
     }
 
-    public void logUserIn(Context context, String name, String alt_email, String phoneNumber){
+    public void logUserIn(/*Context context, */String name, String alt_email, String phoneNumber){
         SharedPreferences preferences = context.getSharedPreferences(context.getString(R.string.prefs_file_name), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         // Start storing all the data
@@ -184,7 +184,7 @@ public class ApplicationManager {
         return null;
     }
 
-    public long storeTask(Context context, Scannable scannable) {
+    public long storeTask(/*Context context, */Scannable scannable) {
         Date now = new Date();
         // For the static storage only
         SQLiteDatabase database = new OfficientLocalDbHelper(context).getWritableDatabase();
@@ -192,7 +192,7 @@ public class ApplicationManager {
         return storage.addTaskRecord(scannable, now);
     }
 
-    public void endTask(Context context, Scannable scannable, long id) {
+    public void endTask(/*Context context, */Scannable scannable, long id) {
         Date now = new Date();
         SQLiteDatabase database = new OfficientLocalDbHelper(context).getWritableDatabase();
         SQLiteStorage storage = new SQLiteStorage(database);
