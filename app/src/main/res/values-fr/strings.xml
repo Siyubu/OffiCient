@@ -1,26 +1,26 @@
 <resources>
     <string name="app_name">OffiCient</string>
     <string name="andrew_id_prompt">Andrew ID</string>
-    <string name="title_activity_login">Sign in</string>
-    <string name="action_register">Register now</string>
+    <string name="title_activity_login">Connexion</string>
+    <string name="action_register">Inscrivez-vous</string>
     <string name="prompt_email">Email</string>
-    <string name="alt_email">Alternative email address</string>
-    <string name="prompt_phone_number">Phone number</string>
-    <string name="prompt_password">Password</string>
-    <string name="prompt_name">Name</string>
-    <string name="prof_edit">EDIT PROFILE</string>
-    <string name="add_course">ADD COURSE</string>
-    <string name="add_ass">ADD ASSIGNMENT</string>
-    <string name="prompt_password_confirmation">Confirm Password</string>
-    <string name="integrity_notice">By clicking on the <b>Register</b> button, you confirm that the information that you provided is accurate and true.</string>
-    <string name="prompt_registration">Register now</string>
+    <string name="alt_email">Seconde adresse email</string>
+    <string name="prompt_phone_number">Telephone</string>
+    <string name="prompt_password">Mot de passe</string>
+    <string name="prompt_name">Nom</string>
+    <string name="prof_edit">MODIFICATION DE PROFIL</string>
+    <string name="add_course">AJOUTER UN COURS</string>
+    <string name="add_ass">AJOUTER UN DEVOIR</string>
+    <string name="prompt_password_confirmation">Confirmez votre mot de passe</string>
+    <string name="integrity_notice">En cliquant sur <b>S\'inscrire</b> vous confirmez que l\'information fournie est correcte et valide.</string>
+    <string name="prompt_registration">Inscription</string>
     <string name="confirm_faculty">Please input the confirmation code that we sent to %s@andrew.cmu.edu to proceed. </string>
-    <string name="action_sign_in">Log in </string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
+    <string name="action_sign_in">Connexion </string>
+    <string name="action_sign_in_short">Connexion</string>
+    <string name="welcome">"Bienvenue !"</string>
+    <string name="invalid_username">Nom d\'utilisateur valide</string>
     <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
+    <string name="login_failed">Connexion</string>
     <string name="or">OR</string>
     <string name="title_activity_registration">Registration</string>
     <string name="submit">Submit</string>
@@ -29,11 +29,11 @@
     <string name="open_now">Open Now</string>
     <string name="congratulations">Congratulations</string>
     <string name="title_activity_courses_list">CoursesList</string>
-    <string name="title_home">Home</string>
+    <string name="title_home">Accueil</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="statistics">Statistics</string>
-    <string name="profile">Profile</string>
+    <string name="statistics">Statistiques</string>
+    <string name="profile">Profil</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_profile">Profile</string>
     <string name="title_add_course">Add Course</string>
@@ -47,8 +47,8 @@
     <string name="term_prompt">Term Prompt</string>
     <string name="action_add_course">Add Course</string>
     <string name="action_add_assignment">Add Assignment</string>
-    <string name="scan_QR_Image">Scan QR Image via email</string>
-    <string name="Send_QR_Image_to_Email">Share QR Image </string>
+    <string name="scan_QR_Image">Share QR Image via email</string>
+    <string name="Send_QR_Image_to_Email">Generate QR Image </string>
     <string name="title_activity_test_activiy">TestActiviy</string>
     <string name="started_at">Started: %s</string>
     <string name="stop">Stop</string>
@@ -57,7 +57,6 @@
     <string name="class_prompt">Choose a Class</string>
     <string name="sign_out">Sign out</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="prefs_file_name">xyz_details</string>
     <string name="invalid_qr_code">The code that you scanned is not valid.</string>
@@ -96,15 +95,15 @@
     <string name="due_on">Due on %s</string>
     <string name="no_data">Nothing available here yet.</string>
     <string name="loading">Loading</string>
+    <string name="input_andrewId">Input the Andrew ID</string>
+    <string name="date_format">%4d-%02d-%02d</string>
+    <string name="hour_format">%02d:%02d:%02d</string>
+    <string name="successfully_added">Data has been added.</string>
     <string name="assignment_details">Assignment Details</string>
     <string name="add_oh">Office Hours</string>
     <string name="course_desc">Course Description</string>
     <string name="start_oh">Start Time</string>
-    <string name="date_format">%4d-%02d-%02d</string>
-    <string name="hour_format"> %02d:%02d:%02d</string>
-    <string name="successfully_added">Data has been added.</string>
     <string name="venue">Venue</string>
     <string name="end_time">End Time</string>
-    <string name="input_andrewId">Input the Andrew ID</string>
 
 </resources>
