@@ -40,8 +40,6 @@ public class AddOfficeHoursTask extends StandardRequestTask {
     protected void processData(String s) {
         if (s.equalsIgnoreCase("success")){
             Toast.makeText(getBaseActivity(), R.string.successfully_added, Toast.LENGTH_LONG).show();
-            // Navigate to the CourseDetail Fragment
-            /*getBaseActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CoursesFragment()).commit();*/
         }
     }
 

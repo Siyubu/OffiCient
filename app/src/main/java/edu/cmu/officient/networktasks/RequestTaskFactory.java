@@ -38,7 +38,7 @@ public class RequestTaskFactory {
             case "addAssignment":
                 return new AddAssignmentTask(activity, root, progress);
             case "addOfficeHours":
-                return new AddAssignmentTask(activity, root, progress);
+                return new AddOfficeHoursTask(activity, root, progress);
         }
         return null;
     }

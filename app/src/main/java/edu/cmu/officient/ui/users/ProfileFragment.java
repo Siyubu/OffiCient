@@ -90,13 +90,11 @@ public class ProfileFragment extends Fragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //parentActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AssignmentQRGenerator(parentActivity, assignment))
-                        //.addToBackStack(null).commit();
-                //ApplicationManager.getInstance(activity).getLoggedInUser().
-                //ApplicationManager
                 Intent intent = new Intent(activity, LoginActivity.class);
-                startActivity(intent);
-                ApplicationManager.getInstance(activity).logUserOut();
+                if (ApplicationManager.getInstance(activity).logUserOut()) {
+                    startActivity(intent);
+                    activity.finish();
+                }
             }
         });
 

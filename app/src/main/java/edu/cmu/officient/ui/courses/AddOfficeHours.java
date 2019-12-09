@@ -78,7 +78,7 @@ public class AddOfficeHours extends Fragment {
                StandardRequestTask task = RequestTaskFactory.getTask(progressBar, view, activity, null, "addOfficeHours");
                if (task != null)
                    task.execute("addOfficeHours",description.getText().toString(),venue.getText().toString(),start_time.getText().toString(),
-                           end_time.getText().toString(), selected_course.getId() + "", ApplicationManager.getInstance(activity).getLoggedInUser().getAndrewId());
+                           end_time.getText().toString(), selected_course.getId() + "", "" + ApplicationManager.getInstance(activity).getLoggedInUser().getId());
            }
        });
         start_time.setOnFocusChangeListener(new View.OnFocusChangeListener() {

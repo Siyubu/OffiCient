@@ -40,54 +40,22 @@ import edu.cmu.officient.storage.OfficientLocalDbHelper;
 import edu.cmu.officient.storage.SQLiteStorage;
 
 public class ApplicationManager {
-    private static final ApplicationManager APPLICATION_MANAGER = new ApplicationManager();
-    private static ApplicationManager APPLICATION_MANAGER_TEMP;
+    private static ApplicationManager APPLICATION_MANAGER;
     private List<ScannedQRCode> scannedQRCodes = new ArrayList<>();
     private Context context;
-    private User loggedInUser = null;
-
-
-    /*public static ApplicationManager getInstance() {
-        return APPLICATION_MANAGER;
-    }*/
+    private User LOGGED_IN_USER = null;
 
     public static ApplicationManager getInstance(Context context) {
-        if (APPLICATION_MANAGER_TEMP == null) {
-            APPLICATION_MANAGER_TEMP = new ApplicationManager(context);
+        if (APPLICATION_MANAGER == null) {
+            APPLICATION_MANAGER = new ApplicationManager(context);
         }
-        return APPLICATION_MANAGER_TEMP;
-    }
-
-    private ApplicationManager() {
+        return APPLICATION_MANAGER;
     }
 
     private ApplicationManager(Context context) {
         this.context = context;
     }
 
-    /*public ScannedCodeStatus processScannedCode(Context context, ScannedQRCode code){
-        // First check if it is inside the List
-        for (ScannedQRCode scannedCode : scannedQRCodes) {
-            if (scannedCode.equals(code)) {
-                // Check the state and do what is required
-                if (scannedCode.getState() == scannedCode.TIMER_STARTED) {
-                    scannedCode.setState(scannedCode.TIMER_STOPPING);
-                    scannedCode.run(context); // Execute the action in Stopping to stop it
-                    return ScannedCodeStatus.STOPPED;
-                }
-                // Here we had the data but it has already been stopped
-            }
-        }
-        // Not found
-        scannedQRCodes.add(code); // Code state should be starting, so now we run the action
-        if (code.getState() == code.TIMER_STARTING) {
-            code.run(context); // Should be in STARTED state now
-            return ScannedCodeStatus.RUNNING;
-        }
-        else
-            return ScannedCodeStatus.EXPIRED;
-    }
-*/
     public ScannedCodeStatus processScannedCode(ScannedQRCode code){
         // First check if it is inside the List
         for (ScannedQRCode scannedCode : scannedQRCodes) {
@@ -124,7 +92,7 @@ public class ApplicationManager {
         return activities;
     }
 
-    public void logUserIn(/*Context context, */JSONObject response, boolean isFaculty){
+    public void logUserIn(JSONObject response, boolean isFaculty){
         SharedPreferences preferences = context.getSharedPreferences(context.getString(R.string.prefs_file_name), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         // Start storing all the data
@@ -142,7 +110,7 @@ public class ApplicationManager {
         editor.apply();
     }
 
-    public void logUserIn(/*Context context, */String name, String alt_email, String phoneNumber){
+    public void logUserIn(String name, String alt_email, String phoneNumber){
         SharedPreferences preferences = context.getSharedPreferences(context.getString(R.string.prefs_file_name), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         // Start storing all the data
@@ -152,46 +120,37 @@ public class ApplicationManager {
         editor.apply();
     }
 
-    public  void logUserOut(Context context){
+    public boolean logUserOut(){
         SharedPreferences preferences = context.getSharedPreferences(context.getString(R.string.prefs_file_name), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.remove("user.name");
+        editor.remove("user.id");
+        editor.remove("user.andrew_id");
+        editor.remove("user.is_faculty");
+        editor.remove("user.alt_email");
+        editor.remove("user.phone_number");
         editor.apply();
+        return true;
     }
-
-/*
-    public User getLoggedInUser(Context context){
-        SharedPreferences preferences = context.getSharedPreferences(context.getString(R.string.prefs_file_name), Context.MODE_PRIVATE);
-        String andrewId = preferences.getString("user.andrew_id", null);
-        if (andrewId != null) {
-            // We have the user data so we can now build their object
-            int userId = preferences.getInt("user.id", -1);
-            String name = preferences.getString("user.name", null);
-            String altEmail = preferences.getString("user.alt_email", null);
-            String phoneNumber = preferences.getString("user.phone_number", null);
-            boolean isFaculty = preferences.getBoolean("user.is_faculty", false);
-            return new User(userId, andrewId, name, altEmail, phoneNumber, isFaculty);
-        }
-        return null;
-    }
-*/
 
     public User getLoggedInUser(){
-        SharedPreferences preferences = context.getSharedPreferences(context.getString(R.string.prefs_file_name), Context.MODE_PRIVATE);
-        String andrewId = preferences.getString("user.andrew_id", null);
-        if (andrewId != null) {
-            // We have the user data so we can now build their object
-            int userId = preferences.getInt("user.id", -1);
-            String name = preferences.getString("user.name", null);
-            String altEmail = preferences.getString("user.alt_email", null);
-            String phoneNumber = preferences.getString("user.phone_number", null);
-            boolean isFaculty = preferences.getBoolean("user.is_faculty", false);
-            return new User(userId, andrewId, name, altEmail, phoneNumber, isFaculty);
+        if (LOGGED_IN_USER == null) {
+            SharedPreferences preferences = context.getSharedPreferences(context.getString(R.string.prefs_file_name), Context.MODE_PRIVATE);
+            String andrewId = preferences.getString("user.andrew_id", null);
+            if (andrewId != null) {
+                // We have the user data so we can now build their object
+                int userId = preferences.getInt("user.id", -1);
+                String name = preferences.getString("user.name", null);
+                String altEmail = preferences.getString("user.alt_email", null);
+                String phoneNumber = preferences.getString("user.phone_number", null);
+                boolean isFaculty = preferences.getBoolean("user.is_faculty", false);
+                return new User(userId, andrewId, name, altEmail, phoneNumber, isFaculty);
+            }
         }
-        return null;
+        return LOGGED_IN_USER;
     }
 
-    public long storeTask(/*Context context, */Scannable scannable) {
+    public long storeTask(Scannable scannable) {
         Date now = new Date();
         // For the static storage only
         SQLiteDatabase database = new OfficientLocalDbHelper(context).getWritableDatabase();
@@ -199,7 +158,7 @@ public class ApplicationManager {
         return storage.addTaskRecord(scannable, now);
     }
 
-    public void endTask(/*Context context, */Scannable scannable, long id) {
+    public void endTask(Scannable scannable, long id) {
         Date now = new Date();
         SQLiteDatabase database = new OfficientLocalDbHelper(context).getWritableDatabase();
         SQLiteStorage storage = new SQLiteStorage(database);
