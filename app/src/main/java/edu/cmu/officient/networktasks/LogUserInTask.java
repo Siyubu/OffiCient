@@ -8,10 +8,9 @@
  *
  */
 
-package edu.cmu.officient.networktaks;
+package edu.cmu.officient.networktasks;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 

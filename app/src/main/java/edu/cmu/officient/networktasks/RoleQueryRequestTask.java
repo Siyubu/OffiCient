@@ -8,7 +8,7 @@
  *
  */
 
-package edu.cmu.officient.networktaks;
+package edu.cmu.officient.networktasks;
 
 import android.view.View;
 
@@ -28,6 +28,7 @@ public class RoleQueryRequestTask extends StandardRequestTask {
 
     @Override
     protected String getOutput() {
+        System.out.println(getData());
         try {
             return getData().getString("message");
         } catch (JSONException e) {

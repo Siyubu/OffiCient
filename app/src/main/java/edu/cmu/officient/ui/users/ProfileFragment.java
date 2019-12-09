@@ -28,27 +28,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import edu.cmu.officient.DBCommunication.RequestData;
 import edu.cmu.officient.R;
 import edu.cmu.officient.logic.ApplicationManager;
 import edu.cmu.officient.model.User;
-import edu.cmu.officient.networktaks.RequestTaskFactory;
-import edu.cmu.officient.networktaks.StandardRequestTask;
+import edu.cmu.officient.networktasks.RequestTaskFactory;
+import edu.cmu.officient.networktasks.StandardRequestTask;
 
 public class ProfileFragment extends Fragment {
     private AppCompatActivity activity;

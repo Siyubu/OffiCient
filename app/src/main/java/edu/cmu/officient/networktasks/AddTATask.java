@@ -8,7 +8,7 @@
  *
  */
 
-package edu.cmu.officient.networktaks;
+package edu.cmu.officient.networktasks;
 
 import android.view.View;
 import android.widget.Toast;
@@ -17,41 +17,36 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
 
-import edu.cmu.officient.R;
+public class AddTATask extends StandardRequestTask {
 
-public class EnrollUserTask extends StandardRequestTask {
-    private final int [] hide = new int[]{R.id.enroll_in}, show = new int[]{R.id.view_statistics};
-
-    public EnrollUserTask(AppCompatActivity activity, View root, View progressMarker) {
+    public AddTATask(AppCompatActivity activity, View root, View progressMarker) {
         super(activity, root, progressMarker);
     }
 
     @Override
     protected String getOutput() {
+        System.out.println(getData());
         try {
-            System.out.println(getData());
             return getData().getString("message");
         }
         catch (JSONException e) {
+            e.printStackTrace();
             return "error";
         }
     }
 
     @Override
     protected void processData(String s) {
-        if (s.equalsIgnoreCase("failed")) {
-            Toast.makeText(getBaseActivity(), "Failed to add you to the course.", Toast.LENGTH_SHORT).show();
+        if (s.equalsIgnoreCase("success")) {
+            Toast.makeText(getRoot().getContext(), "Added successfully", Toast.LENGTH_SHORT).show();
         }
         else {
-            for (int id : hide)
-                getRoot().findViewById(id).setVisibility(View.GONE);
-            for (int id : show)
-                getRoot().findViewById(id).setVisibility(View.VISIBLE);
+            Toast.makeText(getRoot().getContext(), "An error occured while processing your request.", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     protected String[] getRequestParameters() {
-        return new String[]{"enrollStudent", "andrewId", "course_id"};
+        return new String[]{"enrollTA", "course_id", "andrewId"};
     }
 }

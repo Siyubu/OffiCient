@@ -73,4 +73,17 @@ public class ModelObjectBuilder {
         }
         return null;
     }
+
+    public static User buildUser(JSONObject object) {
+        try {
+            int id = object.getInt("id");
+            String andrewId = object.getString("andrewId"), name = object.getString("name"), altEmail = object.getString("alternative_email"),
+                    phoneNumber = object.getString("phoneNumber");
+            return new User(id, andrewId, name, altEmail, phoneNumber);
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

@@ -1,28 +1,18 @@
 package edu.cmu.officient.ui.users;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import edu.cmu.officient.DBCommunication.RequestData;
 import edu.cmu.officient.R;
-import edu.cmu.officient.logic.ApplicationManager;
-import edu.cmu.officient.networktaks.RequestTaskFactory;
-import edu.cmu.officient.networktaks.StandardRequestTask;
-import edu.cmu.officient.ui.MainActivity;
+import edu.cmu.officient.networktasks.RequestTaskFactory;
+import edu.cmu.officient.networktasks.StandardRequestTask;
 
 public class LoginActivity extends AppCompatActivity {
     private ProgressBar progressBar;

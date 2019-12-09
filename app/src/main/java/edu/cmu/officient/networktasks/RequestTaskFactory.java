@@ -8,20 +8,21 @@
  *
  */
 
-package edu.cmu.officient.networktaks;
+package edu.cmu.officient.networktasks;
 
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class RequestTaskFactory {
-    public static StandardRequestTask getTask(View progress, View root, AppCompatActivity activity, RecyclerView recycler, String ... args) {
+    public static StandardRequestTask getTask(View progress, View root, AppCompatActivity activity, View recycler, String ... args) {
         switch (args[0]) {
             case "userRole":
                 return new RoleQueryRequestTask(activity, root, progress);
             case "coursesList":
-                return new CoursesListQueryTask(activity, root, progress, args.length, recycler);
+                return new CoursesListQueryTask(activity, root, progress, args.length, (RecyclerView) recycler);
             case "login":
                 return new LogUserInTask(activity, root, progress);
             case "signup":
@@ -30,6 +31,10 @@ public class RequestTaskFactory {
                 return new UpdateProfileTask(activity, root, progress, args);
             case "enrollStudent":
                 return new EnrollUserTask(activity, root, progress);
+            case "allStudents": // Assuming we are already in the Fragment
+                return new GetCandidateTAList(activity, root, progress, Integer.parseInt(args[1]));
+            case "enrollTA":
+                return new AddTATask(activity, root, progress);
         }
         return null;
     }
