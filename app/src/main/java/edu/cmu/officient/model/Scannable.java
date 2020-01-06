@@ -12,6 +12,7 @@ package edu.cmu.officient.model;
 
 import android.content.ContentValues;
 
+import java.util.Map;
 import java.util.Properties;
 
 public interface Scannable {
@@ -20,4 +21,5 @@ public interface Scannable {
     String getType();
     String getLocalDatabaseName();
     ContentValues getStorableData();
+    Map<String, Object> getStorableDataMap();
 }

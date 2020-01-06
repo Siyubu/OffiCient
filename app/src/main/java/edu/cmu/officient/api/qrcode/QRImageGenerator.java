@@ -46,7 +46,7 @@ public class QRImageGenerator {
             // Here assignment
             Assignment assignment = (Assignment) scannable;
             builder = new AssignmentQRBuilder();
-            builder.setId(assignment.getId());
+            builder.setId("" + assignment.getId()); // Waiting for ID to be String in Firestore
             builder.setName(assignment.getTitle());
             builder.setType(ObjectTypeFactory.getObjectType(scannable));
             builder.setDeadline(assignment.getDeadline());
@@ -60,7 +60,8 @@ public class QRImageGenerator {
             Course course = (Course) scannable;
             builder = new CourseQRBuilder();
 
-            builder.setId(course.getId());
+            //builder.setId(course.getId());
+            builder.setId("" + course.getId()); // Twaek for Firebase version
             builder.setOwnerId(ApplicationManager.getInstance(context).getLoggedInUser().getId()); // Assuming it is generated only by instructors
             builder.setName(course.getTitle());
 

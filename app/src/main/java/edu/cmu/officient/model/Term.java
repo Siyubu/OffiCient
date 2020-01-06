@@ -12,12 +12,13 @@ package edu.cmu.officient.model;
 
 import androidx.annotation.Nullable;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
 import edu.cmu.officient.util.DateConversion;
 
-public class Term {
+public class Term implements Serializable {
     private int id;
     private String name;
     private Date startDate, endDate;

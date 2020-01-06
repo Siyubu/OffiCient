@@ -42,7 +42,7 @@ public class AssignmentQRBuilder extends QRBuilder {
         catch (BuilderException e) {
             e.fix();
         }
-        String text = String.format(Locale.getDefault(), "ID=%d\nNAME=%s\nTYPE=%s\nDEADLINE=%s\nAVAILABLE_TILL=%s\nPUBLISHED_DATE=%s",
+        String text = String.format(Locale.getDefault(), "ID=%s\nNAME=%s\nTYPE=%s\nDEADLINE=%s\nAVAILABLE_TILL=%s\nPUBLISHED_DATE=%s",
                 getId(), getName(), getType(), getDeadline(), getAvailableTill(), getPublished_time());
         return new QRGEncoder(text, null, QRGContents.Type.TEXT, 1000);
     }

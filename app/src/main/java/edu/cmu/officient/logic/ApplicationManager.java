@@ -41,7 +41,7 @@ import edu.cmu.officient.storage.SQLiteStorage;
 
 public class ApplicationManager {
     private static ApplicationManager APPLICATION_MANAGER;
-    private List<ScannedQRCode> scannedQRCodes = new ArrayList<>();
+    private static List<ScannedQRCode> scannedQRCodes = new ArrayList<>();
     private Context context;
     private User LOGGED_IN_USER = null;
 

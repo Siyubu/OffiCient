@@ -33,13 +33,15 @@ public class ScannedCodeFactory {
             ObjectType type = ObjectType.fromString(properties.getProperty("TYPE"));
             // Get the common data as well
             int id = Integer.parseInt(properties.getProperty("ID"));
+            String stringID = properties.getProperty("ID");
             String name = properties.getProperty("NAME");
 
-            SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.getDefault());
+            SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
             switch (type){
                 case ASSIGNMENT:
                     // Get additional data like Course name
-                    Date deadline = formatter.parse(properties.getProperty("DEADLINE")), availableTill = formatter.parse(properties.getProperty("AVAILABLE_TILL")),
+                    Date deadline = formatter.parse(properties.getProperty("DEADLINE")),
+                            availableTill = formatter.parse(properties.getProperty("AVAILABLE_TILL")),
                             publishedOn = formatter.parse(properties.getProperty("PUBLISHED_DATE"));
 
                     Assignment assignment = new Assignment();
@@ -53,7 +55,7 @@ public class ScannedCodeFactory {
                     Time startAt= Time.parse(properties.getProperty("START_AT")), endAt = Time.parse(properties.getProperty("END_AT"));
                     int day = Integer.parseInt(properties.getProperty("DAY")), instructorId = Integer.parseInt(properties.getProperty("OWNER_ID"));
                     OfficeHours officeHours = new OfficeHours();
-                    officeHours.setId(id);
+                    officeHours.setId(stringID);
                     officeHours.setStartAt(startAt);
                     officeHours.setEndAt(endAt);
                     officeHours.setDay(day);

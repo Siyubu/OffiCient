@@ -8,9 +8,20 @@
  *
  */
 
+/*
+ *
+ *  * @author Segla Boladji Vinny Trinite Adjibi
+ *  * AndrewID : vadjibi
+ *  * Program : MSIT
+ *  *
+ *  * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized assistance on this work.
+ *
+ */
 
-package edu.cmu.officient.ui.courses;
 
+package edu.cmu.officient.ui.assignments;
+
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +36,6 @@ import java.util.List;
 
 import edu.cmu.officient.R;
 import edu.cmu.officient.model.Assignment;
-import edu.cmu.officient.model.Course;
-import edu.cmu.officient.ui.assignments.AssignmentQRGenerator;
 
 public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.ViewHolder> {
     private List<Assignment> assignments;
@@ -47,9 +56,11 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.Vi
             @Override
             public void onClick(View view) {
                 // Start the detail fragment
-                parentActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AssignmentQRGenerator(parentActivity, assignment))
-                        .addToBackStack(null).commit();
-
+                /*parentActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AssignmentQRGenerator(parentActivity, assignment))
+                        .addToBackStack(null).commit();*/
+                Intent intent = new Intent(parentActivity, AssignmentDetailActivity.class);
+                intent.putExtra("assignment", assignment);
+                parentActivity.startActivity(intent);
             }
         });
     }

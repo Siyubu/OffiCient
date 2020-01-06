@@ -37,7 +37,7 @@ public class OfficeHoursQRBuilder extends QRBuilder {
         catch (BuilderException e) {
             e.fix();
         }
-        String text = String.format(Locale.getDefault(), "ID=%d\nTYPE=%s\nSTART_AT=%s\nEND_AT=%s\nDAY=%s\nOWNER_ID=%s",
+        String text = String.format(Locale.getDefault(), "ID=%s\nTYPE=%s\nSTART_AT=%s\nEND_AT=%s\nDAY=%s\nOWNER_ID=%s",
                 getId(), getType(), getStartAt(), getEndAt(),getDayOfTheWeek(), getOwnerId());
         return new QRGEncoder(text, null, QRGContents.Type.TEXT, 1000);
     }

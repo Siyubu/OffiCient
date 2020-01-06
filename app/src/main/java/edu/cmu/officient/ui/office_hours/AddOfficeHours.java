@@ -8,12 +8,23 @@
  *
  */
 
-package edu.cmu.officient.ui.courses;
+/*
+ *
+ *  * @author Segla Boladji Vinny Trinite Adjibi
+ *  * AndrewID : vadjibi
+ *  * Program : MSIT
+ *  *
+ *  * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized assistance on this work.
+ *
+ */
+
+package edu.cmu.officient.ui.office_hours;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +35,15 @@ import android.widget.ProgressBar;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,7 +51,9 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import edu.cmu.officient.DBCommunication.RequestData;
 import edu.cmu.officient.R;
@@ -44,6 +64,8 @@ import edu.cmu.officient.networktasks.RequestTaskFactory;
 import edu.cmu.officient.networktasks.StandardRequestTask;
 import edu.cmu.officient.ui.assignments.AddAssignmentFragment;
 import edu.cmu.officient.util.DateConversion;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class AddOfficeHours extends Fragment {
     private AppCompatActivity activity;
@@ -72,13 +94,40 @@ public class AddOfficeHours extends Fragment {
        add_course_btn.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-               SimpleDateFormat format = new SimpleDateFormat("", Locale.getDefault());
+               SimpleDateFormat format = new SimpleDateFormat("", Locale.ENGLISH);
                DateConversion converter = new DateConversion();
                String date = converter.getStringDateTime(new Date(), "-");
                StandardRequestTask task = RequestTaskFactory.getTask(progressBar, view, activity, null, "addOfficeHours");
                if (task != null)
                    task.execute("addOfficeHours",description.getText().toString(),venue.getText().toString(),start_time.getText().toString(),
-                           end_time.getText().toString(), selected_course.getId() + "", "" + ApplicationManager.getInstance(activity).getLoggedInUser().getId());
+                           end_time.getText().toString(), selected_course.getId() + "", "" + ApplicationManager.getInstance(activity).getLoggedInUser().getAndrewId());
+               // Adding with Firestore
+
+               /*FirebaseApp.initializeApp(activity);*/
+               FirebaseFirestore db = FirebaseFirestore.getInstance();
+               Map<String, Object> oh = new HashMap<>();
+
+               oh.put("description", description.getText().toString());
+               oh.put("venue", venue.getText().toString());
+               oh.put("start_time", start_time.getText().toString());
+               oh.put("end_time", end_time.getText().toString());
+               oh.put("owner", ApplicationManager.getInstance(activity).getLoggedInUser().getAndrewId());
+               oh.put("course_id", selected_course.getId() + "");
+
+               db.collection("office_hours")
+                       .add(oh)
+                       .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                           @Override
+                           public void onSuccess(DocumentReference documentReference) {
+                               Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                           }
+                       })
+                       .addOnFailureListener(new OnFailureListener() {
+                           @Override
+                           public void onFailure(@NonNull Exception e) {
+                               Log.w(TAG, "Error adding document", e);
+                           }
+                       });
            }
        });
         start_time.setOnFocusChangeListener(new View.OnFocusChangeListener() {

@@ -10,6 +10,7 @@
 
 package edu.cmu.officient.ui.courses;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,8 +49,13 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
             @Override
             public void onClick(View view) {
                 // Start the detail fragment
+                Intent intent = new Intent(parentActivity, CourseDetailActivity.class);
+                intent.putExtra("course", course);
+                parentActivity.startActivity(intent);
+/*
                 parentActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CourseDetailFragment(parentActivity, course))
                         .addToBackStack(null).commit();
+*/
             }
         });
     }

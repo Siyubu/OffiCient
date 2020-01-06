@@ -14,12 +14,14 @@ import android.content.ContentValues;
 
 import androidx.annotation.Nullable;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.Map;
 
 import edu.cmu.officient.storage.*;
 import edu.cmu.officient.storage.OfficientLocalDbContract.*;
 
-public class Assignment implements Scannable {
+public class Assignment implements Scannable, Serializable {
     private int id, expectedTime; // Expected time in hours
     Date publishedOn, deadline, availableTill;
     private String title;
@@ -66,6 +68,11 @@ public class Assignment implements Scannable {
         }
         
         return values;
+    }
+
+    @Override
+    public Map<String, Object> getStorableDataMap() {
+        return null;
     }
 
     @Override

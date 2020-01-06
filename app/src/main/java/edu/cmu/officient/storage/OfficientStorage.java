@@ -16,7 +16,7 @@ import java.util.Locale;
 import edu.cmu.officient.model.*;
 
 public abstract class OfficientStorage{
-    public static SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("dd/MM/yy HH:mm:ss", Locale.getDefault());
+    public static SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("dd/MM/yy HH:mm:ss", Locale.ENGLISH);
     public Assignment getAssignment(int id) { // Builds an object using the ID
         return new Assignment();
     }

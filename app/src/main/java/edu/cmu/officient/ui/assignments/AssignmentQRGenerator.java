@@ -42,7 +42,7 @@ public class AssignmentQRGenerator extends Fragment {
 
 
 
-    public AssignmentQRGenerator(AppCompatActivity activity,Assignment assignment) {
+    public AssignmentQRGenerator(AppCompatActivity activity, Assignment assignment) {
         this.activity = activity;
         this.assignment = assignment;
     }

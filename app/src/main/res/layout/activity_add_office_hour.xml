@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /*
+  ~  * @author Solange Iyubu
+  ~  * AndrewID : siyubu
+  ~  * Program : ECE
+  ~  *
+  ~  * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized assistance on this work.
+  ~  */
+  -->
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".ui.assignments.AddOfficeHours"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/page_assignment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:text="@string/add_oh"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:layout_alignParentTop="true"
+            />
+
+        <EditText
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:drawablePadding="@dimen/login_field_icon_padding"
+            android:hint="Description"
+            android:inputType="textShortMessage"
+            android:padding="20dp"
+            android:layout_below="@id/page_assignment"
+            />
+
+        <EditText
+            android:id="@+id/start_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:hint="@string/start_oh"
+            android:inputType="datetime"
+            android:padding="20dp"
+            android:layout_below="@id/description"/>
+
+        <EditText
+            android:id="@+id/end_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:hint="@string/end_time"
+            android:inputType="datetime"
+            android:padding="20dp"
+            android:layout_below="@id/start_time"/>
+
+        <EditText
+            android:id="@+id/venue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:hint="@string/venue"
+            android:padding="20dp"
+            android:layout_below="@id/end_time"/>
+
+        <Button
+            android:id="@+id/add_office_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:background="@drawable/primary_button_background"
+            android:text="@string/add_office_hours"
+            android:textColor="@color/white"
+            android:padding="20dp"
+            android:layout_below="@id/venue"/>
+
+        <ProgressBar
+            android:id="@+id/load"
+            android:layout_width="43dp"
+            android:layout_height="4dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="64dp"
+            android:layout_marginBottom="64dp"
+            android:visibility="gone"
+            android:layout_centerInParent="true"/>
+
+
+
+    </RelativeLayout>
+
+</ScrollView>

@@ -12,32 +12,31 @@ package edu.cmu.officient.model;
 
 import android.content.ContentValues;
 
+import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Map;
 
 import edu.cmu.officient.storage.OfficientLocalDbContract.*;
 import edu.cmu.officient.util.Time;
 
-public class OfficeHours implements Scannable {
-    private int id, day; // Day is a 0 based value of the day in the week
-    private String venue, description;
+public class OfficeHours implements Scannable, Serializable {
+    private int day; // Day is a 0 based value of the day in the week
+    private String venue, description, id, ownerId, courseId;
     private Time startAt, endAt;
-    private Course course;
-    private Instructor holder; // Instructor holding the office hours
 
     public OfficeHours() {
 
     }
 
-    public OfficeHours(int id, int day, String venue, String description,  Time startAt, Time endAt,
-                       Course course, Instructor holder) {
-        this.id = id;
+    public OfficeHours(String id, int day, String venue, String description,  String ownerId, String courseId, Time startAt, Time endAt) {
+        this.day = day;
         this.venue = venue;
         this.description = description;
-        this.day = day;
+        this.id = id;
+        this.ownerId = ownerId;
+        this.courseId = courseId;
         this.startAt = startAt;
         this.endAt = endAt;
-        this.course = course;
-        this.holder = holder;
     }
 
     @Override
@@ -66,24 +65,41 @@ public class OfficeHours implements Scannable {
     public ContentValues getStorableData() {
         ContentValues values = new ContentValues();
         values.put(ScannedOfficeHours.COL_OH_ID, id);
-        values.put(ScannedOfficeHours.COL_INSTRUCTOR, holder.getFullname());
-        values.put(ScannedOfficeHours.COL_INSTRUCTOR_ID, holder.getId());
-        if (course != null) {
-            values.put(ScannedOfficeHours.COL_COURSE_ID, course.getId());
-            values.put(ScannedOfficeHours.COL_COURSE_TITLE, course.getTitle());
-        }
+        values.put(ScannedOfficeHours.COL_INSTRUCTOR, ownerId);
+        values.put(ScannedOfficeHours.COL_COURSE_ID, courseId);
         return values;
+    }
+
+    @Override
+    public Map<String, Object> getStorableDataMap() {
+        return null;
     }
 
     public String getType(){
         return "Office Hours";
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public String getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public String getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
+    }
+
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -117,22 +133,6 @@ public class OfficeHours implements Scannable {
 
     public void setEndAt(Time endAt) {
         this.endAt = endAt;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-    public Instructor getHolder() {
-        return holder;
-    }
-
-    public void setHolder(Instructor holder) {
-        this.holder = holder;
     }
 
     public int getDay() {

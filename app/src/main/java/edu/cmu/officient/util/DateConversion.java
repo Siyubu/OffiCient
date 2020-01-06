@@ -32,7 +32,7 @@ public class DateConversion {
     }
 
     public String getStringDateTime (Date datetime, String separator) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy" + separator + "MM" + separator + "dd HH:mm:ss", Locale.getDefault());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy" + separator + "MM" + separator + "dd HH:mm:ss", Locale.ENGLISH);
         return format.format(datetime);
     }
 

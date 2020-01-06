@@ -23,6 +23,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import edu.cmu.officient.model.*;
 
@@ -38,7 +39,7 @@ public class ModelObjectBuilder {
                     converter.stringToDate(termDetails.getString("end_date")));
             List<OfficeHours> officeHours = new ArrayList<>();
 
-            if (object.has("ohrs")) {
+            /*if (object.has("ohrs")) {
                 JSONArray ohs = object.getJSONArray("ohrs");
                 Date date;
                 for (int i=0; i< ohs.length(); ++i) {
@@ -51,11 +52,12 @@ public class ModelObjectBuilder {
                     Instructor user = new Instructor(data.getInt("user_id"), data.getString("andrewId"), data.getString("name"), data.getString("alternative_email"),
                             data.getString("phoneNumber"));
 
-                    officeHours.add(new OfficeHours(data.getInt("id"), day, data.getString("venue"), data.getString("description"),
+                    officeHours.add(new OfficeHours("" + data.getInt("id"), day, data.getString("venue"), data.getString("description"),
                             converter.stringToTime((data.getString("scheduled_start_time"))), converter.stringToTime(data.getString("scheduled_end_time")), null, user));
 
                 }
-            }
+            }*/
+
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
             List<Assignment> assignments = new ArrayList<>();
             // Assignments
@@ -96,6 +98,21 @@ public class ModelObjectBuilder {
         }
         catch (JSONException e) {
             e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static OfficeHours buildOfficeHour(String id, Map<String, Object> data) {
+        if (data.containsKey("owner")) {
+            /*int day, String venue, String description,  Time startAt, Time endAt,
+                    Course course*/
+            DateConversion converter = new DateConversion();
+            Date date = converter.stringToDate(data.get("start_time").toString());
+            Calendar calendar = Calendar.getInstance(Locale.getDefault());
+            calendar.setTime(date);
+            int day = calendar.get(Calendar.DAY_OF_WEEK);
+            return new OfficeHours(id, day, data.get("venue").toString(), data.get("description").toString(), data.get("owner").toString(), data.get("course_id").toString(),
+                    converter.stringToTime(data.get("start_time").toString()), converter.stringToTime(data.get("end_time").toString()));
         }
         return null;
     }

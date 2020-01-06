@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /*
+  ~  * @author Segla Boladji Vinny Trinite Adjibi
+  ~  * AndrewID : vadjibi
+  ~  * Program : MSIT
+  ~  *
+  ~  * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized assistance on this work.
+  ~  */
+  -->
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="100dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="gone"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginBottom="20dp">
+                <TextView
+                    android:id="@+id/course_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+                <TextView
+                    android:id="@+id/term"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_below="@id/course_name"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"/>
+                <TextView
+                    android:id="@+id/separator"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black"
+                    android:layout_below="@id/term"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_below="@id/separator">
+                    <Button
+                        android:id="@+id/enroll_in"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/PrimaryFlatButton"
+                        android:text="@string/enroll"/>
+
+                    <Button
+                        android:id="@+id/add_assignment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/PrimaryFlatButton"
+                        android:text="@string/add_assignment"
+                        android:visibility="gone"/>
+                    <Button
+                        android:id="@+id/add_ta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/PrimaryFlatButton"
+                        android:text="@string/add_ta"
+                        android:visibility="gone"/>
+
+                    <Button
+                        android:id="@+id/view_statistics"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/PrimaryFlatButton"
+                        android:text="@string/view_statistics"
+                        android:visibility="gone"/>
+                </LinearLayout>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:id="@+id/ta_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/cardview"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:padding="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp">
+            <RelativeLayout
+                android:id="@+id/tas_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tas"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"
+                    android:layout_toLeftOf="@id/add_ta_btn"
+                    android:layout_toStartOf="@id/add_ta_btn"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"/>
+                <Button
+                    android:id="@+id/add_ta_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:drawableStart="@drawable/ic_add_circle_black_24dp"
+                    android:drawableLeft="@drawable/ic_add_circle_black_24dp"
+                    android:minWidth="25dp"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tas_not_found"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_data"
+                android:textStyle="italic"
+                android:layout_below="@id/tas_label"
+                android:visibility="gone" />
+
+            <edu.cmu.officient.ui.customviews.AdvancedRecyclerView
+                android:id="@+id/tas_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tas_label">
+
+            </edu.cmu.officient.ui.customviews.AdvancedRecyclerView>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/oh_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            app:layout_constraintTop_toBottomOf="@id/ta_container"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginBottom="20dp">
+            <RelativeLayout
+                android:id="@+id/oh_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/office_hours"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/add_office_hours_btn"
+                    android:layout_toStartOf="@id/add_office_hours_btn"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"/>
+
+                <Button
+                    android:id="@+id/add_office_hours_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:drawableStart="@drawable/ic_add_circle_black_24dp"
+                    android:drawableLeft="@drawable/ic_add_circle_black_24dp"
+                    android:minWidth="25dp"/>
+
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/oh_not_found"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_data"
+                android:textStyle="italic"
+                android:layout_below="@id/oh_label"
+                android:visibility="gone" />
+
+            <edu.cmu.officient.ui.customviews.AdvancedRecyclerView
+                android:id="@+id/oh_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/oh_label">
+
+            </edu.cmu.officient.ui.customviews.AdvancedRecyclerView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            app:layout_constraintTop_toBottomOf="@id/oh_container"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginBottom="20dp">
+            <RelativeLayout
+                android:id="@+id/assignment_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/assignments"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/add_assignment_btn"
+                    android:layout_toStartOf="@id/add_assignment_btn"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"/>
+                <Button
+                    android:id="@+id/add_assignment_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:drawableStart="@drawable/ic_add_circle_black_24dp"
+                    android:drawableLeft="@drawable/ic_add_circle_black_24dp"
+                    android:minWidth="25dp"/>
+            </RelativeLayout>
+
+            <edu.cmu.officient.ui.customviews.AdvancedRecyclerView
+                android:id="@+id/assignment_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/assignment_label">
+            </edu.cmu.officient.ui.customviews.AdvancedRecyclerView>
+
+            <TextView
+                android:id="@+id/hw_not_found"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_data"
+                android:textStyle="italic"
+                android:layout_below="@id/assignment_label"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

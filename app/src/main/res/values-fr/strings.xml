@@ -105,5 +105,10 @@
     <string name="start_oh">Start Time</string>
     <string name="venue">Venue</string>
     <string name="end_time">End Time</string>
-
+    <string name="assignment_title">Titre: %s</string>
+    <string name="object_deadline">Du le: %s</string>
+    <string name="object_desc">Description: %s</string>
+    <string name="oh_holder">Enseignant: %s</string>
+    <string name="time_and_venue">Held on: %s - <b>%s</b></string>
+    <string name="details">Details</string>
 </resources>

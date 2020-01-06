@@ -23,6 +23,7 @@ import edu.cmu.officient.networktasks.GetCandidateTAList;
 import edu.cmu.officient.networktasks.RequestTaskFactory;
 import edu.cmu.officient.networktasks.StandardRequestTask;
 import edu.cmu.officient.ui.courses.AddTADialogFragment;
+import edu.cmu.officient.ui.courses.CourseDetailActivity;
 
 public class AddTAListener implements View.OnClickListener {
     private AppCompatActivity activity;
@@ -34,7 +35,8 @@ public class AddTAListener implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        //AddTADialogFragment fragment = new AddTADialogFragment(activity, course);
-        //fragment.show(activity.getSupportFragmentManager(), "Pick a TA");
+        StandardRequestTask task = RequestTaskFactory.getTask(null, null, activity, null, "allStudents", "" + course.getId());
+        if (task != null)
+            task.execute("allStudents", "" + course.getId());
     }
 }

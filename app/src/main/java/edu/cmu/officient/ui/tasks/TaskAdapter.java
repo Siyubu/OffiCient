@@ -96,7 +96,5 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             taskDate = v.findViewById(R.id.task_started_time);
             stopTask = v.findViewById(R.id.manual_task_stop);
         }
-
-
     }
 }

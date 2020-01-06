@@ -8,9 +8,20 @@
  *
  */
 
+/*
+ *
+ *  * @author Segla Boladji Vinny Trinite Adjibi
+ *  * AndrewID : vadjibi
+ *  * Program : MSIT
+ *  *
+ *  * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized assistance on this work.
+ *
+ */
 
-package edu.cmu.officient.ui.courses;
 
+package edu.cmu.officient.ui.office_hours;
+
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +37,6 @@ import java.util.List;
 import java.util.Locale;
 
 import edu.cmu.officient.R;
-import edu.cmu.officient.model.Course;
 import edu.cmu.officient.model.OfficeHours;
 
 public class OfficeHoursAdapter extends RecyclerView.Adapter<OfficeHoursAdapter.ViewHolder> {
@@ -39,16 +49,18 @@ public class OfficeHoursAdapter extends RecyclerView.Adapter<OfficeHoursAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final OfficeHours oh = officeHours.get(position);
-        holder.title.setText(oh.getHolder().toString());
+        holder.title.setText(oh.getOwnerId());
         holder.day.setText(parentActivity.getString(R.string.oh_day_hours,
                 DateFormatSymbols.getInstance(Locale.getDefault()).getWeekdays()[oh.getDay()], oh.getStartAt(), oh.getEndAt()));
         holder.venue.setText(oh.getVenue());
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(parentActivity, OfficeHourDetailActivity.class);
+                intent.putExtra("office_hour", officeHours.get(position));
+                parentActivity.startActivity(intent);
             }
         });
     }

@@ -67,13 +67,12 @@ public class CoursesFragment extends Fragment {
         recyclerView = root.findViewById(R.id.courses_list);
 
         if (courses.size() == 0 ) {
-            StandardRequestTask task;
             String [] args;
             if (user.isFaculty())
                 args = new String[] {"coursesList", "" + user.getId()};
             else
                 args = new String[] {"coursesList"};
-            task = RequestTaskFactory.getTask(progressBar, root, activity, recyclerView, args);
+            StandardRequestTask task = RequestTaskFactory.getTask(progressBar, root, activity, recyclerView, args);
             if (task != null)
                 task.execute(args);
         }

@@ -18,6 +18,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,7 +27,7 @@ import javax.xml.transform.Templates;
 
 import edu.cmu.officient.util.DateConversion;
 
-public class Course /*implements Scannable*/ {
+public class Course implements Serializable /*implements Scannable*/ {
     private int id;
     private String title, code;
     private Term term;
@@ -109,6 +110,10 @@ public class Course /*implements Scannable*/ {
             return id==course.id && title.equals(course.title) && code.equals(course.code) && term.equals(course.term);
         }
         return false;
+    }
+
+    public void addOfficeHours(OfficeHours oh) {
+        officeHours.add(oh);
     }
 
     /*@Override

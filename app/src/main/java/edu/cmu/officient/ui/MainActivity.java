@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.FirebaseApp;
 
 import edu.cmu.officient.DBCommunication.CheckInternetConnection;
 import edu.cmu.officient.R;
@@ -35,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+/*
+        // Initialize Firebase
+        FirebaseApp.initializeApp(this);*/
+
         // Set up the Internet Connection class
         CheckInternetConnection checker = CheckInternetConnection.getInstance();
         checker.setContext(getApplicationContext()); // Set it to the application context so it doesn't leak
@@ -62,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == QRCodeScanner.QR_CODE_READER && data != null) {
             String output = data.getStringExtra("code");
             ScannedQRCode qrCode = ScannedCodeFactory.loadCode(output);
-            Toast.makeText(this, output, Toast.LENGTH_SHORT).show();
             if (qrCode != null) {
                 switch (manager.processScannedCode(qrCode)) {
                     case RUNNING:

@@ -1,90 +1,65 @@
 /*
  *
- *  * @author Solange Iyubu
- *  * AndrewID : siyubu
- *  * Program : MSECE
+ *  * @author Segla Boladji Vinny Trinite Adjibi
+ *  * AndrewID : vadjibi
+ *  * Program : MSIT
  *  *
  *  * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized assistance on this work.
- *
+ *  
  */
 
 package edu.cmu.officient.ui.assignments;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.graphics.Bitmap;
-import android.os.AsyncTask;
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.TimePicker;
-import android.widget.Toast;
-
-import com.google.zxing.WriterException;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import edu.cmu.officient.DBCommunication.RequestData;
 import edu.cmu.officient.R;
-import edu.cmu.officient.api.qrcode.QRImageGenerator;
-import edu.cmu.officient.model.Assignment;
 import edu.cmu.officient.model.Course;
 import edu.cmu.officient.networktasks.RequestTaskFactory;
 import edu.cmu.officient.networktasks.StandardRequestTask;
 import edu.cmu.officient.util.DateConversion;
 
-public class AddAssignmentFragment extends Fragment
-{
+public class AddAssignmentActivity extends AppCompatActivity {
 
-   // private Spinner selectCourse;
     private Button addAssignmentBtn;
     private EditText assign_title;
     private EditText expect_time;
     private EditText deadline;
     private EditText availability;
     private ProgressBar progressBar;
-   // private ArrayAdapter adapter;
-   // ArrayList<Course> courses;
-    private AppCompatActivity activity;
     Course selectedCourse;
 
-    public AddAssignmentFragment(AppCompatActivity activity,Course selectedCourse)
-    {
-       this.activity=activity;
-       this.selectedCourse=selectedCourse;
-    }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
-    {
-        final View view = inflater.inflate(R.layout.fragment_add_assigment, container, false);
-        progressBar =view.findViewById(R.id.load);
-        addAssignmentBtn=view.findViewById(R.id.add_course);
-        assign_title=view.findViewById(R.id.ass_title);
-        expect_time=view.findViewById(R.id.exp_time);
-        deadline=view.findViewById(R.id.due_date);
-        availability=view.findViewById(R.id.avail_time);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_add_assignment);
+        getSupportActionBar().setTitle(R.string.add_assignment);
+
+        Intent intent = getIntent();
+        selectedCourse = (Course) intent.getSerializableExtra("course");
+
+        progressBar =findViewById(R.id.load);
+        addAssignmentBtn=findViewById(R.id.add_course);
+        assign_title=findViewById(R.id.ass_title);
+        expect_time=findViewById(R.id.exp_time);
+        deadline=findViewById(R.id.due_date);
+        availability=findViewById(R.id.avail_time);
 
         addAssignmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,7 +68,7 @@ public class AddAssignmentFragment extends Fragment
                 SimpleDateFormat format = new SimpleDateFormat("", Locale.ENGLISH);
                 DateConversion converter = new DateConversion();
                 String date = converter.getStringDateTime(new Date(), "-");
-                StandardRequestTask task = RequestTaskFactory.getTask(progressBar, view, activity, null, "addAssignment");
+                StandardRequestTask task = RequestTaskFactory.getTask(progressBar, null, AddAssignmentActivity.this, null, "addAssignment");
                 if (task != null)
                     task.execute("addAssignment",assign_title.getText().toString(),deadline.getText().toString(),date,
                             availability.getText().toString(),expect_time.getText().toString(), selectedCourse.getId() + "");
@@ -113,7 +88,19 @@ public class AddAssignmentFragment extends Fragment
                     calendar_time(availability);
             }
         });
-        return view;
+
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("course", selectedCourse);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        selectedCourse = (Course) savedInstanceState.getSerializable("course");
     }
 
     private void calendar_time(final EditText editText)
@@ -124,7 +111,7 @@ public class AddAssignmentFragment extends Fragment
         int mMonth = c.get(Calendar.MONTH);
         int mDay = c.get(Calendar.DAY_OF_MONTH);
         // date picker dialog
-        DatePickerDialog datePickerDialog = new DatePickerDialog(activity,
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 new DatePickerDialog.OnDateSetListener() {
 
                     @Override
@@ -144,7 +131,7 @@ public class AddAssignmentFragment extends Fragment
         final Calendar c = Calendar.getInstance();
         int hour = c.get(Calendar.HOUR_OF_DAY);
         int minute = c.get(Calendar.MINUTE);
-        TimePickerDialog timePickerDialog = new TimePickerDialog(activity, new TimePickerDialog.OnTimeSetListener() {
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int i, int i1) {
                 // Append to the edittext

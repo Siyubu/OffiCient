@@ -23,17 +23,17 @@ import androidmads.library.qrgenearator.QRGEncoder;
 import edu.cmu.officient.util.Time;
 
 public abstract class QRBuilder {
-    private Integer id=0, ownerId=0, dayOfTheWeek=-1;
+    private Integer ownerId=0, dayOfTheWeek=-1;
     private ObjectType type;
-    private String name;
+    private String name, id;
     private Date deadline=null, availableTill=null, published_time=null;
     Time startAt, endAt;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
