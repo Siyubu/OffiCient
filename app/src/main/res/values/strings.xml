@@ -4,7 +4,7 @@
     <string name="title_activity_login">Sign in</string>
     <string name="action_register">Register now</string>
     <string name="prompt_email">Email</string>
-    <string name="alt_email">Alternative email address</string>
+    <string name="alternative_email">Alternative email address</string>
     <string name="prompt_phone_number">Phone number</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_name">Name</string>
@@ -112,5 +112,6 @@
     <string name="oh_holder">Enseignant: %s</string>
     <string name="time_and_venue">Held on: %s - <b>%s</b></string>
     <string name="details">Details</string>
+    <string name="courses">Courses</string>
 
 </resources>

@@ -22,8 +22,8 @@ package edu.cmu.officient.storage;
 
 import java.util.Date;
 
-import edu.cmu.officient.model.Scannable;
+import edu.cmu.officient.api.qrcode.ScannedQRCode;
 
 public interface AddData {
-    long addTaskRecord(Scannable scannable, Date date);
+    void addTaskRecord(ScannedQRCode code, Date date);
 }

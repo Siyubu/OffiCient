@@ -45,7 +45,7 @@ public class NavigationInitializer {
                         selected = new CoursesFragment(activity);
                         break;
                     case R.id.navigation_dashboard:
-                        selected = new DashboardFragment();
+                        selected = new DashboardFragment(activity);
                         break;
                     case R.id.navigation_notifications:
                         selected = new ProfileFragment(activity);

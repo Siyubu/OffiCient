@@ -17,6 +17,7 @@ import android.util.Log;
 
 import java.util.Date;
 
+import edu.cmu.officient.api.qrcode.ScannedQRCode;
 import edu.cmu.officient.model.*;
 import edu.cmu.officient.storage.OfficientLocalDbContract.*;
 
@@ -27,26 +28,26 @@ public class SQLiteStorage extends OfficientStorage implements AddData, ReadData
         this.database = database;
     }
 
-    public long addTaskRecord(Scannable scannable, Date date){
+    public void addTaskRecord(ScannedQRCode code, Date date){
         // Create the query and store the data
+        Scannable scannable = code.getData();
         ContentValues values = scannable.getStorableData();
 
         // Actual start date
         values.put(ScannedAssignment.COL_STARTED_AT, date.toString());
         try {
-            return database.insert(scannable.getLocalDatabaseName(), null, values);
+            database.insert(scannable.getCollectionName(), null, values);
         }
         catch (SQLException e) {
             Log.e(getClass().getSimpleName(), e.getMessage(), e);
         }
-        return -1;
     }
 
-    public void updateTaskRecord(long id, Date endDate, Scannable scannable) {
+    public void updateTaskRecord(String id, Date endDate, Scannable scannable) {
         ContentValues values = new ContentValues();
         values.put(ScannedAssignment.COL_LEFT_AT, endDate.toString());
         try {
-            database.update(scannable.getLocalDatabaseName(), values, ScannedAssignment._ID + " = " + id, null);
+            database.update(scannable.getCollectionName(), values, ScannedAssignment._ID + " = " + id, null);
         }
         catch (SQLException e) {
             Log.e(getClass().getSimpleName(), e.getMessage(), e);

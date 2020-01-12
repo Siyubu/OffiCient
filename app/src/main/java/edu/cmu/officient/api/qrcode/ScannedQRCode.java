@@ -23,7 +23,7 @@ public class ScannedQRCode {
     private TimerState state;
     private User owner; // Represents the owner of the QR Code (Generally an instructor)
     private Scannable data;
-    private long recordId = -1;
+    private String recordId = "";
 
     // Make it accessible from the package
     public final TimerState TIMER_INVALID = new TimerInvalid(this, ""), TIMER_STOPPING = new TimerStopping(this),
@@ -97,11 +97,11 @@ public class ScannedQRCode {
         this.data = data;
     }
 
-    public long getRecordId() {
+    public String getRecordId() {
         return recordId;
     }
 
-    public void setRecordId(long recordId) {
+    public void setRecordId(String recordId) {
         this.recordId = recordId;
     }
 }

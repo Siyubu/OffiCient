@@ -42,8 +42,8 @@ public class AssignmentQRBuilder extends QRBuilder {
         catch (BuilderException e) {
             e.fix();
         }
-        String text = String.format(Locale.getDefault(), "ID=%s\nNAME=%s\nTYPE=%s\nDEADLINE=%s\nAVAILABLE_TILL=%s\nPUBLISHED_DATE=%s",
-                getId(), getName(), getType(), getDeadline(), getAvailableTill(), getPublished_time());
+        String text = String.format(Locale.getDefault(), "ID=%s\nNAME=%s\nTYPE=%s\nDEADLINE=%s\nAVAILABLE_TILL=%s\nPUBLISHED_DATE=%s\nCOURSE_ID=%s",
+                getId(), getName(), getType(), getDeadline(), getAvailableTill(), getPublished_time(), getCourseId());
         return new QRGEncoder(text, null, QRGContents.Type.TEXT, 1000);
     }
 }

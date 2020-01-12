@@ -16,13 +16,14 @@ import androidx.annotation.Nullable;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
-import edu.cmu.officient.storage.*;
+import edu.cmu.officient.logic.ApplicationManager;
 import edu.cmu.officient.storage.OfficientLocalDbContract.*;
 
 public class Assignment implements Scannable, Serializable {
-    private int id, expectedTime; // Expected time in hours
+    private int id, expectedTime, courseId; // Expected time in hours
     Date publishedOn, deadline, availableTill;
     private String title;
     private Course course;
@@ -72,11 +73,16 @@ public class Assignment implements Scannable, Serializable {
 
     @Override
     public Map<String, Object> getStorableDataMap() {
-        return null;
+        Map<String, Object> data = new HashMap<>();
+        data.put("user", ApplicationManager.getInstance(null).getLoggedInUser().getAndrewId());
+        data.put("assignment_id", "" + id);
+        data.put("course_id", courseId);
+        data.put("title", title);
+        return data;
     }
 
     @Override
-    public String getLocalDatabaseName() {
+    public String getCollectionName() {
         return ScannedAssignment.TABLE_NAME;
     }
 
@@ -150,6 +156,14 @@ public class Assignment implements Scannable, Serializable {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
     }
 
     @Override

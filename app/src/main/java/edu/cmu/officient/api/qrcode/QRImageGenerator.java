@@ -52,6 +52,7 @@ public class QRImageGenerator {
             builder.setDeadline(assignment.getDeadline());
             builder.setAvailableTill(assignment.getAvailableTill());
             builder.setPublished_time(assignment.getPublishedOn());
+            builder.setCourseId("" + assignment.getCourse().getId());
 
             return builder.build().encodeAsBitmap();
         }
@@ -77,7 +78,8 @@ public class QRImageGenerator {
             builder.setEndAt(officeHours.getEndAt());
             builder.setDayOfTheWeek(officeHours.getDay());
             builder.setOwnerId(ApplicationManager.getInstance(context).getLoggedInUser().getId()); // QR Code is only seen by creator
-
+            builder.setAndrewId(officeHours.getOwnerId());
+            builder.setCourseId(officeHours.getCourseId());
             return builder.build().encodeAsBitmap();
         }
         return null; // Not handled now

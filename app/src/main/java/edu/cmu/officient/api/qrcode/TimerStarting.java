@@ -24,8 +24,7 @@ public class TimerStarting extends TimerState {
     @Override
     public void execute(Context context) {
         // Call the method to store the record to the database
-        long id = ApplicationManager.getInstance(context).storeTask(getScannedCode().getData());
+        ApplicationManager.getInstance(context).storeTask(getScannedCode());
         getScannedCode().setState(getScannedCode().TIMER_STARTED);
-        getScannedCode().setRecordId(id);
     }
 }

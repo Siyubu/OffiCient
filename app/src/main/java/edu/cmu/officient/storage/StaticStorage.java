@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import edu.cmu.officient.api.qrcode.ScannedQRCode;
 import edu.cmu.officient.model.*;
 
 public class StaticStorage extends OfficientStorage implements ReadData, UpdateData, DeleteData, AddData{
@@ -44,12 +45,12 @@ public class StaticStorage extends OfficientStorage implements ReadData, UpdateD
     }
 
     @Override
-    public long addTaskRecord(Scannable scannable, Date date) {
-        return 0;
+    public void addTaskRecord(ScannedQRCode code, Date date) {
+
     }
 
     @Override
-    public void updateTaskRecord(long id, Date endDate, Scannable scannable) {
+    public void updateTaskRecord(String id, Date endDate, Scannable scannable) {
 
     }
 

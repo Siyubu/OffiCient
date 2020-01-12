@@ -80,7 +80,7 @@ public class CourseDetailActivity extends AppCompatActivity {
             // Should depend on what's the user status with the course
             // Make a query to get the user role
             findViewById(R.id.ta_container).setVisibility(View.GONE); // Others should not see this
-            StandardRequestTask task = RequestTaskFactory.getTask(progressBar, null, this, null, "userRole");
+            StandardRequestTask task = RequestTaskFactory.getTask(progressBar, findViewById(android.R.id.content).getRootView(), this, null, "userRole");
             if (task != null)
                 task.execute("userRole", user.getAndrewId(), "" + course.getId());
         }

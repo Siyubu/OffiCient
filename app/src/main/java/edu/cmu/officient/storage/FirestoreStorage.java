@@ -11,9 +11,7 @@
 package edu.cmu.officient.storage;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -26,25 +24,27 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.Date;
 import java.util.Map;
 
+import edu.cmu.officient.api.qrcode.ScannedQRCode;
 import edu.cmu.officient.model.Scannable;
 import edu.cmu.officient.storage.OfficientLocalDbContract.ScannedAssignment;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class FirestoreStorage extends OfficientStorage implements AddData, ReadData, UpdateData, DeleteData {
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public long addTaskRecord(Scannable scannable, Date date){
+     synchronized public void addTaskRecord(final ScannedQRCode code, Date date){
         // Create the query and store the data
-
+        Scannable scannable = code.getData();
         Map<String, Object> data = scannable.getStorableDataMap();
-
-        db.collection(scannable.getLocalDatabaseName())
+        data.put("started_at", date);
+        db.collection(scannable.getCollectionName())
                 .add(data)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                        code.setRecordId(documentReference.getId());
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -53,26 +53,23 @@ public class FirestoreStorage extends OfficientStorage implements AddData, ReadD
                         Log.w(TAG, "Error adding document", e);
                     }
                 });
-
-        // Actual start date
-        values.put(ScannedAssignment.COL_STARTED_AT, date.toString());
-        try {
-            return database.insert(scannable.getLocalDatabaseName(), null, values);
-        }
-        catch (SQLException e) {
-            Log.e(getClass().getSimpleName(), e.getMessage(), e);
-        }
-        return -1;
     }
 
-    public void updateTaskRecord(long id, Date endDate, Scannable scannable) {
-        ContentValues values = new ContentValues();
-        values.put(ScannedAssignment.COL_LEFT_AT, endDate.toString());
-        try {
-            //database.update(scannable.getLocalDatabaseName(), values, ScannedAssignment._ID + " = " + id, null);
-        }
-        catch (SQLException e) {
-            Log.e(getClass().getSimpleName(), e.getMessage(), e);
-        }
+    public void updateTaskRecord(String id, Date endDate, Scannable scannable) {
+        db.collection(scannable.getCollectionName())
+                .document(id)
+                .update("ended_at", endDate)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void vdd) {
+                        Log.d(TAG, "Updated successfully");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
     }
 }

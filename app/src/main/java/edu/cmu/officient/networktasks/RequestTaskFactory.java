@@ -12,6 +12,7 @@ package edu.cmu.officient.networktasks;
 
 import android.view.View;
 import android.widget.AutoCompleteTextView;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,7 +27,7 @@ public class RequestTaskFactory {
             case "login":
                 return new LogUserInTask(activity, root, progress);
             case "signup":
-                return new RegisterUserTask(activity, root, progress);
+                return new RegisterUserTask(activity, root, progress, args[1], args[2]);
             case "update_profile":
                 return new UpdateProfileTask(activity, root, progress, args);
             case "enrollStudent":

@@ -13,11 +13,8 @@ package edu.cmu.officient.storage;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,6 +24,7 @@ import java.util.Date;
 import java.util.List;
 
 import edu.cmu.officient.DBCommunication.RequestData;
+import edu.cmu.officient.api.qrcode.ScannedQRCode;
 import edu.cmu.officient.model.Assignment;
 import edu.cmu.officient.model.Course;
 import edu.cmu.officient.model.Instructor;
@@ -34,7 +32,6 @@ import edu.cmu.officient.model.OfficeHours;
 import edu.cmu.officient.model.Scannable;
 import edu.cmu.officient.model.Student;
 import edu.cmu.officient.model.Term;
-import edu.cmu.officient.util.DateConversion;
 
 public class RemoteStorage extends OfficientStorage implements ReadData, UpdateData, DeleteData, AddData{
     Context context;
@@ -62,13 +59,13 @@ public class RemoteStorage extends OfficientStorage implements ReadData, UpdateD
         return new Course(1, "Design Patterns for SD", "18785", term, instructors, new ArrayList<Student>(), new ArrayList<OfficeHours>());
     }
     @Override
-    public void updateTaskRecord(long id, Date endDate, Scannable scannable) {
+    public void updateTaskRecord(String id, Date endDate, Scannable scannable) {
 
     }
 
     @Override
-    public long addTaskRecord(Scannable scannable, Date date) {
-        return 0;
+    public void addTaskRecord(ScannedQRCode code, Date date) {
+
     }
 
     private class GetAssignment extends AsyncTask<String, String, String> {

@@ -12,10 +12,14 @@ package edu.cmu.officient.model;
 
 import android.content.ContentValues;
 
+import androidx.annotation.Nullable;
+
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Map;
 
+import edu.cmu.officient.logic.ApplicationManager;
 import edu.cmu.officient.storage.OfficientLocalDbContract.*;
 import edu.cmu.officient.util.Time;
 
@@ -57,7 +61,7 @@ public class OfficeHours implements Scannable, Serializable {
     }
 
     @Override
-    public String getLocalDatabaseName() {
+    public String getCollectionName() {
         return ScannedOfficeHours.TABLE_NAME;
     }
 
@@ -72,7 +76,12 @@ public class OfficeHours implements Scannable, Serializable {
 
     @Override
     public Map<String, Object> getStorableDataMap() {
-        return null;
+        Map<String, Object> data = new HashMap<>();
+        data.put("user", ApplicationManager.getInstance(null).getLoggedInUser().getAndrewId());
+        data.put("office_hour_id", "" + id);
+        data.put("held_by", ownerId);
+        data.put("course_id", courseId);
+        return data;
     }
 
     public String getType(){
@@ -143,11 +152,24 @@ public class OfficeHours implements Scannable, Serializable {
         this.day = day;
     }
 
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (obj instanceof OfficeHours) {
+            OfficeHours o = (OfficeHours) obj;
+            /*private int day; // Day is a 0 based value of the day in the week
+            private String venue, description, id, ownerId, courseId;
+            private Time startAt, endAt;*//*
+            boolean ans = id.equals(o.id) && expectedTime==o.expectedTime && publishedOn.equals(o.publishedOn) &&
+                    deadline.equals(o.deadline) && availableTill.equals(o.availableTill) && title.equals(o.title);
+            return ans;*/
+            return id.equals(o.id);
+        }
+        return false;
+    }
 
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        return "OfficeHours{}";
+        return "Office Hours - " + ownerId;
     }
 }

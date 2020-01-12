@@ -22,7 +22,6 @@ package edu.cmu.officient.ui.office_hours;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,7 +32,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,12 +39,8 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -55,14 +49,11 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import edu.cmu.officient.DBCommunication.RequestData;
 import edu.cmu.officient.R;
 import edu.cmu.officient.logic.ApplicationManager;
 import edu.cmu.officient.model.Course;
-import edu.cmu.officient.model.OfficeHours;
 import edu.cmu.officient.networktasks.RequestTaskFactory;
 import edu.cmu.officient.networktasks.StandardRequestTask;
-import edu.cmu.officient.ui.assignments.AddAssignmentFragment;
 import edu.cmu.officient.util.DateConversion;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;

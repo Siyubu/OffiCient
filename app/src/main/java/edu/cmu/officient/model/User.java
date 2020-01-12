@@ -13,37 +13,39 @@ package edu.cmu.officient.model;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.firebase.firestore.PropertyName;
+
 import java.io.Serializable;
 
 public class User implements Serializable {
-    private final String EMAIL_PREFIX = "andrew.cmu.edu";
+    public static final String EMAIL_SUFFIX = "@andrew.cmu.edu";
     private int id;
-    private String andrewId, fullname, altEmail, phoneNumber;
-    private boolean isFaculty;
+    private String andrew_id, fullname, alternative_email, phone_number;
+    private boolean faculty;
 
     public User(){
 
     }
 
-    public User(int id, String andrewId, String fullname, String altEmail, String phoneNumber) {
+    public User(int id, String andrew_id, String fullname, String alternative_email, String phone_number) {
         this.id = id;
-        this.andrewId = andrewId;
+        this.andrew_id = andrew_id;
         this.fullname = fullname;
-        this.altEmail = altEmail;
-        this.phoneNumber = phoneNumber;
+        this.alternative_email = alternative_email;
+        this.phone_number = phone_number;
     }
 
-    public User(int id, String andrewId, String fullname, String altEmail, String phoneNumber, boolean isFaculty) {
-        this(id, andrewId, fullname, altEmail, phoneNumber);
-        this.isFaculty = isFaculty;
+    public User(int id, String andrew_id, String fullname, String alternative_email, String phone_number, boolean faculty) {
+        this(id, andrew_id, fullname, alternative_email, phone_number);
+        this.faculty = faculty;
     }
 
     public boolean isFaculty(){
-        return isFaculty;
+        return faculty;
     }
 
     public void setFaculty(boolean faculty) {
-        isFaculty = faculty;
+        this.faculty = faculty;
     }
 
     public int getId() {
@@ -54,12 +56,14 @@ public class User implements Serializable {
         this.id = id;
     }
 
+    @PropertyName("andrew_id")
     public String getAndrewId() {
-        return andrewId;
+        return andrew_id;
     }
 
-    public void setAndrewId(String andrewId) {
-        this.andrewId = andrewId;
+    @PropertyName("andrew_id")
+    public void setAndrewId(String andrew_id) {
+        this.andrew_id = andrew_id;
     }
 
     public String getFullname() {
@@ -71,29 +75,33 @@ public class User implements Serializable {
     }
 
     public String getEmail() {
-        return andrewId + "@" + EMAIL_PREFIX;
+        return andrew_id + "@" + EMAIL_SUFFIX;
     }
 
-    public String getAltEmail() {
-        return altEmail;
+    @PropertyName("alternative_email")
+    public String getAlternativeEmail() {
+        return alternative_email;
     }
 
-    public void setAltEmail(String altEmail) {
-        this.altEmail = altEmail;
+    @PropertyName("alternative_email")
+    public void setAlternativeEmail(String alternative_email) {
+        this.alternative_email = alternative_email;
     }
 
+    @PropertyName("phone_number")
     public String getPhoneNumber() {
-        return phoneNumber;
+        return phone_number;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    @PropertyName("phone_number")
+    public void setPhoneNumber(String phone_number) {
+        this.phone_number = phone_number;
     }
 
     @Override
     public boolean equals(@Nullable Object obj) {
         if (obj instanceof User) {
-            return andrewId.equals(((User) obj).andrewId);
+            return andrew_id.equals(((User) obj).andrew_id);
         }
         return false;
     }
@@ -102,7 +110,7 @@ public class User implements Serializable {
     @Override
     public String toString() {
         if (fullname == null || fullname.equals(""))
-            return andrewId;
+            return andrew_id;
         return fullname;
     }
 }

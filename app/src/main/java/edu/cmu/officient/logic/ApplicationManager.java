@@ -22,8 +22,8 @@ package edu.cmu.officient.logic;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,8 +36,7 @@ import edu.cmu.officient.R;
 import edu.cmu.officient.api.qrcode.ScannedQRCode;
 import edu.cmu.officient.model.Scannable;
 import edu.cmu.officient.model.User;
-import edu.cmu.officient.storage.OfficientLocalDbHelper;
-import edu.cmu.officient.storage.SQLiteStorage;
+import edu.cmu.officient.storage.FirestoreStorage;
 
 public class ApplicationManager {
     private static ApplicationManager APPLICATION_MANAGER;
@@ -120,6 +119,19 @@ public class ApplicationManager {
         editor.apply();
     }
 
+    public void logUserIn(User user) {
+        SharedPreferences preferences = context.getSharedPreferences(context.getString(R.string.prefs_file_name), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        // Start storing all the data
+        editor.putInt("user.id", user.getId())
+                .putString("user.andrew_id", user.getAndrewId())
+                .putString("user.name", user.getFullname())
+                .putString("user.alt_email", user.getAlternativeEmail())
+                .putString("user.phone_number", user.getPhoneNumber())
+                .putBoolean("user.is_faculty", user.isFaculty());
+        editor.apply();
+    }
+
     public boolean logUserOut(){
         SharedPreferences preferences = context.getSharedPreferences(context.getString(R.string.prefs_file_name), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
@@ -130,6 +142,8 @@ public class ApplicationManager {
         editor.remove("user.alt_email");
         editor.remove("user.phone_number");
         editor.apply();
+
+        FirebaseAuth.getInstance().signOut();
         return true;
     }
 
@@ -150,18 +164,21 @@ public class ApplicationManager {
         return LOGGED_IN_USER;
     }
 
-    public long storeTask(Scannable scannable) {
+    public void storeTask(ScannedQRCode code) {
         Date now = new Date();
+        Scannable scannable = code.getData();
         // For the static storage only
-        SQLiteDatabase database = new OfficientLocalDbHelper(context).getWritableDatabase();
+        /*SQLiteDatabase database = new OfficientLocalDbHelper(context).getWritableDatabase();
         SQLiteStorage storage = new SQLiteStorage(database);
-        return storage.addTaskRecord(scannable, now);
+        return storage.addTaskRecord(code, now);*/
+        new FirestoreStorage().addTaskRecord(code, now);
     }
 
-    public void endTask(Scannable scannable, long id) {
+    public void endTask(Scannable scannable, String id) {
         Date now = new Date();
-        SQLiteDatabase database = new OfficientLocalDbHelper(context).getWritableDatabase();
+        /*SQLiteDatabase database = new OfficientLocalDbHelper(context).getWritableDatabase();
         SQLiteStorage storage = new SQLiteStorage(database);
-        storage.updateTaskRecord(id, now, scannable);
+        storage.updateTaskRecord(id, now, scannable);*/
+        new FirestoreStorage().updateTaskRecord(id, now, scannable);
     }
 }

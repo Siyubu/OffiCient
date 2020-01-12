@@ -25,5 +25,5 @@ import java.util.Date;
 import edu.cmu.officient.model.Scannable;
 
 public interface UpdateData {
-    void updateTaskRecord(long id, Date endDate, Scannable scannable);
+    void updateTaskRecord(String id, Date endDate, Scannable scannable);
 }

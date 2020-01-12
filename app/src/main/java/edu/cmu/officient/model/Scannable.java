@@ -19,7 +19,7 @@ public interface Scannable {
     boolean isInRange();
     boolean userCanAccess(int id);
     String getType();
-    String getLocalDatabaseName();
+    String getCollectionName();
     ContentValues getStorableData();
     Map<String, Object> getStorableDataMap();
 }

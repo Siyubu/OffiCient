@@ -25,7 +25,7 @@ import edu.cmu.officient.util.Time;
 public abstract class QRBuilder {
     private Integer ownerId=0, dayOfTheWeek=-1;
     private ObjectType type;
-    private String name, id;
+    private String name, id, andrewId, courseId;
     private Date deadline=null, availableTill=null, published_time=null;
     Time startAt, endAt;
 
@@ -107,6 +107,22 @@ public abstract class QRBuilder {
 
     public void setDayOfTheWeek(Integer dayOfTheWeek) {
         this.dayOfTheWeek = dayOfTheWeek;
+    }
+
+    public String getAndrewId() {
+        return andrewId;
+    }
+
+    public void setAndrewId(String andrewId) {
+        this.andrewId = andrewId;
+    }
+
+    public String getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
     }
 
     public abstract QRGEncoder build();

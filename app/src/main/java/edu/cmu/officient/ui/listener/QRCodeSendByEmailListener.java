@@ -47,7 +47,7 @@ public class QRCodeSendByEmailListener implements View.OnClickListener  {
             boolean result = QRGSaver.save(directory+"/", filename, bitmap, QRGContents.ImageType.IMAGE_PNG);
             if (result) {
                 User currentUser = ApplicationManager.getInstance(context).getLoggedInUser();
-                String [] emails = new String[] {currentUser.getEmail(), currentUser.getAltEmail()} ;
+                String [] emails = new String[] {currentUser.getEmail(), currentUser.getAlternativeEmail()} ;
                 String subject = "Your QR Code";
                 File file = new File(directory + "/" + filename + ".png");
                 Intent emailIntent = new Intent(Intent.ACTION_SEND);

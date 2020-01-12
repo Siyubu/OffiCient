@@ -32,9 +32,22 @@ public class ScannedCodeFactory {
             // Collect the type and process it
             ObjectType type = ObjectType.fromString(properties.getProperty("TYPE"));
             // Get the common data as well
-            int id = Integer.parseInt(properties.getProperty("ID"));
-            String stringID = properties.getProperty("ID");
-            String name = properties.getProperty("NAME");
+            int id=0, courseId=0;
+            try {
+                id = Integer.parseInt(properties.getProperty("ID"));
+            }
+            catch (NumberFormatException e) {
+                /* */
+            }
+            String stringID = "", name = "";
+            try {
+                id = Integer.parseInt(properties.getProperty("ID"));
+                courseId = Integer.parseInt(properties.getProperty("COURSE_ID"));
+                name = properties.getProperty("NAME");
+            }
+            catch (NumberFormatException e) {
+                stringID = properties.getProperty("ID");
+            }
 
             SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
             switch (type){
@@ -43,22 +56,26 @@ public class ScannedCodeFactory {
                     Date deadline = formatter.parse(properties.getProperty("DEADLINE")),
                             availableTill = formatter.parse(properties.getProperty("AVAILABLE_TILL")),
                             publishedOn = formatter.parse(properties.getProperty("PUBLISHED_DATE"));
-
                     Assignment assignment = new Assignment();
                     assignment.setId(id);
                     assignment.setTitle(name);
                     assignment.setAvailableTill(availableTill);
                     assignment.setDeadline(deadline);
                     assignment.setPublishedOn(publishedOn);
+                    assignment.setCourseId(courseId);
                     return new ScannedQRCode(assignment);
                 case OFFICE_HOURS:
                     Time startAt= Time.parse(properties.getProperty("START_AT")), endAt = Time.parse(properties.getProperty("END_AT"));
-                    int day = Integer.parseInt(properties.getProperty("DAY")), instructorId = Integer.parseInt(properties.getProperty("OWNER_ID"));
+                    int day = Integer.parseInt(properties.getProperty("DAY")); //, instructorId = Integer.parseInt(properties.getProperty("OWNER_ID"));
+                    String andrew = properties.getProperty("ANDREW_ID");
                     OfficeHours officeHours = new OfficeHours();
                     officeHours.setId(stringID);
                     officeHours.setStartAt(startAt);
                     officeHours.setEndAt(endAt);
                     officeHours.setDay(day);
+                    Log.e("TEST", properties.toString());
+                    officeHours.setCourseId(properties.getProperty("COURSE_ID"));
+                    officeHours.setOwnerId(andrew);
                     return new ScannedQRCode(officeHours);
             }
         }

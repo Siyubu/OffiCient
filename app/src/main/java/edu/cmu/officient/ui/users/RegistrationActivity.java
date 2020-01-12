@@ -35,15 +35,25 @@ public class RegistrationActivity extends AppCompatActivity {
         completeRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(CheckInternetConnection.getInstance().isAvailable()){
-                    StandardRequestTask task = RequestTaskFactory.getTask(progressBar, findViewById(android.R.id.content).getRootView(), RegistrationActivity.this, null, "signup");
-                    if (task != null)
-                        task.execute("signup",username.getText().toString(),password.getText().toString());
+                if (checkFields()) {
+                    if(CheckInternetConnection.getInstance().isAvailable()){
+                        StandardRequestTask task = RequestTaskFactory.getTask(progressBar, findViewById(android.R.id.content).getRootView(), RegistrationActivity.this, null, "signup", username.getText().toString(), password.getText().toString());
+                        if (task != null)
+                            task.execute("signup",username.getText().toString(),password.getText().toString());
+                    }
+                    else{
+                        Toast.makeText(RegistrationActivity.this, "Unable to connect to the network", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
-                else{
-                    Toast.makeText(RegistrationActivity.this, "Unable to connect to the network", Toast.LENGTH_SHORT).show();
+                else {
+                    Toast.makeText(RegistrationActivity.this, "Password should be at least 8 characters.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    private boolean checkFields(){
+        return password.getText().length() >= 8;
     }
 }

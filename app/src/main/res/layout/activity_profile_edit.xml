@@ -74,7 +74,7 @@
         android:id="@+id/textAltEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/alt_email" />
+        android:text="@string/alternative_email" />
 
     <Space
         android:layout_width="match_parent"

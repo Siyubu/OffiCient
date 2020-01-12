@@ -21,16 +21,25 @@
 package edu.cmu.officient.ui.users;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import edu.cmu.officient.R;
 import edu.cmu.officient.logic.ApplicationManager;
 import edu.cmu.officient.model.User;
@@ -57,7 +66,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         final View root = inflater.inflate(R.layout.fragment_profile, container, false);
-        User user = ApplicationManager.getInstance(activity).getLoggedInUser();
+        final User user = ApplicationManager.getInstance(activity).getLoggedInUser();
         final EditText andrewId = root.findViewById(R.id.field_andrewId);
         name = root.findViewById(R.id.field_name);
         altEmail = root.findViewById(R.id.field_alt_email);
@@ -68,7 +77,7 @@ public class ProfileFragment extends Fragment {
         logout = root.findViewById(R.id.logout);
         andrewId.setText(user.getAndrewId());
         name.setText(user.getFullname());
-        altEmail.setText(user.getAltEmail());
+        altEmail.setText(user.getAlternativeEmail());
         phoneNumber.setText(user.getPhoneNumber());
         update.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,10 +89,29 @@ public class ProfileFragment extends Fragment {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                update.setEnabled(true);
+                /*update.setEnabled(true);
                 StandardRequestTask task = RequestTaskFactory.getTask(done, root, activity, null, "update_profile", andrewId.getText().toString(), name.getText().toString(), altEmail.getText().toString(), phoneNumber.getText().toString(),password.getText().toString());
                 if (task != null)
                     task.execute("update_profile", andrewId.getText().toString(), name.getText().toString(), altEmail.getText().toString(), phoneNumber.getText().toString(),password.getText().toString());
+                */
+                // Save the fields to the Firestore database
+                Map<String, Object> data = new HashMap<>();
+                data.put("alternative_email", altEmail.getText().toString());
+                data.put("fullname", name.getText().toString());
+                data.put("phone_number", phoneNumber.getText().toString());
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                db.collection("users")
+                        .document(user.getAndrewId())
+                        .update(data)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (! task.isSuccessful())
+                                    Toast.makeText(activity, "Error occured while processing your request. Please try again later.", Toast.LENGTH_SHORT).show();
+                                else
+                                    Toast.makeText(activity, "Profile updated.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                 disableFields();
             }
         });
