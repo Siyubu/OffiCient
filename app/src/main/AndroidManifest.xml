@@ -15,11 +15,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.office_hours.AddOfficeHourActivity"></activity>
-        <activity android:name=".ui.office_hours.OfficeHourDetailActivity" />
-        <activity android:name=".ui.assignments.AssignmentDetailActivity" />
-        <activity android:name=".ui.assignments.AddAssignmentActivity" />
-        <activity android:name=".ui.courses.CourseDetailActivity" />
+        <activity android:name=".ui.office_hours.AddOfficeHourActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.courses.CourseDetailActivity" />
+        </activity>
+        <activity android:name=".ui.office_hours.OfficeHourDetailActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.courses.CourseDetailActivity" />
+        </activity>
+        <activity android:name=".ui.assignments.AssignmentDetailActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.courses.CourseDetailActivity" />
+        </activity>
+        <activity android:name=".ui.assignments.AddAssignmentActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.courses.CourseDetailActivity" />
+        </activity>
+        <activity android:name=".ui.courses.CourseDetailActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.MainActivity" />
+        </activity>
 
         <service
             android:name=".misc.DataPersistenceService"
