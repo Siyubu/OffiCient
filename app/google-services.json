@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "694646678589",
+    "firebase_url": "https://officient-d6792.firebaseio.com",
+    "project_id": "officient-d6792",
+    "storage_bucket": "officient-d6792.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:694646678589:android:246a2a4bd5de8291bff654",
+        "android_client_info": {
+          "package_name": "edu.cmu.officient"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "694646678589-2ree0pcv8dod7nkv49h3eo54dutllm74.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYfgG_CvQRroFCkNBaQs32Cm_vBLUvMOQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "694646678589-2ree0pcv8dod7nkv49h3eo54dutllm74.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
