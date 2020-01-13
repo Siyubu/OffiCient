@@ -131,7 +131,7 @@ public class CourseDetailActivity extends AppCompatActivity {
         enroll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                StandardRequestTask task = RequestTaskFactory.getTask(progressBar, null, CourseDetailActivity.this, null, "enrollStudent");
+                StandardRequestTask task = RequestTaskFactory.getTask(progressBar, getWindow().getDecorView().getRootView(), CourseDetailActivity.this, null, "enrollStudent");
                 if (task != null)
                     task.execute("enrollStudent", user.getAndrewId(), "" + course.getId());
             }

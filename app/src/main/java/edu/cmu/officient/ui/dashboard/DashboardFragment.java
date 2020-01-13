@@ -109,36 +109,66 @@ public class DashboardFragment extends Fragment {
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 CollectionReference assignments = db.collection("assignment_records"), ohrs = db.collection("office_hours_records");
                 assignments.whereEqualTo("course_id", course_id);
-                if ( !user.isFaculty())
-                    assignments.whereEqualTo("user", user.getAndrewId());
-
-                assignments.get()
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                e.printStackTrace();
-                            }
-                        })
-                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                            @Override
-                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                StringBuilder builder = new StringBuilder("title;student_id;started_at;ended_at\n");
-                                for (DocumentSnapshot snapshot : queryDocumentSnapshots) {
-                                    builder.append("\"");
-                                    builder.append(snapshot.getString("title"));
-                                    builder.append("\"");
-                                    builder.append(",");
-                                    builder.append(snapshot.getString("user"));
-                                    builder.append(",");
-                                    builder.append(snapshot.getDate("started_at"));
-                                    builder.append(",");
-                                    builder.append(snapshot.getDate("ended_at"));
-                                    builder.append("\n");
+                if ( ! user.isFaculty()) {
+                    assignments.whereEqualTo("user", user.getAndrewId())
+                            .get()
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    e.printStackTrace();
                                 }
-                                ass_line = builder.toString();
-                                addCompleted();
-                            }
-                        });
+                            })
+                            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                @Override
+                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                    StringBuilder builder = new StringBuilder("title;student_id;started_at;ended_at\n");
+                                    for (DocumentSnapshot snapshot : queryDocumentSnapshots) {
+                                        builder.append("\"");
+                                        builder.append(snapshot.getString("title"));
+                                        builder.append("\"");
+                                        builder.append(",");
+                                        builder.append(snapshot.getString("user"));
+                                        builder.append(",");
+                                        builder.append(snapshot.getDate("started_at"));
+                                        builder.append(",");
+                                        builder.append(snapshot.getDate("ended_at"));
+                                        builder.append("\n");
+                                    }
+                                    ass_line = builder.toString();
+                                    addCompleted();
+                                }
+                            });
+                }
+                else {
+                    assignments
+                            .get()
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    e.printStackTrace();
+                                }
+                            })
+                            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                @Override
+                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                    StringBuilder builder = new StringBuilder("title;student_id;started_at;ended_at\n");
+                                    for (DocumentSnapshot snapshot : queryDocumentSnapshots) {
+                                        builder.append("\"");
+                                        builder.append(snapshot.getString("title"));
+                                        builder.append("\"");
+                                        builder.append(",");
+                                        builder.append(snapshot.getString("user"));
+                                        builder.append(",");
+                                        builder.append(snapshot.getDate("started_at"));
+                                        builder.append(",");
+                                        builder.append(snapshot.getDate("ended_at"));
+                                        builder.append("\n");
+                                    }
+                                    ass_line = builder.toString();
+                                    addCompleted();
+                                }
+                            });
+                }
 
                 // Office hours here
                 if (user.isFaculty()) {
