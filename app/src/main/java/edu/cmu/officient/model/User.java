@@ -75,7 +75,7 @@ public class User implements Serializable {
     }
 
     public String getEmail() {
-        return andrew_id + "@" + EMAIL_SUFFIX;
+        return andrew_id + EMAIL_SUFFIX;
     }
 
     @PropertyName("alternative_email")
