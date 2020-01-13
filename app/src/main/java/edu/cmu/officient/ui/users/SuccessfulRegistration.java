@@ -26,6 +26,7 @@ public class SuccessfulRegistration extends AppCompatActivity {
                 //manager.log
                 Intent intent = new Intent(SuccessfulRegistration.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
