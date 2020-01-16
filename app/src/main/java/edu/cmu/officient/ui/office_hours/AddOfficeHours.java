@@ -89,10 +89,10 @@ public class AddOfficeHours extends Fragment {
                DateConversion converter = new DateConversion();
                String date = converter.getStringDateTime(new Date(), "-");
                StandardRequestTask task = RequestTaskFactory.getTask(progressBar, view, activity, null, "addOfficeHours");
-               if (task != null)
+               /*if (task != null)
                    task.execute("addOfficeHours",description.getText().toString(),venue.getText().toString(),start_time.getText().toString(),
                            end_time.getText().toString(), selected_course.getId() + "", "" + ApplicationManager.getInstance(activity).getLoggedInUser().getAndrewId());
-               // Adding with Firestore
+*/               // Adding with Firestore
 
                /*FirebaseApp.initializeApp(activity);*/
                FirebaseFirestore db = FirebaseFirestore.getInstance();

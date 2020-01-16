@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.cmu.officient.util.Constants;
+
 public class RequestData {
 
     private String apiLink;
@@ -41,7 +43,7 @@ public class RequestData {
                 httpParams.put(attributes[i], arguments[i]);
             }
             jsonObject = httpJsonParser.makeHttpRequest(
-                    "http://gamfruits.com/officient_api/functions.php", "POST", httpParams);
+                    Constants.API_LINK, "POST", httpParams);
         }
         else{
             jsonObject = null;

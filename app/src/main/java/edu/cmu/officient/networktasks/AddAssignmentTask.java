@@ -43,6 +43,9 @@ public class AddAssignmentTask extends StandardRequestTask {
             // Navigate to the CourseDetail Fragment
             /*getBaseActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CoursesFragment()).commit();*/
         }
+        else {
+            Toast.makeText(getBaseActivity(), "Unexpected error occured", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

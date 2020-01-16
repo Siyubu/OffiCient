@@ -73,7 +73,8 @@ public class JSONProtocol {
             StringBuilder sb = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
-                sb.append(line + "\n");
+                sb.append(line);
+                sb.append("\n");
             }
             is.close();
             json = sb.toString();

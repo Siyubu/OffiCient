@@ -24,6 +24,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -65,10 +66,12 @@ public class AddOfficeHourActivity extends AppCompatActivity {
         end_time = findViewById(R.id.end_time);
         venue = findViewById(R.id.venue);
         description = findViewById(R.id.description);
-        Button add_course_btn = findViewById(R.id.add_office_btn);
+        final Button add_course_btn = findViewById(R.id.add_office_btn);
         add_course_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
+                add_course_btn.setEnabled(false);
                 SimpleDateFormat format = new SimpleDateFormat("", Locale.ENGLISH);
                 DateConversion converter = new DateConversion();
                 String date = converter.getStringDateTime(new Date(), "-");
@@ -95,12 +98,16 @@ public class AddOfficeHourActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
                                 Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                Toast.makeText(AddOfficeHourActivity.this, "Added successfully", Toast.LENGTH_SHORT).show();
+                                finish();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Log.w(TAG, "Error adding document", e);
+                                add_course_btn.setEnabled(true);
+                                progressBar.setVisibility(View.GONE);
                             }
                         });
             }

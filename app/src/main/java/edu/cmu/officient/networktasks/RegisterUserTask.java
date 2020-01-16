@@ -40,10 +40,12 @@ public class RegisterUserTask extends StandardRequestTask {
 
     @Override
     protected String getOutput() {
+        Log.e("DATA", getData().toString());
         try {
             return getData().getString("message");
         }
         catch (JSONException e) {
+            e.printStackTrace();
             return  "error";
         }
     }
@@ -53,7 +55,7 @@ public class RegisterUserTask extends StandardRequestTask {
         if(s.equalsIgnoreCase("already_registered")){
             Toast.makeText(getBaseActivity(), "User is already registered", Toast.LENGTH_SHORT).show();
         }
-        else{
+        else if (s.equals("success")){
             // Save to Firebase
             FirebaseAuth auth = FirebaseAuth.getInstance();
             auth.createUserWithEmailAndPassword(username + User.EMAIL_SUFFIX, password)

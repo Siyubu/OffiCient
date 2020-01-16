@@ -57,8 +57,13 @@ public class CourseDetailActivity extends AppCompatActivity {
         course = (Course) intent.getSerializableExtra("course");
         setContentView(R.layout.activity_course_detail);
 
-        getSupportActionBar().setTitle(course.getTitle());
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        try {
+            getSupportActionBar().setTitle(course.getTitle());
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        catch (NullPointerException e) {
+            e.printStackTrace();
+        }
         
         progressBar = findViewById(R.id.progress_bar);
         TextView courseName = findViewById(R.id.course_name), term = findViewById(R.id.term);
